@@ -25,6 +25,7 @@ export default defineConfig({
         'ping-pong-flower': 'ping-pong-flower.html',
         'plumeria': 'plumeria.html',
         'stargazer-lily': 'stargazer-lily.html',
+        'puff-flower-bag-charm': 'puff-flower-bag-charm.html',
         'dictionary': 'dictionary.html',
         'calendar': 'calendar.html',
         'catalogue': 'catalogue.html',
