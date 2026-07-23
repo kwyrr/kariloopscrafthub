@@ -29,7 +29,7 @@ const patternPages = [
   'carnations', 'cosmos', 'daisy', 'detailed-sunflower', 
   'fluffy-tulips', 'forget-me-not', 'lavenders', 'leaf-stem', 
   'lily-of-the-valley', 'little-hearts', 'mini-rose', 'peonies', 
-  'ping-pong-flower', 'plumeria', 'puff-flower-bag-charm', 'stargazer-lily'
+  'ping-pong-flower', 'plumeria', 'puff-flower-bag-charm', 'ruffle-heart-bag-charm', 'stargazer-lily'
 ];
 
 if (patternPages.includes(currentPatternId)) {
