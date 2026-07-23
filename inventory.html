@@ -1,0 +1,1405 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/src/assets/kariloops%20logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventory | Kariloops</title>
+  <!-- Add Google Fonts for a premium look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body
+  class="bg-[#FAFAF9] text-gray-800 font-sans antialiased selection:bg-brand-primary selection:text-gray-900 relative min-h-screen overflow-x-hidden">
+  <!-- Decorative Background Blobs -->
+  <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+    <div class="absolute -top-[10%] -right-[5%] w-[40%] h-[40%] rounded-full bg-pink-200/20 blur-[120px]"></div>
+    <div class="absolute top-[20%] -left-[10%] w-[30%] h-[30%] rounded-full bg-brand-primary/20 blur-[100px]"></div>
+    <div class="absolute bottom-[-10%] right-[10%] w-[50%] h-[40%] rounded-full bg-yellow-200/20 blur-[120px]"></div>
+  </div>
+
+  <div id="app">
+    <nav id="mainNav">
+      <div class="status-banner">
+        <span>KARILOOPS � 2026</span>
+        <div class="status-location">
+          <span class="status-pulse-dot"></span>
+          <span id="live-clock">MANILA, PH � --:--</span>
+        </div>
+        <span>v1.0.0 ?</span>
+      </div>
+
+      <div class="custom-nav-container">
+        <a class="nav-profile-brand group" href="index.html#home">
+          <img src="/src/assets/kariloops%20logo.png" alt="Kariloops Logo"
+            class="h-16 md:h-20 w-auto max-w-xs transition-transform group-hover:scale-105 object-contain" />
+          <div class="profile-details">
+            <span class="profile-name">Kariloops</span>
+            <span class="profile-title">Kariloops Crafthub</span>
+          </div>
+        </a>
+
+        <div class="desktop-nav-links">
+          <a href="index.html#flower-patterns" class="nav-link">Crochet Patterns</a>
+          <a href="inventory.html" class="nav-link">Inventory</a>
+          <a href="catalogue.html" class="nav-link">Catalogue</a>
+          <a href="calendar.html" class="nav-link">Calendar</a>
+          <a href="dictionary.html" class="nav-link">Dictionary</a>
+        </div>
+
+        <div class="nav-actions">
+          <a class="btn-cv" href="index.html#shop">Shop</a>
+          <a class="btn-hire" href="index.html#commission">Commission</a>
+
+          <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-nav" id="mobileNav">
+        <!-- Date and Time for mobile menu -->
+        <div
+          class="-mx-6 -mt-6 mb-6 p-6 bg-brand-light border-b border-brand-border text-xs font-medium tracking-widest uppercase text-gray-700 flex flex-col items-center justify-center gap-1.5 shadow-sm">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span>MANILA, PH</span>
+          </div>
+          <span class="live-clock-mobile-date"></span>
+        </div>
+
+        <div class="flex flex-col gap-4 px-2">
+          <a href="index.html#flower-patterns" class="mobile-nav-link group">Crochet Patterns</a>
+          <a href="inventory.html" class="mobile-nav-link group">Inventory</a>
+          <a href="catalogue.html" class="mobile-nav-link group">Catalogue</a>
+          <a href="calendar.html" class="mobile-nav-link group">Calendar</a>
+          <a href="dictionary.html" class="mobile-nav-link group">Dictionary</a>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: auto; padding-top: 20px;">
+          <a class="btn-cv" href="index.html#shop" style="display: inline-block;">Shop</a>
+          <a class="btn-hire" href="index.html#commission" style="display: inline-block;"
+            class="mobile-nav-link">Commission</a>
+        </div>
+      </div>
+      <div class="mobile-overlay" id="mobileOverlay"></div>
+    </nav>
+
+    <main class="p-8 max-w-7xl mx-auto mt-16 relative">
+      <div class="mb-12 text-center">
+        <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight drop-shadow-md">Inventory
+          Dashboard</h1>
+        <p class="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto">Track your crochet projects, materials, and
+          stock status in real-time.</p>
+      </div>
+
+      <!-- Flowers Summary Dashboard -->
+      <div class="flex items-center gap-4 mb-8">
+        <div class="h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent flex-1"></div>
+        <h2 class="text-3xl font-extrabold text-gray-800 flex items-center gap-3"><span
+            class="text-4xl shadow-sm rounded-full bg-white p-2 border border-pink-100">🌸</span> Flowers Dashboard
+        </h2>
+        <div class="h-px bg-gradient-to-r from-pink-300 via-transparent to-transparent flex-1"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <!-- Completed Items -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">Completed Items</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+          </div>
+          <div id="dashFlowersCompleted" class="text-4xl font-bold text-gray-900">124</div>
+        </div>
+
+        <!-- To-Do -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">To-Do Projects</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-yellow-50 flex items-center justify-center text-yellow-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+              </svg>
+            </div>
+          </div>
+          <div id="dashFlowersTodo" class="text-4xl font-bold text-gray-900">18</div>
+        </div>
+
+        <!-- Total Inventory -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">Total Items in Stock</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-pink-50 flex items-center justify-center text-pink-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+              </svg>
+            </div>
+          </div>
+          <div id="dashFlowersTotal" class="text-4xl font-bold text-gray-900">450</div>
+        </div>
+
+        <!-- Nearest Deadline -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">Nearest Deadline</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <div id="dashFlowersDeadlineDays" class="text-3xl font-bold text-gray-900">-</div>
+            <div id="dashFlowersDeadlineItem" class="text-sm font-medium text-gray-500 mt-1 truncate">No upcoming
+              deadlines</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flowers Charts Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-12">
+        <!-- Pie Chart -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500">
+          <h2 class="text-lg font-bold text-gray-900 mb-4">📊 Flowers Summary Breakdown</h2>
+          <div class="w-full h-56">
+            <canvas id="flowersPieChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500">
+          <h2 class="text-lg font-bold text-gray-900 mb-4">📈 Flowers Status Overview</h2>
+          <div class="w-full h-56">
+            <canvas id="flowersBarChart"></canvas>
+          </div>
+        </div>
+
+        <!-- To-Do List -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500 flex flex-col">
+          <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">📝 Pending To-Do</h2>
+          <div class="w-full flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar max-h-56" id="flowersTodoList">
+            <!-- JS will populate rows here -->
+          </div>
+        </div>
+
+        <!-- Pending Assembly List -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500 flex flex-col">
+          <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">🛠 Pending Assembly</h2>
+          <div class="w-full flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar max-h-56" id="flowersAssemblyList">
+            <!-- JS will populate rows here -->
+          </div>
+        </div>
+      </div>
+
+<!-- Editable Flowers Table -->
+      <div
+        class="bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 mb-16 overflow-hidden relative">
+        <div class="flex flex-col sm:flex-row justify-between amigurumi-start sm:amigurumi-center gap-4 mb-8">
+          <h2 class="text-2xl font-extrabold text-gray-900 border-l-4 border-brand-primary pl-3">Flowers Inventory</h2>
+          <div class="flex amigurumi-center gap-4">
+            <span id="editModeStatusIndicatorFlowers"
+              class="text-sm font-medium text-gray-500 hidden amigurumi-center gap-1.5"><span
+                class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>Edit Mode Active</span>
+            <button id="openAuthModalBtnFlowers"
+              class="flex amigurumi-center gap-2 px-6 py-3 bg-brand-primary text-gray-900 hover:bg-brand-accent font-bold rounded-2xl transition-all shadow-md hover:shadow-brand-primary/40 hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                </path>
+              </svg>
+              Edit Table
+            </button>
+            <button id="saveEditBtnFlowers"
+              class="hidden amigurumi-center gap-2 px-6 py-3 bg-brand-primary text-gray-900 hover:bg-brand-accent font-bold rounded-2xl transition-all shadow-md hover:shadow-brand-primary/40 hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Save Changes
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse min-w-max" id="flowersTable">
+            <thead>
+              <tr
+                class="border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-widest bg-gradient-to-r from-gray-50/80 to-transparent">
+                <th class="p-4 rounded-tl-xl whitespace-nowrap">Item</th>
+                <th class="p-4 whitespace-nowrap">Quantity</th>
+                <th class="p-4 whitespace-nowrap">Price (?)</th>
+                <th class="p-4 whitespace-nowrap">Order Amount</th>
+                <th class="p-4 whitespace-nowrap">Created for Order</th>
+                <th class="p-4 whitespace-nowrap">Order Status</th>
+                <th class="p-4 whitespace-nowrap">Due Date</th>
+                <th class="p-4 whitespace-nowrap">Days Left</th>
+                <th class="p-4 whitespace-nowrap">Total Price</th>
+                <th class="p-4 rounded-tr-xl whitespace-nowrap">To Do</th>
+                <th class="p-4 hidden action-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="flowersTableBody" class="text-sm font-medium text-gray-800 divide-y divide-gray-100">
+              <!-- JS will populate rows here -->
+            </tbody>
+          </table>
+          <div id="addFlowerRowContainer" class="hidden mt-4 justify-center">
+            <button id="addFlowerRowBtn"
+              class="flex amigurumi-center gap-2 px-4 py-2 bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900 font-bold rounded-xl transition-all border border-dashed border-gray-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+              </svg>
+              Add New Item
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Amigurumi Summary Dashboard -->
+      <div class="mt-20 flex amigurumi-center gap-4 mb-8">
+        <div class="h-px bg-gradient-to-r from-transparent via-teal-300 to-transparent flex-1"></div>
+        <h2 class="text-3xl font-extrabold text-gray-800 flex amigurumi-center gap-3"><span
+            class="text-4xl shadow-sm rounded-full bg-white p-2 border border-teal-100">🧶</span> Amigurumi & Materials
+          Dashboard</h2>
+        <div class="h-px bg-gradient-to-r from-teal-300 via-transparent to-transparent flex-1"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <!-- Completed Amigurumi -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between amigurumi-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">Completed Amigurumi</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-teal-50 flex amigurumi-center justify-center text-teal-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+          </div>
+          <div id="dashAmigurumiCompleted" class="text-4xl font-bold text-gray-900">124</div>
+        </div>
+
+        <!-- To-Do -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between amigurumi-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">To-Do Projects</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-purple-50 flex amigurumi-center justify-center text-purple-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+              </svg>
+            </div>
+          </div>
+          <div id="dashAmigurumiTodo" class="text-4xl font-bold text-gray-900">18</div>
+        </div>
+
+        <!-- Total Inventory -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between amigurumi-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">Total Amigurumi in Stock</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-orange-50 flex amigurumi-center justify-center text-orange-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+              </svg>
+            </div>
+          </div>
+          <div id="dashAmigurumiTotal" class="text-4xl font-bold text-gray-900">450</div>
+        </div>
+
+        <!-- Nearest Deadline -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between amigurumi-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">Nearest Deadline</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-red-50 flex amigurumi-center justify-center text-red-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <div id="dashAmigurumiDeadlineDays" class="text-3xl font-bold text-gray-900">-</div>
+            <div id="dashAmigurumiDeadlineItem" class="text-sm font-medium text-gray-500 mt-1 truncate">No upcoming
+              deadlines</div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Amigurumi Charts Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+        <!-- Pie Chart -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500">
+          <h2 class="text-lg font-bold text-gray-900 mb-4">📊 Amigurumi Summary Breakdown</h2>
+          <div class="w-full h-56">
+            <canvas id="amigurumiPieChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500">
+          <h2 class="text-lg font-bold text-gray-900 mb-4">📈 Amigurumi Status Overview</h2>
+          <div class="w-full h-56">
+            <canvas id="amigurumiBarChart"></canvas>
+          </div>
+        </div>
+
+        <!-- To-Do List -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500 flex flex-col">
+          <h2 class="text-lg font-bold text-gray-900 mb-4 flex amigurumi-center gap-2">📝 Pending To-Do</h2>
+          <div class="w-full flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar max-h-56" id="amigurumiTodoList">
+            <!-- JS will populate rows here -->
+          </div>
+        </div>
+      </div>
+
+<!-- Editable Amigurumi Table -->
+      <div
+        class="bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 mb-16 overflow-hidden relative">
+        <div class="flex flex-col sm:flex-row justify-between amigurumi-start sm:amigurumi-center gap-4 mb-8">
+          <h2 class="text-2xl font-extrabold text-gray-900 border-l-4 border-brand-primary pl-3">Amigurumi & Materials
+            Inventory</h2>
+          <div class="flex amigurumi-center gap-4">
+            <span id="editModeStatusIndicatorAmigurumi"
+              class="text-sm font-medium text-gray-500 hidden amigurumi-center gap-1.5"><span
+                class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>Edit Mode Active</span>
+            <button id="openAuthModalBtnAmigurumi"
+              class="flex amigurumi-center gap-2 px-6 py-3 bg-brand-primary text-gray-900 hover:bg-brand-accent font-bold rounded-2xl transition-all shadow-md hover:shadow-brand-primary/40 hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                </path>
+              </svg>
+              Edit Table
+            </button>
+            <button id="saveEditBtnAmigurumi"
+              class="hidden amigurumi-center gap-2 px-6 py-3 bg-brand-primary text-gray-900 hover:bg-brand-accent font-bold rounded-2xl transition-all shadow-md hover:shadow-brand-primary/40 hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Save Changes
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse min-w-max" id="amigurumiTable">
+            <thead>
+              <tr
+                class="border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-widest bg-gradient-to-r from-gray-50/80 to-transparent">
+                <th class="p-4 rounded-tl-xl whitespace-nowrap">Item</th>
+                <th class="p-4 whitespace-nowrap">Quantity</th>
+                <th class="p-4 whitespace-nowrap">Price (?)</th>
+                <th class="p-4 whitespace-nowrap">Order Amount</th>
+                <th class="p-4 whitespace-nowrap">Created for Order</th>
+                <th class="p-4 whitespace-nowrap">Order Status</th>
+                <th class="p-4 whitespace-nowrap">Due Date</th>
+                <th class="p-4 whitespace-nowrap">Days Left</th>
+                <th class="p-4 whitespace-nowrap">Total Price</th>
+                <th class="p-4 rounded-tr-xl whitespace-nowrap">To Do</th>
+                <th class="p-4 hidden action-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="amigurumiTableBody" class="text-sm font-medium text-gray-800 divide-y divide-gray-100">
+              <!-- JS will populate rows here -->
+            </tbody>
+          </table>
+          <div id="addAmigurumiRowContainer" class="hidden mt-4 justify-center">
+            <button id="addAmigurumiRowBtn"
+              class="flex amigurumi-center gap-2 px-4 py-2 bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900 font-bold rounded-xl transition-all border border-dashed border-gray-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+              </svg>
+              Add New Item
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+<!-- Items Summary Dashboard -->
+      <div class="mt-20 flex items-center gap-4 mb-8">
+        <div class="h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent flex-1"></div>
+        <h2 class="text-3xl font-extrabold text-gray-800 flex items-center gap-3"><span
+            class="text-4xl shadow-sm rounded-full bg-white p-2 border border-blue-100">📦</span> Items & Materials
+          Dashboard</h2>
+        <div class="h-px bg-gradient-to-r from-blue-300 via-transparent to-transparent flex-1"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <!-- Completed Items -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">Completed Items</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+          </div>
+          <div id="dashItemsCompleted" class="text-4xl font-bold text-gray-900">124</div>
+        </div>
+
+        <!-- To-Do -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">To-Do Projects</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+              </svg>
+            </div>
+          </div>
+          <div id="dashItemsTodo" class="text-4xl font-bold text-gray-900">18</div>
+        </div>
+
+        <!-- Total Inventory -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">Total Items in Stock</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+              </svg>
+            </div>
+          </div>
+          <div id="dashItemsTotal" class="text-4xl font-bold text-gray-900">450</div>
+        </div>
+
+        <!-- Nearest Deadline -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(236,72,153,0.1)] transition-all duration-500 group">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-gray-500 font-medium tracking-wide text-sm uppercase">Nearest Deadline</h3>
+            <div
+              class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-500 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <div id="dashItemsDeadlineDays" class="text-3xl font-bold text-gray-900">-</div>
+            <div id="dashItemsDeadlineItem" class="text-sm font-medium text-gray-500 mt-1 truncate">No upcoming
+              deadlines</div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Items Charts Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+        <!-- Pie Chart -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500">
+          <h2 class="text-lg font-bold text-gray-900 mb-4">📊 Items Summary Breakdown</h2>
+          <div class="w-full h-56">
+            <canvas id="itemsPieChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500">
+          <h2 class="text-lg font-bold text-gray-900 mb-4">📈 Items Status Overview</h2>
+          <div class="w-full h-56">
+            <canvas id="itemsBarChart"></canvas>
+          </div>
+        </div>
+
+        <!-- To-Do List -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500 flex flex-col">
+          <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">📝 Pending To-Do</h2>
+          <div class="w-full flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar max-h-56" id="itemsTodoList">
+            <!-- JS will populate rows here -->
+          </div>
+        </div>
+      </div>
+      <!-- Editable Items Table -->
+      <div
+        class="bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 mb-16 overflow-hidden relative">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+          <h2 class="text-2xl font-extrabold text-gray-900 border-l-4 border-brand-primary pl-3">Items & Materials
+            Inventory</h2>
+          <div class="flex items-center gap-4">
+            <span id="editModeStatusIndicatorItems"
+              class="text-sm font-medium text-gray-500 hidden items-center gap-1.5"><span
+                class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>Edit Mode Active</span>
+            <button id="openAuthModalBtnItems"
+              class="flex items-center gap-2 px-6 py-3 bg-brand-primary text-gray-900 hover:bg-brand-accent font-bold rounded-2xl transition-all shadow-md hover:shadow-brand-primary/40 hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                </path>
+              </svg>
+              Edit Table
+            </button>
+            <button id="saveEditBtnItems"
+              class="hidden items-center gap-2 px-6 py-3 bg-brand-primary text-gray-900 hover:bg-brand-accent font-bold rounded-2xl transition-all shadow-md hover:shadow-brand-primary/40 hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Save Changes
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse min-w-max" id="itemsTable">
+            <thead>
+              <tr
+                class="border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-widest bg-gradient-to-r from-gray-50/80 to-transparent">
+                <th class="p-4 rounded-tl-xl whitespace-nowrap">Item</th>
+                <th class="p-4 whitespace-nowrap">Quantity</th>
+                <th class="p-4 whitespace-nowrap">Price (?)</th>
+                <th class="p-4 whitespace-nowrap">Order Amount</th>
+                <th class="p-4 whitespace-nowrap">Created for Order</th>
+                <th class="p-4 whitespace-nowrap">Order Status</th>
+                <th class="p-4 whitespace-nowrap">Due Date</th>
+                <th class="p-4 whitespace-nowrap">Days Left</th>
+                <th class="p-4 whitespace-nowrap">Total Price</th>
+                <th class="p-4 rounded-tr-xl whitespace-nowrap">To Do</th>
+                <th class="p-4 hidden action-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="itemsTableBody" class="text-sm font-medium text-gray-800 divide-y divide-gray-100">
+              <!-- JS will populate rows here -->
+            </tbody>
+          </table>
+          <div id="addItemRowContainer" class="hidden mt-4 justify-center">
+            <button id="addItemRowBtn"
+              class="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900 font-bold rounded-xl transition-all border border-dashed border-gray-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+              </svg>
+              Add New Item
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Page Transition Overlay -->
+    <div id="pageTransition" class="fixed inset-0 hidden flex-col" style="z-index: 9999;">
+      <div class="absolute inset-0 bg-white/40 backdrop-blur-sm z-0"></div>
+      <div id="transitionPanel"
+        class="relative z-10 w-full h-full bg-gradient-to-br from-brand-light via-pink-50 to-brand-primary transform translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] flex items-center justify-center overflow-hidden">
+
+        <div class="absolute inset-0 opacity-30">
+          <div class="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-white/40 blur-[80px]"></div>
+          <div class="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-brand-primary/40 blur-[100px]">
+          </div>
+        </div>
+
+        <div id="transitionGlare"
+          class="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] skew-x-[-20deg]">
+        </div>
+
+        <h2 id="transitionTitle"
+          class="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight drop-shadow-sm opacity-0 translate-y-4 transition-all duration-500 ease-out z-20">
+          Loading...
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="authModal" class="auth-modal">
+    <div class="bg-white rounded-3xl p-8 shadow-2xl max-w-sm w-full mx-auto flex flex-col items-center">
+      <h3 class="text-xl font-bold text-gray-900 mb-2">Enter Password</h3>
+      <p class="text-sm text-gray-500 mb-8 text-center">Please enter the correct 6-digit password to edit the inventory.
+      </p>
+
+      <div id="pinDotsContainer" class="flex gap-4 mb-8">
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4 mb-8">
+        <button class="numpad-btn" data-num="1">1</button>
+        <button class="numpad-btn" data-num="2">2</button>
+        <button class="numpad-btn" data-num="3">3</button>
+        <button class="numpad-btn" data-num="4">4</button>
+        <button class="numpad-btn" data-num="5">5</button>
+        <button class="numpad-btn" data-num="6">6</button>
+        <button class="numpad-btn" data-num="7">7</button>
+        <button class="numpad-btn" data-num="8">8</button>
+        <button class="numpad-btn" data-num="9">9</button>
+        <div></div>
+        <button class="numpad-btn" data-num="0">0</button>
+        <button class="numpad-btn bg-red-50 hover:bg-red-100 text-red-500" id="numpadBackspace">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" />
+          </svg>
+        </button>
+      </div>
+
+      <button class="w-full py-3 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-colors"
+        id="closeAuthModalBtn">Cancel</button>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBuwl7lgyfy_UuOx4LYRhih-oaYsrRWF8s",
+      authDomain: "kariloopscrafthub.firebaseapp.com",
+      projectId: "kariloopscrafthub",
+      storageBucket: "kariloopscrafthub.firebasestorage.app",
+      messagingSenderId: "394697271274",
+      appId: "1:394697271274:web:0f30db84226691bc5df493",
+      measurementId: "G-P7NM1SBJM2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    document.addEventListener('DOMContentLoaded', function () {
+      // --- Charts Initialization ---
+      const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(17, 24, 39, 0.9)',
+            padding: 12,
+            titleFont: { family: 'Inter', size: 14, weight: 'bold' },
+            bodyFont: { family: 'Inter', size: 14 },
+            cornerRadius: 8,
+            displayColors: false
+          }
+        },
+        animation: { duration: 1500, easing: 'easeOutQuart' }
+      };
+
+      const pieOptions = {
+        ...commonOptions,
+        cutout: '65%',
+        plugins: {
+          ...commonOptions.plugins,
+          legend: { display: true, position: 'bottom', labels: { usePointStyle: true, padding: 20, font: { family: 'Inter', size: 13 } } }
+        }
+      };
+
+      const barOptions = {
+        ...commonOptions,
+        scales: {
+          y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)', drawBorder: false }, border: { display: false } },
+          x: { grid: { display: false, drawBorder: false }, border: { display: false } }
+        }
+      };
+
+
+      function createBarChart(ctxId, type = 'flowers') {
+        const ctx = document.getElementById(ctxId)?.getContext('2d');
+        if (!ctx) return null;
+
+        let bgColors, borderColors, hoverColors;
+        if (type === 'flowers') {
+          bgColors = ['rgba(244, 114, 182, 0.7)', 'rgba(167, 139, 250, 0.7)', 'rgba(96, 165, 250, 0.7)', 'rgba(251, 191, 36, 0.7)', 'rgba(52, 211, 153, 0.7)'];
+          borderColors = ['rgba(244, 114, 182, 1)', 'rgba(167, 139, 250, 1)', 'rgba(96, 165, 250, 1)', 'rgba(251, 191, 36, 1)', 'rgba(52, 211, 153, 1)'];
+          hoverColors = ['rgba(244, 114, 182, 0.9)', 'rgba(167, 139, 250, 0.9)', 'rgba(96, 165, 250, 0.9)', 'rgba(251, 191, 36, 0.9)', 'rgba(52, 211, 153, 0.9)'];
+        } else if (type === 'amigurumi') {
+          bgColors = ['rgba(20, 184, 166, 0.7)', 'rgba(236, 72, 153, 0.7)', 'rgba(234, 179, 8, 0.7)', 'rgba(168, 85, 247, 0.7)', 'rgba(239, 68, 68, 0.7)'];
+          borderColors = ['rgba(20, 184, 166, 1)', 'rgba(236, 72, 153, 1)', 'rgba(234, 179, 8, 1)', 'rgba(168, 85, 247, 1)', 'rgba(239, 68, 68, 1)'];
+          hoverColors = ['rgba(20, 184, 166, 0.9)', 'rgba(236, 72, 153, 0.9)', 'rgba(234, 179, 8, 0.9)', 'rgba(168, 85, 247, 0.9)', 'rgba(239, 68, 68, 0.9)'];
+        } else {
+          // Items get a cooler/different palette: Orange, Purple, Indigo, Cyan, Blue
+          bgColors = ['rgba(251, 146, 60, 0.7)', 'rgba(192, 132, 252, 0.7)', 'rgba(129, 140, 248, 0.7)', 'rgba(34, 211, 238, 0.7)', 'rgba(56, 189, 248, 0.7)'];
+          borderColors = ['rgba(251, 146, 60, 1)', 'rgba(192, 132, 252, 1)', 'rgba(129, 140, 248, 1)', 'rgba(34, 211, 238, 1)', 'rgba(56, 189, 248, 1)'];
+          hoverColors = ['rgba(251, 146, 60, 0.9)', 'rgba(192, 132, 252, 0.9)', 'rgba(129, 140, 248, 0.9)', 'rgba(34, 211, 238, 0.9)', 'rgba(56, 189, 248, 0.9)'];
+        }
+
+        return new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['For Assembly', 'For Wrapping', 'In Progress', 'To Do', 'Completed'],
+            datasets: [{
+              label: 'Items',
+              data: [0, 0, 0, 0, 0],
+              backgroundColor: bgColors,
+              borderColor: borderColors,
+              borderWidth: 2,
+              borderRadius: 8,
+              hoverBackgroundColor: hoverColors
+            }]
+          },
+          options: barOptions
+        });
+      }
+
+      function createPieChart(ctxId, type = 'flowers') {
+        const ctx = document.getElementById(ctxId)?.getContext('2d');
+        if (!ctx) return null;
+
+        let bgColors, borderColors;
+        if (type === 'flowers') {
+          bgColors = ['rgba(52, 211, 153, 0.8)', 'rgba(251, 191, 36, 0.8)'];
+          borderColors = ['rgba(52, 211, 153, 1)', 'rgba(251, 191, 36, 1)'];
+        } else if (type === 'amigurumi') {
+          bgColors = ['rgba(20, 184, 166, 0.8)', 'rgba(168, 85, 247, 0.8)'];
+          borderColors = ['rgba(20, 184, 166, 1)', 'rgba(168, 85, 247, 1)'];
+        } else {
+          // Completed: Blue, To-Do: Purple
+          bgColors = ['rgba(56, 189, 248, 0.8)', 'rgba(192, 132, 252, 0.8)'];
+          borderColors = ['rgba(56, 189, 248, 1)', 'rgba(192, 132, 252, 1)'];
+        }
+
+        return new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Completed', 'To Do'],
+            datasets: [{
+              data: [0, 0],
+              backgroundColor: bgColors,
+              borderColor: borderColors,
+              borderWidth: 2,
+              hoverOffset: 4
+            }]
+          },
+          options: pieOptions
+        });
+      }
+
+      let flowersBarChart = createBarChart('flowersBarChart', 'flowers');
+      let flowersPieChart = createPieChart('flowersPieChart', 'flowers');
+      let itemsBarChart = createBarChart('itemsBarChart', 'items');
+      let itemsPieChart = createPieChart('itemsPieChart', 'items');
+      let amigurumiBarChart = createBarChart('amigurumiBarChart', 'amigurumi');
+      let amigurumiPieChart = createPieChart('amigurumiPieChart', 'amigurumi');
+
+      // --- Editable Table Logic ---
+      const authModal = document.getElementById('authModal');
+      const closeAuthModalBtn = document.getElementById('closeAuthModalBtn');
+      const pinDots = document.querySelectorAll('.pin-dot');
+      const numpadBtns = document.querySelectorAll('.numpad-btn[data-num]');
+
+      let isEditMode = false;
+      const correctPin = '061624';
+      let currentPin = '';
+
+      const flowerNames = [
+        "Mini Daisy", "Forget Me Not", "Fluffy Tulips", "Blooming Tulips", "Calla Lily",
+        "Simple Sunflower", "Azalea", "Hibiscus", "Carnations", "Dahlias", "Plumeria",
+        "Detailed Sunflower", "Lily", "Lily of the Valley", "Peonies", "Giant Rose",
+        "Baby's Breath", "Lavenders", "Little Hearts", "Leaf Stem", "Ping Pong Flower",
+        "Amigurumi", "Mini Rose", "Snow Berry", "Cosmos"
+      ];
+
+      const amigurumiNames = [
+        "Bunny Keychain", "Turtle Amigurumi", "Whale Keychain", "Octopus Amigurumi", "Bear Keychain"
+      ];
+
+      const itemNames = [
+        "Single Flower Holder", "Sweet Bouquet", "Love Bouquet", "Infinity Bouquet", "Handwritten Letter",
+        "Greeting Card", "Flower Stem", "Craft Wire", "(1) Black Wrap", "(2) White & Gold Wrap",
+        "(3) Brown Wrap", "(4) Violet & Gold Wrap", "(5) Blue Wrap", "(6) Green Wrap",
+        "(7) Two-Tone Pink Wrap", "(8) Pink Wrap", "(9) Kraft Wrap", "(10) White Embossed",
+        "(11) Cream Embossed", "(12) Pink Embossed", "(13) Blue Embossed", "(14) Purple Embossed",
+        "(15) Cream Ribbon", "(16) Pink Ribbon", "(17) Big Clear Wrap", "(18) Small Clear Wrap",
+        "Pleated Pearl Wrap", "Glue Sticks", "Thank You Cards", "Stickers", "Paper Bags"
+      ];
+
+      function createEmptyRow(name = '') {
+        return { item: name, quantity: 0, price: 0, orderAmount: 0, createdForOrder: 0, orderStatus: 'To Do', dueDate: '', daysLeft: '', totalPrice: '', toDo: 0 };
+      }
+
+      let flowersData = [];
+      let itemsData = [];
+      const defaultFlowersData = flowerNames.map(createEmptyRow);
+      const defaultItemsData = itemNames.map(createEmptyRow);
+      let amigurumiData = [];
+      const defaultAmigurumiData = amigurumiNames.map(createEmptyRow);
+
+      function calculateDerivedFields(row) {
+        const qty = parseFloat(row.quantity) || 0;
+        const cleanPrice = String(row.price).replace(/[^0-9.-]+/g, "");
+        const price = parseFloat(cleanPrice) || 0;
+        row.totalPrice = (qty * price).toFixed(2);
+
+        const orderAmt = parseInt(row.orderAmount) || 0;
+        const createdAmt = parseInt(row.createdForOrder) || 0;
+        row.toDo = orderAmt - createdAmt;
+
+        if (row.dueDate) {
+          const due = new Date(row.dueDate);
+          const now = new Date();
+          const diffTime = due - now;
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          row.daysLeft = diffDays > 0 ? diffDays + ' days' : (diffDays === 0 ? 'Today' : 'Overdue');
+        } else {
+          row.daysLeft = '-';
+        }
+      }
+
+      function updateDashboard(dataArray, type) {
+        let completedItems = 0;
+        let notCompletedItems = 0;
+        let todoProjects = 0;
+        let totalItems = 0;
+        let statusCounts = { 'For Assembly': 0, 'For Wrapping': 0, 'In Progress': 0, 'To Do': 0, 'Completed': 0 };
+
+        let nearestDate = null;
+        let nearestItemName = '';
+        let nearestDaysLeft = null;
+
+        dataArray.forEach(row => {
+          totalItems += parseInt(row.quantity) || 0;
+
+          const orderAmt = parseInt(row.orderAmount) || 0;
+          const createdAmt = parseInt(row.createdForOrder) || 0;
+          const currentToDo = orderAmt - createdAmt;
+
+          if (row.orderStatus === 'Completed') {
+            completedItems += parseInt(row.quantity) || 0;
+          } else {
+            notCompletedItems += currentToDo;
+            todoProjects++;
+          }
+
+          if (row.orderStatus && statusCounts[row.orderStatus] !== undefined) {
+            statusCounts[row.orderStatus] += parseInt(row.orderAmount) || 0;
+          }
+
+          if (row.orderStatus !== 'Completed' && row.dueDate) {
+            const due = new Date(row.dueDate);
+            const now = new Date();
+            const diffTime = due - now;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (nearestDate === null || due < nearestDate) {
+              nearestDate = due;
+              nearestDaysLeft = diffDays;
+              nearestItemName = row.item || 'Unnamed Item';
+            }
+          }
+        });
+
+        const prefix = type === 'flowers' ? 'dashFlowers' : (type === 'amigurumi' ? 'dashAmigurumi' : 'dashItems');
+        const elComp = document.getElementById(prefix + 'Completed');
+        const elTodo = document.getElementById(prefix + 'Todo');
+        const elTotal = document.getElementById(prefix + 'Total');
+        const elDeadlineDays = document.getElementById(prefix + 'DeadlineDays');
+        const elDeadlineItem = document.getElementById(prefix + 'DeadlineItem');
+
+        if (elComp) elComp.textContent = completedItems;
+        if (elTodo) elTodo.textContent = todoProjects;
+        if (elTotal) elTotal.textContent = totalItems;
+
+        if (elDeadlineDays && elDeadlineItem) {
+          if (nearestDate !== null) {
+            let colorClass = 'text-gray-900';
+            if (nearestDaysLeft < 0) colorClass = 'text-red-600';
+            else if (nearestDaysLeft <= 3) colorClass = 'text-orange-500';
+            else colorClass = 'text-green-600';
+
+            elDeadlineDays.className = `text-3xl font-bold ${colorClass}`;
+
+            if (nearestDaysLeft > 0) {
+              elDeadlineDays.textContent = nearestDaysLeft + (nearestDaysLeft === 1 ? ' day left' : ' days left');
+            } else if (nearestDaysLeft === 0) {
+              elDeadlineDays.textContent = 'Due Today!';
+            } else {
+              elDeadlineDays.textContent = Math.abs(nearestDaysLeft) + ' days overdue';
+            }
+            elDeadlineItem.textContent = nearestItemName;
+          } else {
+            elDeadlineDays.className = 'text-3xl font-bold text-gray-400';
+            elDeadlineDays.textContent = '-';
+            elDeadlineItem.textContent = 'No upcoming deadlines';
+          }
+        }
+
+        const bChart = type === 'flowers' ? flowersBarChart : (type === 'amigurumi' ? amigurumiBarChart : itemsBarChart);
+        const pChart = type === 'flowers' ? flowersPieChart : (type === 'amigurumi' ? amigurumiPieChart : itemsPieChart);
+
+        if (bChart) {
+          bChart.data.datasets[0].data = [statusCounts['For Assembly'], statusCounts['For Wrapping'], statusCounts['In Progress'], statusCounts['To Do'], statusCounts['Completed']];
+          bChart.update();
+        }
+        if (pChart) {
+          pChart.data.datasets[0].data = [completedItems, notCompletedItems];
+          pChart.update();
+        }
+
+        // Update To-Do List
+        const todoListId = type === 'flowers' ? 'flowersTodoList' : (type === 'amigurumi' ? 'amigurumiTodoList' : 'itemsTodoList');
+        const todoListEl = document.getElementById(todoListId);
+        if (todoListEl) {
+          todoListEl.innerHTML = '';
+          let hasTodos = false;
+          dataArray.forEach(row => {
+            if (row.toDo > 0) {
+              hasTodos = true;
+              // Make flowers clickable links to their pattern pages
+              const itemDiv = document.createElement(type === 'flowers' ? 'a' : 'div');
+              if (type === 'flowers') {
+                // Convert "Baby's Breath" to "babys-breath.html"
+                const url = row.item.toLowerCase().replace(/[']/g, '').replace(/\s+/g, '-') + '.html';
+                itemDiv.href = url;
+              }
+              itemDiv.className = type === 'flowers'
+                ? 'flex items-center gap-3 p-3 bg-pink-50/50 rounded-xl border border-pink-100/50 transition-colors hover:bg-pink-50 cursor-pointer hover:shadow-sm'
+                : 'flex items-center gap-3 p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 transition-colors hover:bg-blue-50';
+
+              const dot = document.createElement('div');
+              dot.className = type === 'flowers'
+                ? 'w-2 h-2 rounded-full bg-pink-400 flex-shrink-0'
+                : 'w-2 h-2 rounded-full bg-blue-400 flex-shrink-0';
+
+              const textSpan = document.createElement('span');
+              textSpan.className = 'text-sm font-semibold text-gray-700 truncate';
+              textSpan.textContent = `${row.toDo} ${row.item}`;
+
+              itemDiv.appendChild(dot);
+              itemDiv.appendChild(textSpan);
+
+              // If there's a deadline, show a small pill
+              if (row.dueDate) {
+                const due = new Date(row.dueDate);
+                const now = new Date();
+                const diffTime = due - now;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                const datePill = document.createElement('span');
+                datePill.className = 'ml-auto text-[10px] font-bold px-2 py-1 rounded-full whitespace-nowrap ' +
+                  (diffDays < 0 ? 'bg-red-100 text-red-600' : (diffDays <= 3 ? 'bg-orange-100 text-orange-600' : 'bg-gray-100 text-gray-500'));
+                datePill.textContent = diffDays < 0 ? 'Overdue' : (diffDays === 0 ? 'Today' : `${diffDays}d`);
+                itemDiv.appendChild(datePill);
+              }
+
+              todoListEl.appendChild(itemDiv);
+            }
+          });
+
+          if (!hasTodos) {
+            const emptyMsg = document.createElement('div');
+            emptyMsg.className = 'flex flex-col items-center justify-center h-full text-center p-4 opacity-50';
+            emptyMsg.innerHTML = `<svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-sm font-medium text-gray-500">All caught up!</span>`;
+            todoListEl.appendChild(emptyMsg);
+          }
+        }
+
+        const assemblyListEl = type === 'flowers' ? document.getElementById('flowersAssemblyList') : null;
+        if (assemblyListEl) {
+          assemblyListEl.innerHTML = '';
+          let hasAssembly = false;
+          dataArray.forEach(row => {
+            if (row.orderStatus === 'For Assembly') {
+              hasAssembly = true;
+              const itemDiv = document.createElement(type === 'flowers' ? 'a' : 'div');
+              if (type === 'flowers') {
+                const url = row.item.toLowerCase().replace(/[']/g, '').replace(/\s+/g, '-') + '.html';
+                itemDiv.href = url;
+              }
+              itemDiv.className = type === 'flowers'
+                ? 'flex items-center gap-3 p-3 bg-pink-50/50 rounded-xl border border-pink-100/50 transition-colors hover:bg-pink-50 cursor-pointer hover:shadow-sm'
+                : 'flex items-center gap-3 p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 transition-colors hover:bg-blue-50';
+
+              const dot = document.createElement('div');
+              dot.className = type === 'flowers'
+                ? 'w-2 h-2 rounded-full bg-pink-400 flex-shrink-0'
+                : 'w-2 h-2 rounded-full bg-blue-400 flex-shrink-0';
+
+              const textSpan = document.createElement('span');
+              textSpan.className = 'text-sm font-semibold text-gray-700 truncate';
+              textSpan.textContent = `${row.toDo > 0 ? row.toDo : (parseInt(row.orderAmount)||0)} ${row.item}`;
+
+              itemDiv.appendChild(dot);
+              itemDiv.appendChild(textSpan);
+              assemblyListEl.appendChild(itemDiv);
+            }
+          });
+
+          if (!hasAssembly) {
+            const emptyMsg = document.createElement('div');
+            emptyMsg.className = 'flex flex-col items-center justify-center h-full text-center p-4 opacity-50';
+            emptyMsg.innerHTML = `<span class="text-sm font-medium text-gray-500">No items for assembly</span>`;
+            assemblyListEl.appendChild(emptyMsg);
+          }
+        }
+      }
+
+
+      async function loadData() {
+        // We use onSnapshot for real-time updates!
+        onSnapshot(doc(db, "inventory", "flowers"), (docSnap) => {
+          if (docSnap.exists()) {
+            flowersData = docSnap.data().data;
+          } else {
+            flowersData = [...defaultFlowersData];
+            // Save defaults to DB
+            setDoc(doc(db, "inventory", "flowers"), { data: flowersData });
+          }
+          if (!isEditMode) renderTable(flowersData, 'flowersTableBody', 'flowers');
+        });
+
+        onSnapshot(doc(db, "inventory", "items"), (docSnap) => {
+          if (docSnap.exists()) {
+            itemsData = docSnap.data().data;
+          } else {
+            itemsData = [...defaultItemsData];
+            // Save defaults to DB
+            setDoc(doc(db, "inventory", "items"), { data: itemsData });
+          }
+          if (!isEditMode) renderTable(itemsData, 'itemsTableBody', 'items');
+        renderTable(amigurumiData, 'amigurumiTableBody', 'amigurumi');
+                  renderTable(amigurumiData, 'amigurumiTableBody', 'amigurumi');
+        });
+
+        onSnapshot(doc(db, "inventory", "amigurumi"), (docSnap) => {
+          if (docSnap.exists()) {
+            amigurumiData = docSnap.data().data;
+          } else {
+            amigurumiData = [...defaultAmigurumiData];
+            setDoc(doc(db, "inventory", "amigurumi"), { data: amigurumiData });
+          }
+          if (!isEditMode) renderTable(amigurumiData, 'amigurumiTableBody', 'amigurumi');
+        });
+      }
+
+      async function saveData() {
+        try {
+          await setDoc(doc(db, "inventory", "flowers"), { data: flowersData });
+          await setDoc(doc(db, "inventory", "items"), { data: itemsData });
+          await setDoc(doc(db, "inventory", "amigurumi"), { data: amigurumiData });
+        } catch (e) {
+          console.error("Error saving document: ", e);
+          alert("Failed to save to database. Please check your connection.");
+        }
+      }
+      function renderTable(dataArray, tbodyId, type) {
+        const tableBody = document.getElementById(tbodyId);
+        if (!tableBody) return;
+        tableBody.innerHTML = '';
+
+        if (dataArray.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="11" class="p-8 text-center text-gray-500 italic">No inventory records found.</td></tr>';
+          updateDashboard(dataArray, type);
+          return;
+        }
+
+        dataArray.forEach((row, index) => {
+          calculateDerivedFields(row);
+
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-pink-50/30 transition-all duration-300 border-b border-gray-100/50 last:border-0';
+
+          const cells = ['item', 'quantity', 'price', 'orderAmount', 'createdForOrder', 'orderStatus', 'dueDate', 'daysLeft', 'totalPrice', 'toDo'];
+
+          cells.forEach(key => {
+            const td = document.createElement('td');
+            td.className = 'p-4 truncate max-w-[150px]';
+            if (isEditMode && key !== 'daysLeft' && key !== 'totalPrice' && key !== 'toDo') {
+              if (key === 'orderStatus') {
+                const options = ['Completed', 'For Wrapping', 'For Assembly', 'In Progress', 'To Do', 'None'];
+                const optionsHtml = options.map(opt => `<option value="${opt}" ${row[key] === opt ? 'selected' : ''}>${opt}</option>`).join('');
+                td.innerHTML = `<select class="w-full bg-white border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary" data-index="${index}" data-key="${key}" data-type="${type}">
+                  <option value="">-</option>
+                  ${optionsHtml}
+                </select>`;
+              } else {
+                let inputType = 'text';
+                if (['quantity', 'orderAmount', 'createdForOrder'].includes(key)) inputType = 'number';
+                if (key === 'dueDate') inputType = 'date';
+
+                let stepAttr = inputType === 'number' ? 'step="any"' : '';
+                let val = row[key] !== undefined && row[key] !== null && row[key] !== 0 ? row[key] : '';
+
+                if (key === 'price') {
+                  // Ensure if the user already typed a peso sign, we don't duplicate it visually (by stripping it from the value)
+                  let cleanVal = String(val).replace(/₱/g, '');
+                  td.innerHTML = `<div class="relative flex items-center">
+                    <span class="absolute left-2 text-gray-500 pointer-events-none font-semibold">₱</span>
+                    <input type="${inputType}" ${stepAttr} class="w-full bg-white border border-gray-300 rounded pl-6 pr-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary" value="${cleanVal}" data-index="${index}" data-key="${key}" data-type="${type}">
+                  </div>`;
+                } else {
+                  td.innerHTML = `<input type="${inputType}" ${stepAttr} class="w-full bg-white border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary" value="${val}" data-index="${index}" data-key="${key}" data-type="${type}">`;
+                }
+              }
+            } else {
+              let val = row[key];
+              if (key === 'price' || key === 'totalPrice') val = val ? '₱' + val : '-';
+              if (key === 'orderStatus') {
+                const color = val === 'Completed' ? 'bg-green-100 text-green-700' : (val === 'For Wrapping' ? 'bg-purple-100 text-purple-700' : (val === 'For Assembly' ? 'bg-pink-100 text-pink-700' : (val === 'In Progress' ? 'bg-blue-100 text-blue-700' : (val === 'To Do' ? 'bg-yellow-100 text-yellow-700' : 'bg-gray-100 text-gray-700'))));
+                val = val ? `<span class="px-2 py-1 rounded-full text-xs font-bold ${color} whitespace-nowrap">${val}</span>` : '-';
+              }
+              td.innerHTML = val || '-';
+            }
+            tr.appendChild(td);
+          });
+
+          // Delete Action
+          const actionTd = document.createElement('td');
+          actionTd.className = `p-4 action-col ${isEditMode ? '' : 'hidden'}`;
+          actionTd.innerHTML = `<button class="text-red-500 hover:text-red-700 transition-colors" data-delete-idx="${index}" data-type="${type}">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+          </button>`;
+          tr.appendChild(actionTd);
+
+          tableBody.appendChild(tr);
+        });
+
+        if (isEditMode) {
+          tableBody.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('change', (e) => {
+              const idx = e.target.getAttribute('data-index');
+              const key = e.target.getAttribute('data-key');
+              const t = e.target.getAttribute('data-type');
+              const dataRef = t === 'flowers' ? flowersData : (t === 'amigurumi' ? amigurumiData : itemsData);
+              dataRef[idx][key] = e.target.value;
+              updateDashboard(dataRef, t);
+            });
+          });
+
+          tableBody.querySelectorAll('[data-delete-idx]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              const idx = e.currentTarget.getAttribute('data-delete-idx');
+              const t = e.currentTarget.getAttribute('data-type');
+              const dataRef = t === 'flowers' ? flowersData : (t === 'amigurumi' ? amigurumiData : itemsData);
+              const tbody = t === 'flowers' ? 'flowersTableBody' : (t === 'amigurumi' ? 'amigurumiTableBody' : 'itemsTableBody');
+              dataRef.splice(idx, 1);
+              renderTable(dataRef, tbody, t);
+            });
+          });
+        }
+        updateDashboard(dataArray, type);
+      }
+
+      document.getElementById('addFlowerRowBtn')?.addEventListener('click', () => {
+        flowersData.push(createEmptyRow());
+        renderTable(flowersData, 'flowersTableBody', 'flowers');
+      });
+
+      document.getElementById('addItemRowBtn')?.addEventListener('click', () => {
+        itemsData.push(createEmptyRow());
+        renderTable(itemsData, 'itemsTableBody', 'items');
+      });
+
+      document.getElementById('addAmigurumiRowBtn')?.addEventListener('click', () => {
+        amigurumiData.push(createEmptyRow());
+        renderTable(amigurumiData, 'amigurumiTableBody', 'amigurumi');
+      });
+
+      // --- Authentication Logic ---
+      function updateDots() {
+        pinDots.forEach((dot, index) => {
+          if (index < currentPin.length) dot.classList.add('filled');
+          else dot.classList.remove('filled');
+        });
+      }
+
+      function resetPin() {
+        currentPin = '';
+        updateDots();
+      }
+
+      function toggleAuthModal() {
+        resetPin();
+        authModal?.classList.add('is-active');
+      }
+
+      document.getElementById('openAuthModalBtnFlowers')?.addEventListener('click', toggleAuthModal);
+      document.getElementById('openAuthModalBtnItems')?.addEventListener('click', toggleAuthModal);
+      document.getElementById('openAuthModalBtnAmigurumi')?.addEventListener('click', toggleAuthModal);
+
+      closeAuthModalBtn?.addEventListener('click', () => {
+        authModal.classList.remove('is-active');
+      });
+
+      numpadBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (currentPin.length < 6) {
+            currentPin += btn.getAttribute('data-num');
+            updateDots();
+            if (currentPin.length === 6) {
+              setTimeout(() => {
+                if (currentPin === correctPin) {
+                  authModal.classList.remove('is-active');
+                  isEditMode = true;
+                  document.getElementById('editModeStatusIndicatorFlowers')?.classList.remove('hidden');
+                  document.getElementById('editModeStatusIndicatorItems')?.classList.remove('hidden');
+                  document.getElementById('editModeStatusIndicatorAmigurumi')?.classList.remove('hidden');
+                  document.getElementById('addFlowerRowContainer')?.classList.remove('hidden');
+                  document.getElementById('addItemRowContainer')?.classList.remove('hidden');
+                  document.getElementById('addAmigurumiRowContainer')?.classList.remove('hidden');
+                  document.getElementById('openAuthModalBtnFlowers')?.classList.add('hidden');
+                  document.getElementById('openAuthModalBtnItems')?.classList.add('hidden');
+                  document.getElementById('openAuthModalBtnAmigurumi')?.classList.add('hidden');
+                  document.getElementById('saveEditBtnFlowers')?.classList.remove('hidden');
+                  document.getElementById('saveEditBtnFlowers')?.classList.add('flex');
+                  document.getElementById('saveEditBtnItems')?.classList.remove('hidden');
+                  document.getElementById('saveEditBtnItems')?.classList.add('flex');
+                  document.getElementById('saveEditBtnAmigurumi')?.classList.remove('hidden');
+                  document.getElementById('saveEditBtnAmigurumi')?.classList.add('flex');
+
+                  renderTable(flowersData, 'flowersTableBody', 'flowers');
+                  renderTable(itemsData, 'itemsTableBody', 'items');
+                } else {
+                  const modalWindow = authModal?.querySelector('div');
+                  modalWindow?.classList.add('shake');
+                  setTimeout(() => modalWindow?.classList.remove('shake'), 400);
+                  resetPin();
+                }
+              }, 200);
+            }
+          }
+        });
+      });
+
+      document.getElementById('numpadBackspace')?.addEventListener('click', () => {
+        if (currentPin.length > 0) {
+          currentPin = currentPin.slice(0, -1);
+          updateDots();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!authModal.classList.contains('is-active')) return;
+        
+        if (e.key >= '0' && e.key <= '9') {
+          const btn = Array.from(numpadBtns).find(b => b.getAttribute('data-num') === e.key);
+          if (btn) btn.click();
+        } else if (e.key === 'Backspace') {
+          document.getElementById('numpadBackspace')?.click();
+        } else if (e.key === 'Escape') {
+          closeAuthModalBtn?.click();
+        }
+      });
+
+      function saveAllChanges() {
+        // Force sync all inputs to data arrays to avoid blur/click race conditions
+        document.querySelectorAll('#flowersTableBody input, #flowersTableBody select').forEach(input => {
+          const idx = input.getAttribute('data-index');
+          const key = input.getAttribute('data-key');
+          if (idx !== null && key !== null && flowersData[idx]) {
+            flowersData[idx][key] = input.value;
+          }
+        });
+        document.querySelectorAll('#itemsTableBody input, #itemsTableBody select').forEach(input => {
+          const idx = input.getAttribute('data-index');
+          const key = input.getAttribute('data-key');
+          if (idx !== null && key !== null && itemsData[idx]) {
+            itemsData[idx][key] = input.value;
+          }
+        });
+        document.querySelectorAll('#amigurumiTableBody input, #amigurumiTableBody select').forEach(input => {
+          const idx = input.getAttribute('data-index');
+          const key = input.getAttribute('data-key');
+          if (idx !== null && key !== null && amigurumiData[idx]) {
+            amigurumiData[idx][key] = input.value;
+          }
+        });
+
+        saveData();
+        isEditMode = false;
+        document.getElementById('editModeStatusIndicatorFlowers')?.classList.add('hidden');
+        document.getElementById('editModeStatusIndicatorItems')?.classList.add('hidden');
+        document.getElementById('editModeStatusIndicatorAmigurumi')?.classList.add('hidden');
+        document.getElementById('addFlowerRowContainer')?.classList.add('hidden');
+        document.getElementById('addItemRowContainer')?.classList.add('hidden');
+        document.getElementById('addAmigurumiRowContainer')?.classList.add('hidden');
+        document.getElementById('openAuthModalBtnFlowers')?.classList.remove('hidden');
+        document.getElementById('openAuthModalBtnItems')?.classList.remove('hidden');
+        document.getElementById('openAuthModalBtnAmigurumi')?.classList.remove('hidden');
+        document.getElementById('saveEditBtnFlowers')?.classList.add('hidden');
+        document.getElementById('saveEditBtnFlowers')?.classList.remove('flex');
+        document.getElementById('saveEditBtnItems')?.classList.add('hidden');
+        document.getElementById('saveEditBtnItems')?.classList.remove('flex');
+        document.getElementById('saveEditBtnAmigurumi')?.classList.add('hidden');
+        document.getElementById('saveEditBtnAmigurumi')?.classList.remove('flex');
+
+        renderTable(flowersData, 'flowersTableBody', 'flowers');
+        renderTable(itemsData, 'itemsTableBody', 'items');
+
+        const saveBtn = document.getElementById('saveEditBtnFlowers');
+        if (saveBtn) {
+          const originalText = saveBtn.innerText;
+          saveBtn.innerText = 'Saved!';
+          setTimeout(() => saveBtn.innerText = originalText, 2000);
+        }
+        const saveBtn2 = document.getElementById('saveEditBtnItems');
+        if (saveBtn2) {
+          const originalText2 = saveBtn2.innerText;
+          saveBtn2.innerText = 'Saved!';
+          setTimeout(() => saveBtn2.innerText = originalText2, 2000);
+        }
+        const saveBtn3 = document.getElementById('saveEditBtnAmigurumi');
+        if (saveBtn3) {
+          const originalText3 = saveBtn3.innerText;
+          saveBtn3.innerText = 'Saved!';
+          setTimeout(() => saveBtn3.innerText = originalText3, 2000);
+        }
+      }
+
+      document.getElementById('saveEditBtnFlowers')?.addEventListener('click', saveAllChanges);
+      document.getElementById('saveEditBtnItems')?.addEventListener('click', saveAllChanges);
+      document.getElementById('saveEditBtnAmigurumi')?.addEventListener('click', saveAllChanges);
+
+      loadData();
+    });
+  </script>
+
+  <!-- Floating Hamburger Menu for scroll -->
+  <button type="button" id="floatingMenuToggle" aria-label="Open menu"
+    class="fixed top-8 right-8 w-14 h-14 bg-brand-primary text-gray-900 rounded-full shadow-2xl hover:shadow-brand-primary/50 hover:bg-brand-accent flex flex-col justify-center items-center gap-1.5 z-50 opacity-0 pointer-events-none transition-all duration-300 transform hover:-translate-y-1 focus:outline-none">
+    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+  </button>
+</body>
+
+</html>

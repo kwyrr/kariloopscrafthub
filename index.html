@@ -1,0 +1,1333 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/src/assets/kariloops%20logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kariloops</title>
+  <!-- Add Google Fonts for a premium look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body
+  class="bg-[#FAFAF9] text-gray-800 font-sans antialiased selection:bg-brand-primary selection:text-gray-900 relative min-h-screen overflow-x-hidden">
+  <!-- Decorative Background Blobs -->
+  <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+    <div class="absolute -top-[10%] -right-[5%] w-[40%] h-[40%] rounded-full bg-pink-200/20 blur-[120px]"></div>
+    <div class="absolute top-[20%] -left-[10%] w-[30%] h-[30%] rounded-full bg-brand-primary/20 blur-[100px]"></div>
+    <div class="absolute bottom-[-10%] right-[10%] w-[50%] h-[40%] rounded-full bg-yellow-200/20 blur-[120px]"></div>
+  </div>
+
+  <div id="app">
+    <nav id="mainNav">
+      <div class="status-banner">
+        <span>KARILOOPS · 2026</span>
+        <div class="status-location">
+          <span class="status-pulse-dot"></span>
+          <span id="live-clock">MANILA, PH · 20:59</span>
+        </div>
+        <span>v1.0.0 ♡</span>
+      </div>
+
+      <div class="custom-nav-container">
+        <a class="nav-profile-brand group" href="#home">
+          <img src="/src/assets/kariloops%20logo.png" alt="Kariloops Logo"
+            class="h-16 md:h-20 w-auto max-w-xs transition-transform group-hover:scale-105 object-contain" />
+          <div class="profile-details">
+            <span class="profile-name">Kariloops</span>
+            <span class="profile-title">Patterns ♡ Inventory</span>
+          </div>
+        </a>
+
+        <div class="desktop-nav-links">
+          <a href="#flower-patterns" class="nav-link">Crochet Patterns</a>
+          <a href="inventory.html" class="nav-link">Inventory</a>
+          <a href="catalogue.html" class="nav-link">Catalogue</a>
+          <a href="calendar.html" class="nav-link">Calendar</a>
+          <a href="dictionary.html" class="nav-link">Dictionary</a>
+        </div>
+
+        <div class="nav-actions">
+          <a class="btn-cv" href="#shop">Shop</a>
+          <a class="btn-hire" href="#commission">Commission ♡</a>
+
+          <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-nav" id="mobileNav">
+        <!-- Date and Time for mobile menu -->
+        <div
+          class="-mx-6 -mt-6 mb-6 p-6 bg-brand-light border-b border-brand-border text-xs font-medium tracking-widest uppercase text-gray-700 flex flex-col items-center justify-center gap-1.5 shadow-sm">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span>MANILA, PH</span>
+          </div>
+          <span class="live-clock-mobile-date"></span>
+        </div>
+
+        <div class="flex flex-col gap-4 px-2">
+          <a href="#flower-patterns" class="mobile-nav-link group">Crochet Patterns</a>
+          <a href="inventory.html" class="mobile-nav-link group">Inventory</a>
+          <a href="catalogue.html" class="mobile-nav-link group">Catalogue</a>
+          <a href="calendar.html" class="mobile-nav-link group">Calendar</a>
+          <a href="dictionary.html" class="mobile-nav-link group">Dictionary</a>
+        <button id="openStitchCounterMenu" class="mobile-nav-link group text-left flex items-center justify-between w-full">
+          <span>Project Counter</span>
+          <svg class="w-4 h-4 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+          </svg>
+        </button>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: auto; padding-top: 20px;">
+          <a class="btn-cv" href="#shop" style="display: inline-block;">Shop</a>
+          <a class="btn-hire" href="#commission" style="display: inline-block;" class="mobile-nav-link">Commission ♡</a>
+        </div>
+      </div>
+      <div class="mobile-overlay" id="mobileOverlay"></div>
+    </nav>
+
+    <main class="p-8 max-w-7xl mx-auto mt-16 text-center relative">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-light/50 border border-brand-border text-brand-primary font-bold text-sm uppercase tracking-widest mb-6 shadow-sm">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+        Kariloops Craft Hub
+      </div>
+      <h1
+        class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 mb-6 tracking-tight drop-shadow-sm">
+        Welcome to Kariloops</h1>
+      <p class="text-gray-500 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">Manage your beautiful flower
+        patterns, yarn inventory, and vibrant colors seamlessly in one elegant space.</p>
+
+
+      <div class="flex flex-col sm:flex-row justify-center gap-6 mb-16 relative z-10">
+        <a href="#flower-patterns" class="group relative px-8 py-4 rounded-full font-extrabold text-gray-800 text-lg tracking-wide shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden text-center flex items-center justify-center gap-3 bg-white border border-brand-primary">
+          <div class="absolute inset-0 bg-brand-neutral opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <span class="relative z-10 text-2xl drop-shadow-sm">🌸</span>
+          <span class="relative z-10 drop-shadow-sm">Flower Patterns</span>
+        </a>
+
+        <a href="#amigurumi-patterns" class="group relative px-8 py-4 rounded-full font-extrabold text-gray-800 text-lg tracking-wide shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden text-center flex items-center justify-center gap-3 bg-white border border-brand-primary">
+          <div class="absolute inset-0 bg-brand-neutral opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <span class="relative z-10 text-2xl drop-shadow-sm">🧸</span>
+          <span class="relative z-10 drop-shadow-sm">Amigurumi & Keychain</span>
+        </a>
+      </div>
+
+      <!-- Flower Patterns Showcase Section -->
+      <section id="flower-patterns" class="text-left mt-16">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-3xl font-bold text-gray-900">Flower Patterns</h2>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="max-w-2xl mx-auto mb-12 relative z-50 text-left">
+          <div class="relative group">
+            <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+              <svg class="h-6 w-6 text-gray-400 group-focus-within:text-brand-primary transition-colors"
+                viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  clip-rule="evenodd" />
+              </svg>
+            </div>
+            <input type="text" id="flowerSearchInput" autocomplete="off"
+              class="block w-full pl-14 pr-4 py-5 border border-white/60 bg-white/60 backdrop-blur-md rounded-2xl leading-5 placeholder-gray-400 focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-gray-900 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] text-lg font-medium"
+              placeholder="Search for a flower pattern (e.g., Peonies)..." />
+          </div>
+          <!-- Predictive Suggestions Dropdown -->
+          <ul id="searchSuggestions"
+            class="absolute z-50 w-full bg-white mt-2 border border-gray-100 rounded-2xl shadow-xl overflow-hidden hidden flex-col text-left divide-y divide-gray-50">
+            <!-- Populated by JS -->
+          </ul>
+
+          <!-- Sort Filter -->
+          <div class="flex flex-wrap items-center gap-4 mt-6 justify-start text-sm z-40 relative" id="sortFilters">
+            <label
+              class="font-bold text-brand-primary flex items-center gap-2 bg-pink-50 px-4 py-2 rounded-full border border-pink-100 shadow-sm">
+              <svg class="w-4 h-4 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12">
+                </path>
+              </svg>
+              SORT BY
+            </label>
+            <!-- Custom Dropdown Component -->
+            <div class="relative" id="customSortDropdown">
+              <!-- Toggle Button -->
+              <button type="button" id="customSortBtn"
+                class="flex items-center justify-between border-2 border-transparent bg-white rounded-full py-2.5 pl-11 pr-4 text-gray-700 shadow-md focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 font-bold cursor-pointer hover:shadow-lg transition-all w-64 hover:-translate-y-0.5 relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <svg class="w-4 h-4 text-brand-primary group-hover:scale-110 transition-transform" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                  </svg>
+                </div>
+                <span id="customSortLabel" class="truncate flex-1 text-left">Name (A-Z)</span>
+                <svg id="customSortIcon" class="w-5 h-5 text-brand-primary transition-transform duration-200"
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+
+              <!-- Dropdown Menu -->
+              <div id="customSortMenu"
+                class="absolute z-50 w-full mt-2 bg-white border border-pink-100 rounded-2xl shadow-xl opacity-0 invisible transform -translate-y-2 transition-all duration-200 overflow-hidden origin-top-right">
+                <ul class="py-2 text-gray-700 font-medium">
+                  <li><button type="button"
+                      class="sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 text-brand-primary bg-pink-50/50 transition-colors flex items-center justify-between group"
+                      data-value="name-asc"><span>Name (A-Z)</span><span
+                        class="text-xs opacity-100 transition-opacity font-bold">A-Z</span></button></li>
+                  <li><button type="button"
+                      class="sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="name-desc"><span>Name (Z-A)</span><span
+                        class="text-xs opacity-0 group-hover:opacity-100 transition-opacity font-bold">Z-A</span></button>
+                  </li>
+                  <div class="h-px bg-gray-100 my-1 mx-4"></div>
+                  <li><button type="button"
+                      class="sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="difficulty-asc"><span>Difficulty (Low to High)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">⭐ -⭐ ⭐ ⭐ </span></button>
+                  </li>
+                  <li><button type="button"
+                      class="sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="difficulty-desc"><span>Difficulty (High to Low)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">⭐ ⭐ ⭐ -⭐ </span></button>
+                  </li>
+                  <div class="h-px bg-gray-100 my-1 mx-4"></div>
+                  <li><button type="button"
+                      class="sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="hours-asc"><span>Hours (Low to High)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">⏳-⏳⏳</span></button>
+                  </li>
+                  <li><button type="button"
+                      class="sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="hours-desc"><span>Hours (High to Low)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">⏳⏳-⏳</span></button>
+                  </li>
+                  <div class="h-px bg-gray-100 my-1 mx-4"></div>
+                  <li><button type="button"
+                      class="sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="price-asc"><span>Price (Low to High)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">$-$$$</span></button>
+                  </li>
+                  <li><button type="button"
+                      class="sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="price-desc"><span>Price (High to Low)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">$$$-$</span></button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:px-8" id="patternsGrid">
+          <!-- Baby's Breath Card -->
+          <button type="button" data-target="patternModal-babys-breath" data-name="Baby's Breath" data-difficulty="2"
+            data-hours="1" data-price="60"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/babys_breath.png" alt="Baby's Breath Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Baby's Breath</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 2/5 ⭐ ⭐☆☆☆</p>
+                <p>Hours: 1-2 hours ⏳</p>
+                <p>Price: 60 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Flower Petals (8x)</span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Big Thai Rose Card -->
+          <button type="button" data-target="patternModal-big-thai-rose" data-name="Big Thai Rose" data-difficulty="4"
+            data-hours="6" data-price="175"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/big_thai_rose.jpg" alt="Big Thai Rose Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Big Thai Rose</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 4/5 ⭐ ⭐ ⭐ ⭐☆</p>
+                <p>Hours: 6-8 hours ⏳</p>
+                <p>Price: 175 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Large Petals (5x)</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Medium Petals (4x)</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Small Petals (4x)</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M12 22V12M12 12C12 12 7 8 4 3c4 1 7 3 8 9zM12 12C12 12 17 8 20 3c-4 1-7 3-8 9z" />
+                  </svg> Torus</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg> Leaf</span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Blooming Tulips Card -->
+          <button type="button" data-target="patternModal-blooming-tulips" data-name="Blooming Tulips"
+            data-difficulty="3" data-hours="2" data-price="80"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/blooming_tulips.jpg" alt="Blooming Tulips Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Blooming Tulips</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 3/5 ⭐ ⭐ ⭐☆☆</p>
+                <p>Hours: 2-3 hours ⏳</p>
+                <p>Price: 80 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Small Petals (3x)</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Large Petals (3x)</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg> Leaf</span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Calla Lily Card -->
+          <button type="button" data-target="patternModal-calla-lily" data-name="Calla Lily" data-difficulty="2"
+            data-hours="1" data-price="80"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/calla_lily.jpg" alt="Calla Lily Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Calla Lily</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 2/5 ⭐ ⭐☆☆☆</p>
+                <p>Hours: 1-2 hours ⏳</p>
+                <p>Price: 80 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Petals</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C8 2 4 5 4 9c0 5 8 13 8 13s8-8 8-13c0-4-3-7-8-7z" />
+                  </svg> Flower Heart</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg> Leaf</span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Carnations Card -->
+          <button type="button" data-target="patternModal-carnations" data-name="Carnations" data-difficulty="3"
+            data-hours="3" data-price="120"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/carnations.png" alt="Carnations Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Carnations</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 3/5 ⭐ ⭐ ⭐☆☆</p>
+                <p>Hours: 3-4 hours ⏳</p>
+                <p>Price: 120 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Petals</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg> Leaf</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M12 22V12M12 12C12 12 7 8 4 3c4 1 7 3 8 9zM12 12C12 12 17 8 20 3c-4 1-7 3-8 9z" />
+                  </svg> Sepal</span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Cosmos Card -->
+          <button type="button" data-target="patternModal-cosmos" data-name="Cosmos" data-difficulty="3" data-hours="3"
+            data-price="90"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/cosmos.png" alt="Cosmos Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Cosmos</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 3/5 ⭐ ⭐ ⭐☆☆</p>
+                <p>Hours: 3-4 hours ⏳</p>
+                <p>Price: 90 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Petals (8x)</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C8 2 4 5 4 9c0 5 8 13 8 13s8-8 8-13c0-4-3-7-8-7z" />
+                  </svg> Flower Heart</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg> Leaf</span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Daisy Card -->
+          <button type="button" data-target="patternModal-daisy" data-name="Daisy" data-difficulty="2" data-hours="1"
+            data-price="70"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/daisy.png" alt="Daisy Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Daisy</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 2/5 ⭐ ⭐☆☆☆</p>
+                <p>Hours: 1-2 hours ⏳</p>
+                <p>Price: 70 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="3" />
+                    <path d="M12 11v10M8 14h8" />
+                  </svg> Flower Stamen</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M12 22V12M12 12C12 12 7 8 4 3c4 1 7 3 8 9zM12 12C12 12 17 8 20 3c-4 1-7 3-8 9z" />
+                  </svg> Sepal</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Petals</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg> Leaf</span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Detailed Sunflower Card -->
+          <button type="button" data-target="patternModal-detailed-sunflower" data-name="Detailed Sunflower"
+            data-difficulty="5" data-hours="5" data-price="150"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/sunflower.jpg" alt="Detailed Sunflower Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Detailed Sunflower</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 5/5 ⭐ ⭐ ⭐ ⭐ ⭐ </p>
+                <p>Hours: 5-6 hours ⏳</p>
+                <p>Price: 150 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C8 2 4 5 4 9c0 5 8 13 8 13s8-8 8-13c0-4-3-7-8-7z" />
+                  </svg> Flower Heart</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-yellow-700" fill="currentColor" viewBox="0 0 24 24">
+                    <circle cx="9" cy="12" r="2" />
+                    <circle cx="15" cy="9" r="2" />
+                    <circle cx="15" cy="15" r="2" />
+                  </svg> Seeds</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M12 22V12M12 12C12 12 7 8 4 3c4 1 7 3 8 9zM12 12C12 12 17 8 20 3c-4 1-7 3-8 9z" />
+                  </svg> Sepal</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Petals</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg> Leaf</span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Fluffy Tulips Card -->
+          <button type="button" data-target="patternModal-fluffy-tulips" data-name="Fluffy Tulips" data-difficulty="1"
+            data-hours="1" data-price="70"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/fluffy_tulips.jpg" alt="Fluffy Tulips Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Fluffy Tulips</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 1/5 ⭐☆☆☆☆</p>
+                <p>Hours: 1 hour ⏳</p>
+                <p>Price: 70 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 3C10 6 7 9 7 13h10c0-4-3-7-5-10z" />
+                    <rect x="11" y="13" width="2" height="8" rx="1" />
+                  </svg> Tulip Body</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg> Leaf</span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Forget Me Not Card -->
+          <button type="button" data-target="patternModal-forget-me-not" data-name="Forget Me Not" data-difficulty="2"
+            data-hours="1" data-price="70"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/forget_me_not.jpg" alt="Forget Me Not Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Forget Me Not</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 2/5 ⭐ ⭐☆☆☆</p>
+                <p>Hours: 1-2 hours ⏳</p>
+                <p>Price: 70 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z" />
+                  </svg> Flower Body (7x)</span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Lavenders Card -->
+          <button type="button" data-target="patternModal-lavenders" data-name="Lavenders" data-difficulty="2"
+            data-hours="1" data-price="70"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/lavenders.png" alt="Lavenders Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Lavenders</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 2/5 ⭐ ⭐☆☆☆</p>
+                <p>Hours: 1 hour ⏳</p>
+                <p>Price: 70 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                    </path>
+                  </svg>
+                  Flower
+                </span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Leaf Stem Card -->
+          <button type="button" data-target="patternModal-leaf-stem" data-name="Leaf Stem" data-difficulty="2"
+            data-hours="1" data-price="70"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/leaf_stem.png" alt="Leaf Stem Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Leaf Stem</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 2/5 ⭐ ⭐☆☆☆</p>
+                <p>Hours: 1-2 Hours ⏳</p>
+                <p>Price: 70 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg>
+                  Leaf (5x)
+                </span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Lily of the Valley Card -->
+          <button type="button" data-target="patternModal-lily-of-the-valley" data-name="Lily of the Valley"
+            data-difficulty="4" data-hours="5" data-price="160"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/lily_of_the_valley.png" alt="Lily of the Valley Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Lily of the Valley</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 4/5 ⭐ ⭐ ⭐ ⭐☆</p>
+                <p>Hours: 5-6 Hours ⏳</p>
+                <p>Price: 160 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-pink-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  Flower Body (5x)
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg>
+                  Leaf
+                </span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Little Hearts Card -->
+          <button type="button" data-target="patternModal-little-hearts" data-name="Little Hearts" data-difficulty="3"
+            data-hours="2" data-price="70"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/little_hearts.png" alt="Little Hearts Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Little Hearts</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 3/5 ⭐ ⭐ ⭐☆☆</p>
+                <p>Hours: 2-3 Hours ⏳</p>
+                <p>Price: 70 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-pink-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                  Heart
+                </span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Mini Rose Card -->
+          <button type="button" data-target="patternModal-mini-rose" data-name="Mini Rose" data-difficulty="3"
+            data-hours="2" data-price="80"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/mini_rose.png" alt="Mini Rose Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Mini Rose</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 3/5 ⭐ ⭐ ⭐☆☆</p>
+                <p>Hours: 2-3 Hours ⏳</p>
+                <p>Price: 80 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  Petals
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                  Sepal
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg>
+                  Leaf
+                </span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Peonies Card -->
+          <button type="button" data-target="patternModal-peonies" data-name="Peonies" data-difficulty="5"
+            data-hours="5" data-price="160"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/peonies.jpg" alt="Peonies Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Peonies</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 5/5 ⭐ ⭐ ⭐ ⭐ ⭐ </p>
+                <p>Hours: 5-6 hours ⏳</p>
+                <p>Price: 160 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-600" fill="currentColor" viewBox="0 0 24 24">
+                    <ellipse cx="12" cy="7" rx="4" ry="5" />
+                    <path d="M12 12v10" />
+                  </svg> Pistil</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg> Petals</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M12 22V12M12 12C12 12 7 8 4 3c4 1 7 3 8 9zM12 12C12 12 17 8 20 3c-4 1-7 3-8 9z" />
+                  </svg> Sepal</span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600"><svg
+                    class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg> Leaf</span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Ping Pong Flower Card -->
+          <button type="button" data-target="patternModal-ping-pong-flower" data-name="Ping Pong Flower"
+            data-difficulty="3" data-hours="2" data-price="150"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/ping_pong_flower.png" alt="Ping Pong Flower Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Ping Pong Flower</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 3/5 ⭐ ⭐ ⭐☆☆</p>
+                <p>Hours: 2-3 Hours ⏳</p>
+                <p>Price: 80 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  Flower Body and Petals
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                  Sepal
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg>
+                  Leaf
+                </span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Plumeria Card -->
+          <button type="button" data-target="patternModal-plumeria" data-name="Plumeria" data-difficulty="5"
+            data-hours="6" data-price="150"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/plumeria.png" alt="Plumeria Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Plumeria</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 5/5 ⭐ ⭐ ⭐ ⭐ ⭐ </p>
+                <p>Hours: 6-7 Hours ⏳</p>
+                <p>Price: 150 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  Petals 15x
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg>
+                  Leaves 2x
+                </span>
+              </div>
+            </div>
+          </button>
+          <!-- Stargazer Lily Card -->
+          <button type="button" data-target="patternModal-stargazer-lily" data-name="Stargazer Lily" data-difficulty="4"
+            data-hours="6" data-price="150"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full">
+              <div class="w-full h-full overflow-hidden">
+                <img src="/src/assets/stargazer_lily.png" alt="Stargazer Lily Crochet Pattern"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Stargazer Lily</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 4/5 ⭐ ⭐ ⭐ ⭐☆</p>
+                <p>Hours: 5-6 Hours ⏳</p>
+                <p>Price: 150 pesos 🏷️</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  Petals 6x
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-gray-50 px-3 py-2 rounded-lg border border-brand-border text-gray-600">
+                  <svg class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 22l8-8" />
+                  </svg>
+                  Leaf
+                </span>
+              </div>
+            </div>
+          </button>
+
+
+        </div>
+
+
+        <!-- Baby's Breath Modal -->
+        <div id="patternModal-babys-breath"
+          class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-[200] hidden items-center justify-center p-4 transition-opacity">
+          <div
+            class="modal-content-inner bg-white w-full max-w-4xl rounded-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-y-auto overflow-x-hidden transform transition-transform scale-95"
+            id="patternModalContent-babys-breath">
+
+            <!-- Modal Header -->
+            <div class="relative h-64 sm:h-80 w-full flex-shrink-0">
+              <img src="/src/assets/babys_breath.png" alt="Baby's Breath Crochet Pattern"
+                class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent"></div>
+
+              <button type="button"
+                class="close-modal-btn absolute top-6 right-6 w-10 h-10 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              <div class="absolute bottom-6 left-8 flex items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white p-3 shadow-lg transform -rotate-6">
+                  <svg class="w-full h-full text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+                <div>
+                  <span
+                    class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md text-white rounded-lg text-xs font-bold tracking-wider uppercase mb-2">Featured</span>
+                  <h2 class="text-3xl font-bold text-white drop-shadow-md">Baby's Breath</h2>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-8 bg-white flex-1">
+              <div class="max-w-none text-left">
+                <h3 class="text-3xl font-bold mb-4 text-gray-900 leading-tight">Baby's Breath</h3>
+                <div class="text-gray-600 mb-8 text-lg leading-relaxed flex flex-col gap-1">
+                  <p>Difficulty: 2/5 ⭐ ⭐☆☆☆</p>
+                  <p>Hours: 1-2 hours ⏳</p>
+                  <p>Price: 60 pesos 🏷️</p>
+                </div>
+
+                <!-- Material Requirements -->
+                <div class="mb-8 p-6 bg-brand-neutral rounded-2xl border border-brand-border">
+                  <h4 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    Material Requirements
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 font-medium">
+
+                    <label class="flex items-start gap-3 cursor-pointer group select-none">
+                      <input type="checkbox" class="custom-checkbox group-active:scale-95" />
+                      <span class="group-hover:text-gray-900 transition-colors">Colored Yarn for Petals</span>
+                    </label>
+                    <label class="flex items-start gap-3 cursor-pointer group select-none">
+                      <input type="checkbox" class="custom-checkbox group-active:scale-95" />
+                      <span class="group-hover:text-gray-900 transition-colors">Green Yarn for Stem and Leaf</span>
+                    </label>
+                    <label class="flex items-start gap-3 cursor-pointer group select-none">
+                      <input type="checkbox" class="custom-checkbox group-active:scale-95" />
+                      <span class="group-hover:text-gray-900 transition-colors">3mm Hook</span>
+                    </label>
+                    <label class="flex items-start gap-3 cursor-pointer group select-none">
+                      <input type="checkbox" class="custom-checkbox group-active:scale-95" />
+                      <span class="group-hover:text-gray-900 transition-colors">0.5mm Craft Wire</span>
+                    </label>
+                    <label class="flex items-start gap-3 cursor-pointer group select-none">
+                      <input type="checkbox" class="custom-checkbox group-active:scale-95" />
+                      <span class="group-hover:text-gray-900 transition-colors">Flower Stem</span>
+                    </label>
+                    <label class="flex items-start gap-3 cursor-pointer group select-none">
+                      <input type="checkbox" class="custom-checkbox group-active:scale-95" />
+                      <span class="group-hover:text-gray-900 transition-colors">Glue Gun</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Flower Parts -->
+                <div class="mb-8 p-6 bg-brand-neutral rounded-2xl border border-brand-border">
+                  <h4 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    Flower Parts
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <div
+                      class="w-full px-4 py-3 rounded-xl bg-gray-50 text-gray-700 font-bold hover:bg-pink-50 hover:text-pink-700 hover:border-pink-200 border border-gray-100 transition-all shadow-sm text-sm flex items-center gap-3">
+                      <svg class="w-5 h-5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                        </path>
+                      </svg> Flower Petals (8x)
+                    </div>
+                  </div>
+                </div>
+
+                
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </section>
+
+<section id="amigurumi-patterns" class="text-left mt-16">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-3xl font-bold text-gray-900">Amigurumi & Keychain Patterns</h2>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="max-w-2xl mx-auto mb-12 relative z-50 text-left">
+          <div class="relative group">
+            <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+              <svg class="h-6 w-6 text-gray-400 group-focus-within:text-brand-primary transition-colors"
+                viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  clip-rule="evenodd" />
+              </svg>
+            </div>
+            <input type="text" id="amigurumiSearchInput" autocomplete="off"
+              class="block w-full pl-14 pr-4 py-5 border border-white/60 bg-white/60 backdrop-blur-md rounded-2xl leading-5 placeholder-gray-400 focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-gray-900 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] text-lg font-medium"
+              placeholder="Search for an amigurumi pattern (e.g., Bunny Keychain)..." />
+          </div>
+          <!-- Predictive Suggestions Dropdown -->
+          <ul id="amigurumiSearchSuggestions"
+            class="absolute z-50 w-full bg-white mt-2 border border-gray-100 rounded-2xl shadow-xl overflow-hidden hidden flex-col text-left divide-y divide-gray-50">
+            <!-- Populated by JS -->
+          </ul>
+
+          <!-- Sort Filter -->
+          <div class="flex flex-wrap items-center gap-4 mt-6 justify-start text-sm z-40 relative" id="amigurumiSortFilters">
+            <label
+              class="font-bold text-brand-primary flex items-center gap-2 bg-pink-50 px-4 py-2 rounded-full border border-pink-100 shadow-sm">
+              <svg class="w-4 h-4 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12">
+                </path>
+              </svg>
+              SORT BY
+            </label>
+            <!-- Custom Dropdown Component -->
+            <div class="relative" id="amigurumiCustomSortDropdown">
+              <!-- Toggle Button -->
+              <button type="button" id="amigurumiCustomSortBtn"
+                class="flex items-center justify-between border-2 border-transparent bg-white rounded-full py-2.5 pl-11 pr-4 text-gray-700 shadow-md focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 font-bold cursor-pointer hover:shadow-lg transition-all w-64 hover:-translate-y-0.5 relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <svg class="w-4 h-4 text-brand-primary group-hover:scale-110 transition-transform" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                  </svg>
+                </div>
+                <span id="amigurumiCustomSortLabel" class="truncate flex-1 text-left">Name (A-Z)</span>
+                <svg id="amigurumiCustomSortIcon" class="w-5 h-5 text-brand-primary transition-transform duration-200"
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+
+              <!-- Dropdown Menu -->
+              <div id="amigurumiCustomSortMenu"
+                class="absolute z-50 w-full mt-2 bg-white border border-pink-100 rounded-2xl shadow-xl opacity-0 invisible transform -translate-y-2 transition-all duration-200 overflow-hidden origin-top-right">
+                <ul class="py-2 text-gray-700 font-medium">
+                  <li><button type="button"
+                      class="amigurumi-sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 text-brand-primary bg-pink-50/50 transition-colors flex items-center justify-between group"
+                      data-value="name-asc"><span>Name (A-Z)</span><span
+                        class="text-xs opacity-100 transition-opacity font-bold">A-Z</span></button></li>
+                  <li><button type="button"
+                      class="amigurumi-sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="name-desc"><span>Name (Z-A)</span><span
+                        class="text-xs opacity-0 group-hover:opacity-100 transition-opacity font-bold">Z-A</span></button>
+                  </li>
+                  <div class="h-px bg-gray-100 my-1 mx-4"></div>
+                  <li><button type="button"
+                      class="amigurumi-sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="difficulty-asc"><span>Difficulty (Low to High)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">⭐ -⭐ ⭐ ⭐ </span></button>
+                  </li>
+                  <li><button type="button"
+                      class="amigurumi-sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="difficulty-desc"><span>Difficulty (High to Low)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">⭐ ⭐ ⭐ -⭐ </span></button>
+                  </li>
+                  <div class="h-px bg-gray-100 my-1 mx-4"></div>
+                  <li><button type="button"
+                      class="amigurumi-sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="hours-asc"><span>Hours (Low to High)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">⏳-⏳⏳</span></button>
+                  </li>
+                  <li><button type="button"
+                      class="amigurumi-sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="hours-desc"><span>Hours (High to Low)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">⏳⏳-⏳</span></button>
+                  </li>
+                  <div class="h-px bg-gray-100 my-1 mx-4"></div>
+                  <li><button type="button"
+                      class="amigurumi-sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="price-asc"><span>Price (Low to High)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">$-$$$</span></button>
+                  </li>
+                  <li><button type="button"
+                      class="amigurumi-sort-option w-full text-left px-5 py-2.5 hover:bg-pink-50 hover:text-brand-primary transition-colors flex items-center justify-between group"
+                      data-value="price-desc"><span>Price (High to Low)</span><span
+                        class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-bold">$$$-$</span></button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:px-8" id="amigurumiPatternsGrid">
+          <!-- Bunny Keychain Card -->
+          <button type="button" data-target="patternModal-bunny-keychain" data-name="Bunny Keychain" data-difficulty="2"
+            data-hours="2" data-price="100"
+            class="pattern-card-trigger flex flex-col bg-white rounded-[2rem] shadow-sm border border-brand-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left group w-full">
+            <div class="relative h-72 sm:h-80 w-full bg-pink-50 flex items-center justify-center">
+              <span class="text-6xl">🐰</span>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col gap-3 bg-white z-20 w-full relative flex-1">
+              <h3
+                class="text-2xl font-bold text-gray-900 leading-tight group-hover:text-brand-primary transition-colors">
+                Bunny Keychain</h3>
+              <div class="text-sm text-gray-500 leading-relaxed font-medium flex flex-col gap-1">
+                <p>Difficulty: 2/5 ⭐ ⭐☆☆☆</p>
+                <p>Hours: 2 hours ⏳</p>
+                <p>Price: 100 pesos 🏷️</p>
+              </div>
+            </div>
+          </button>
+        </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Transition Overlay -->
+        <div id="pageTransition" class="fixed inset-0 hidden flex-col" style="z-index: 9999;">
+          <div class="absolute inset-0 bg-white/40 backdrop-blur-sm z-0"></div>
+          <div id="transitionPanel"
+            class="relative z-10 w-full h-full bg-gradient-to-br from-brand-light via-pink-50 to-brand-primary transform translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] flex items-center justify-center overflow-hidden">
+
+            <div class="absolute inset-0 opacity-30">
+              <div class="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-white/40 blur-[80px]"></div>
+              <div
+                class="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-brand-primary/40 blur-[100px]">
+              </div>
+            </div>
+
+            <div id="transitionGlare"
+              class="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] skew-x-[-20deg]">
+            </div>
+
+            <h2 id="transitionTitle"
+              class="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight drop-shadow-sm opacity-0 translate-y-4 transition-all duration-500 ease-out z-20">
+              Loading...
+            </h2>
+          </div>
+        </div>
+
+
+
+        <script type="module" src="/src/main.ts"></script>
+
+        <!-- Floating Hamburger Menu for scroll -->
+        <button type="button" id="floatingMenuToggle" aria-label="Open menu"
+          class="fixed top-8 right-8 w-14 h-14 bg-brand-primary text-gray-900 rounded-full shadow-2xl hover:shadow-brand-primary/50 hover:bg-brand-accent flex flex-col justify-center items-center gap-1.5 z-50 opacity-0 pointer-events-none transition-all duration-300 transform hover:-translate-y-1 focus:outline-none">
+          <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+          <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+          <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+        </button>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" aria-label="Back to top" class="fixed bottom-8 right-8 w-14 h-14 bg-white text-brand-primary rounded-full shadow-2xl hover:bg-brand-primary hover:text-gray-900 flex justify-center items-center z-50 opacity-0 pointer-events-none transition-all duration-300 transform hover:-translate-y-1 focus:outline-none border border-brand-primary">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </button>
+
+</body>
+
+</html>
+
+

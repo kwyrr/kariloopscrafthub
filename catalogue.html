@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/src/assets/kariloops%20logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogue | Kariloops</title>
+  <!-- Add Google Fonts for a premium look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body
+  class="bg-[#FAFAF9] text-gray-800 font-sans antialiased selection:bg-brand-primary selection:text-gray-900 relative min-h-screen overflow-x-hidden">
+  <!-- Decorative Background Blobs -->
+  <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+    <div class="absolute -top-[10%] -right-[5%] w-[40%] h-[40%] rounded-full bg-pink-200/20 blur-[120px]"></div>
+    <div class="absolute top-[20%] -left-[10%] w-[30%] h-[30%] rounded-full bg-brand-primary/20 blur-[100px]"></div>
+    <div class="absolute bottom-[-10%] right-[10%] w-[50%] h-[40%] rounded-full bg-yellow-200/20 blur-[120px]"></div>
+  </div>
+
+  <div id="app">
+    <nav id="mainNav">
+      <div class="status-banner">
+        <span>KARILOOPS · 2026</span>
+        <div class="status-location">
+          <span class="status-pulse-dot"></span>
+          <span id="live-clock">MANILA, PH · --:--</span>
+        </div>
+        <span>v1.0.0 ♡</span>
+      </div>
+
+      <div class="custom-nav-container">
+        <a class="nav-profile-brand group" href="index.html#home">
+          <img src="/src/assets/kariloops%20logo.png" alt="Kariloops Logo"
+            class="h-16 md:h-20 w-auto max-w-xs transition-transform group-hover:scale-105 object-contain" />
+          <div class="profile-details">
+            <span class="profile-name">Kariloops</span>
+            <span class="profile-title">Patterns ♡ Inventory</span>
+          </div>
+        </a>
+
+        <div class="desktop-nav-links">
+          <a href="index.html#flower-patterns" class="nav-link">Crochet Patterns</a>
+          <a href="inventory.html" class="nav-link">Inventory</a>
+          <a href="catalogue.html" class="nav-link">Catalogue</a>
+          <a href="calendar.html" class="nav-link">Calendar</a>
+          <a href="dictionary.html" class="nav-link">Dictionary</a>
+        </div>
+
+        <div class="nav-actions">
+          <a class="btn-cv" href="index.html#shop">Shop</a>
+          <a class="btn-hire" href="index.html#commission">Commission ♡</a>
+
+          <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-nav" id="mobileNav">
+        <!-- Date and Time for mobile menu -->
+        <div
+          class="-mx-6 -mt-6 mb-6 p-6 bg-brand-light border-b border-brand-border text-xs font-medium tracking-widest uppercase text-gray-700 flex flex-col items-center justify-center gap-1.5 shadow-sm">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span>MANILA, PH</span>
+          </div>
+          <span class="live-clock-mobile-date"></span>
+        </div>
+
+        <div class="flex flex-col gap-4 px-2">
+          <a href="index.html#flower-patterns" class="mobile-nav-link group">Crochet Patterns</a>
+          <a href="inventory.html" class="mobile-nav-link group">Inventory</a>
+          <a href="catalogue.html" class="mobile-nav-link group">Catalogue</a>
+          <a href="calendar.html" class="mobile-nav-link group">Calendar</a>
+          <a href="dictionary.html" class="mobile-nav-link group">Dictionary</a>
+        <button id="openStitchCounterMenu" class="mobile-nav-link group text-left flex items-center justify-between w-full">
+          <span>Project Counter</span>
+          <svg class="w-4 h-4 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+          </svg>
+        </button>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: auto; padding-top: 20px;">
+          <a class="btn-cv" href="index.html#shop" style="display: inline-block;">Shop</a>
+          <a class="btn-hire" href="index.html#commission" style="display: inline-block;" class="mobile-nav-link">Commission ♡</a>
+        </div>
+      </div>
+      <div class="mobile-overlay" id="mobileOverlay"></div>
+    </nav>
+
+    <main class="p-8 max-w-7xl mx-auto mt-16 relative">
+      <div class="mb-12 text-center">
+        <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight drop-shadow-md">Yarn Catalogue</h1>
+        <p class="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto">Manage your yarn colors, codes, and stock status.</p>
+      </div>
+      
+      <!-- Actions -->
+      <div class="flex justify-end mb-6 gap-3">
+          <button id="addYarnBtn" class="bg-brand-primary text-white font-bold py-3 px-6 rounded-xl hover:bg-brand-accent transition-all duration-300 shadow-md items-center gap-2 hidden">
+              <svg class="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+              Add Yarn Color
+          </button>
+          <button id="editCatalogueBtn" class="bg-gray-800 text-white font-bold py-3 px-6 rounded-xl hover:bg-gray-900 transition-all duration-300 shadow-md flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              Edit Catalogue
+          </button>
+          <button id="exitEditModeBtn" class="bg-red-500 text-white font-bold py-3 px-6 rounded-xl hover:bg-red-600 transition-all duration-300 shadow-md flex items-center gap-2 hidden">
+              Exit Edit Mode
+          </button>
+      </div>
+
+      <!-- Catalogue Grid -->
+      <div class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 transition-all duration-500">
+          <div id="catalogueGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+              <!-- JS will populate -->
+          </div>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Password Modal for Edit Mode -->
+  <div id="catalogueAuthModal" class="fixed inset-0 z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div class="absolute inset-0 bg-gray-900/40 backdrop-blur-sm" id="catalogueAuthModalOverlay"></div>
+    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl relative w-full max-w-md mx-4 z-10 transform scale-95 transition-transform duration-300 border border-brand-border" id="catalogueAuthModalContent">
+        <button id="closeCatalogueAuthModal" class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors z-20">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Enter Password</h3>
+        <p class="text-sm text-gray-600 mb-4">Unlock the catalogue to add, edit, or delete yarn colors.</p>
+        <input type="password" id="cataloguePasswordInput" class="w-full p-3 border border-gray-200 rounded-xl mb-3 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary" placeholder="Password">
+        <button id="submitCatalogueAuthBtn" class="w-full bg-brand-primary text-white font-bold py-3 px-4 rounded-xl hover:bg-brand-accent transition-all duration-300">Unlock</button>
+        <p id="cataloguePasswordError" class="text-red-500 text-sm mt-2 hidden">Incorrect password.</p>
+    </div>
+  </div>
+  
+  <!-- Yarn Modal -->
+  <div id="yarnModal" class="fixed inset-0 z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div class="absolute inset-0 bg-gray-900/40 backdrop-blur-sm" id="yarnModalOverlay"></div>
+    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl relative w-full max-w-md mx-4 z-10 transform scale-95 transition-transform duration-300 border border-brand-border" id="yarnModalContent">
+        <button id="closeYarnModal" class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors z-20">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        
+        <h3 id="yarnModalTitle" class="text-2xl font-bold text-gray-900 mb-4">Add Yarn</h3>
+        
+        <!-- Form State -->
+        <div id="yarnEditForm" class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold text-gray-500 mb-1 uppercase tracking-wider">Color Code/Hex</label>
+                <input type="color" id="yarnColorHex" class="w-full h-12 p-1 border border-gray-200 rounded-xl cursor-pointer" value="#ffb6c1">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-gray-500 mb-1 uppercase tracking-wider">Yarn Code</label>
+                <input type="text" id="yarnName" class="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary" placeholder="e.g. #012">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-gray-500 mb-1 uppercase tracking-wider">Yarn Weight</label>
+                <input type="text" id="yarnCode" class="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary" placeholder="e.g. 5ply, DK, Worsted">
+            </div>
+            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100">
+                <label class="text-sm font-bold text-gray-700 cursor-pointer select-none" for="yarnInStock">In Stock?</label>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="yarnInStock" class="sr-only peer" checked>
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-primary"></div>
+                </label>
+            </div>
+            <div class="flex gap-2 pt-2">
+                <button id="deleteYarnBtn" class="bg-red-50 text-red-500 font-bold py-3 px-4 rounded-xl hover:bg-red-100 transition-all duration-300 hidden">Delete</button>
+                <button id="saveYarnBtn" class="flex-1 bg-brand-primary text-white font-bold py-3 px-4 rounded-xl hover:bg-brand-accent transition-all duration-300">Save Yarn</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  
+  <!-- Page Transition Overlay -->
+  <div id="pageTransition" class="fixed inset-0 hidden flex-col" style="z-index: 9999;">
+    <div class="absolute inset-0 bg-white/40 backdrop-blur-sm z-0"></div>
+    <div id="transitionPanel"
+      class="relative z-10 w-full h-full bg-gradient-to-br from-brand-light via-pink-50 to-brand-primary transform translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] flex items-center justify-center overflow-hidden">
+      
+      <div class="absolute inset-0 opacity-30">
+        <div class="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-white/40 blur-[80px]"></div>
+        <div class="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-brand-primary/40 blur-[100px]"></div>
+      </div>
+      
+      <div id="transitionGlare"
+        class="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] skew-x-[-20deg]">
+      </div>
+      
+      <h2 id="transitionTitle"
+        class="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight drop-shadow-sm opacity-0 translate-y-4 transition-all duration-500 ease-out z-20">
+        Loading...
+      </h2>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+  
+  <!-- Floating Hamburger Menu for scroll -->
+  <button type="button" id="floatingMenuToggle" aria-label="Open menu"
+    class="fixed top-8 right-8 w-14 h-14 bg-brand-primary text-gray-900 rounded-full shadow-2xl hover:shadow-brand-primary/50 hover:bg-brand-accent flex flex-col justify-center items-center gap-1.5 z-50 opacity-0 pointer-events-none transition-all duration-300 transform hover:-translate-y-1 focus:outline-none">
+    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+  </button>
+</body>
+</html>
