@@ -29,7 +29,7 @@ const patternPages = [
   'carnations', 'cosmos', 'daisy', 'detailed-sunflower', 
   'fluffy-tulips', 'forget-me-not', 'lavenders', 'leaf-stem', 
   'lily-of-the-valley', 'little-hearts', 'mini-rose', 'peonies', 
-  'ping-pong-flower', 'plumeria', 'stargazer-lily'
+  'ping-pong-flower', 'plumeria', 'puff-flower-bag-charm', 'stargazer-lily'
 ];
 
 if (patternPages.includes(currentPatternId)) {
@@ -573,7 +573,7 @@ const amigurumiSearchInput = document.getElementById('amigurumiSearchInput') as 
 const amigurumiSearchSuggestions = document.getElementById('amigurumiSearchSuggestions');
 
 const amigurumiDatabase = [
-  { name: 'Bunny Keychain', action: () => openModalById('patternModal-bunny-keychain') }
+  { name: 'Puff Flower Bag Charm', action: () => openModalById('patternModal-puff-flower-bag-charm') }
 ];
 
 if (amigurumiSearchInput && amigurumiSearchSuggestions) {
