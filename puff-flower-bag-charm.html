@@ -73,17 +73,20 @@
         <a href="catalogue.html" class="mobile-nav-link group">Catalogue</a>
         <a href="calendar.html" class="mobile-nav-link group">Calendar</a>
         <a href="dictionary.html" class="mobile-nav-link group">Dictionary</a>
-        <button id="openStitchCounterMenu" class="mobile-nav-link group text-left flex items-center justify-between w-full">
+        <button id="openStitchCounterMenu"
+          class="mobile-nav-link group text-left flex items-center justify-between w-full">
           <span>Project Counter</span>
           <svg class="w-4 h-4 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
           </svg>
         </button>
       </div>
 
       <div style="display: flex; gap: 8px; margin-top: auto; padding-top: 20px;">
         <a class="btn-cv" href="index.html#shop" style="display: inline-block;">Shop</a>
-        <a class="btn-hire" href="index.html#commission" style="display: inline-block;" class="mobile-nav-link">Commission →</a>
+        <a class="btn-hire" href="index.html#commission" style="display: inline-block;"
+          class="mobile-nav-link">Commission →</a>
       </div>
     </div>
     <div class="mobile-overlay" id="mobileOverlay"></div>
@@ -105,8 +108,8 @@
     <!-- Description -->
     <div
       class="text-lg text-gray-600 leading-relaxed font-medium flex flex-col gap-2 mb-8 max-w-3xl bg-white p-6 rounded-2xl border border-brand-border shadow-sm inline-block w-fit pr-16">
-      <p class="flex items-center gap-2"><span class="font-bold text-black">Difficulty:</span> 2/5 ⭐ ⭐☆☆☆</p>
-      <p class="flex items-center gap-2"><span class="font-bold text-black">Hours:</span> 2-3 hours ⏳</p>
+      <p class="flex items-center gap-2"><span class="font-bold text-black">Difficulty:</span> 2/5 ⭐⭐☆☆☆</p>
+      <p class="flex items-center gap-2"><span class="font-bold text-black">Hours:</span> 1-2 hours ⏳</p>
       <p class="flex items-center gap-2"><span class="font-bold text-black">Price:</span> 75 pesos 🏷️</p>
     </div>
 
@@ -227,7 +230,8 @@
             <div
               class="pattern-row hover:bg-yellow-50/50 px-2 py-0.5 -mx-2 rounded transition-all select-none cursor-pointer text-black relative group pr-8">
               <span class="font-bold text-gray-900 mr-2 select-none">R2:</span>
-              Slip knot, slst in last hdc, ([2ch, dc, tr], [tr, dc, 2ch, slst], slst in n st) *5, slst in first sp, ch, coy
+              Slip knot, slst in last hdc, ([2ch, dc, tr], [tr, dc, 2ch, slst], slst in n st) *5, slst in first sp, ch,
+              coy
             </div>
             <div
               class="pattern-row hover:bg-yellow-50/50 px-2 py-0.5 -mx-2 rounded transition-all select-none cursor-pointer text-black relative group pr-8 italic">
@@ -244,7 +248,8 @@
             </div>
             <div
               class="pattern-row hover:bg-yellow-50/50 px-2 py-0.5 -mx-2 rounded transition-all select-none cursor-pointer text-black relative group pr-8 italic font-semibold">
-              Align the two flowers (insides facing each other) and make 1sc across all the stitches of the flowers, slst in the slst spaces of the two flowers
+              Align the two flowers (insides facing each other) and make 1sc across all the stitches of the flowers,
+              slst in the slst spaces of the two flowers
             </div>
             <div
               class="pattern-row hover:bg-yellow-50/50 px-2 py-0.5 -mx-2 rounded transition-all select-none cursor-pointer text-black relative group pr-8 italic font-semibold">
@@ -317,8 +322,8 @@
       </div>
       <div class="flex flex-col items-center border-t border-gray-100 pt-6">
         <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">Stitches</h3>
-        <div id="stitchCountDisplay"
-          class="text-5xl font-bold text-black mb-3 drop-shadow-sm font-mono tabular-nums">0</div>
+        <div id="stitchCountDisplay" class="text-5xl font-bold text-black mb-3 drop-shadow-sm font-mono tabular-nums">0
+        </div>
         <div class="flex justify-center gap-3 w-full max-w-[200px]">
           <button id="stitchDecrement"
             class="flex-1 h-10 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 text-xl font-bold flex items-center justify-center transition-colors border border-gray-200 shadow-sm">-</button>
@@ -332,22 +337,23 @@
     </div>
   </div>
 
-  
+
   <!-- Page Transition Overlay -->
   <div id="pageTransition" class="fixed inset-0 hidden flex-col" style="z-index: 9999;">
     <div class="absolute inset-0 bg-white/40 backdrop-blur-sm z-0"></div>
     <div id="transitionPanel"
       class="relative z-10 w-full h-full bg-gradient-to-br from-brand-light via-pink-50 to-brand-primary transform translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] flex items-center justify-center overflow-hidden">
-      
+
       <div class="absolute inset-0 opacity-30">
         <div class="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-white/40 blur-[80px]"></div>
-        <div class="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-brand-primary/40 blur-[100px]"></div>
+        <div class="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-brand-primary/40 blur-[100px]">
+        </div>
       </div>
-      
+
       <div id="transitionGlare"
         class="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] skew-x-[-20deg]">
       </div>
-      
+
       <h2 id="transitionTitle"
         class="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight drop-shadow-sm opacity-0 translate-y-4 transition-all duration-500 ease-out z-20">
         Loading...
@@ -407,5 +413,3 @@
 </body>
 
 </html>
-
-
