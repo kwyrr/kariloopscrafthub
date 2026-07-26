@@ -957,7 +957,7 @@
         const elDeadlineItem = document.getElementById(prefix + 'DeadlineItem');
 
         if (elComp) elComp.textContent = completedItems;
-        if (elTodo) elTodo.textContent = todoProjects;
+        if (elTodo) elTodo.textContent = notCompletedItems;
         if (elTotal) elTotal.textContent = totalItems;
 
         if (elDeadlineDays && elDeadlineItem) {
@@ -1363,6 +1363,11 @@
             amigurumiData[idx][key] = input.value;
           }
         });
+
+        // Recalculate derived fields so they are correct before pushing to Firebase
+        flowersData.forEach(calculateDerivedFields);
+        itemsData.forEach(calculateDerivedFields);
+        amigurumiData.forEach(calculateDerivedFields);
 
         saveData();
         isEditMode = false;
