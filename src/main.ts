@@ -573,7 +573,9 @@ const amigurumiSearchInput = document.getElementById('amigurumiSearchInput') as 
 const amigurumiSearchSuggestions = document.getElementById('amigurumiSearchSuggestions');
 
 const amigurumiDatabase = [
-  { name: 'Puff Flower Bag Charm', action: () => openModalById('patternModal-puff-flower-bag-charm') }
+  { name: 'Puff Flower Bag Charm', action: () => openModalById('patternModal-puff-flower-bag-charm') },
+  { name: 'Ruffle Heart Bag Charm', action: () => openModalById('patternModal-ruffle-heart-bag-charm') },
+  { name: 'Ruffle Bow Keychain', action: () => openModalById('patternModal-ruffle-bow-keychain') }
 ];
 
 if (amigurumiSearchInput && amigurumiSearchSuggestions) {

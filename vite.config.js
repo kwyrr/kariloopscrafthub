@@ -27,6 +27,7 @@ export default defineConfig({
         'stargazer-lily': 'stargazer-lily.html',
         'puff-flower-bag-charm': 'puff-flower-bag-charm.html',
         'ruffle-heart-bag-charm': 'ruffle-heart-bag-charm.html',
+        'ruffle-bow-keychain': 'ruffle-bow-keychain.html',
         'dictionary': 'dictionary.html',
         'calendar': 'calendar.html',
         'catalogue': 'catalogue.html',
