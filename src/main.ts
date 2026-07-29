@@ -29,7 +29,7 @@ const patternPages = [
   'carnations', 'cosmos', 'daisy', 'detailed-sunflower', 
   'fluffy-tulips', 'forget-me-not', 'lavenders', 'leaf-stem', 
   'lily-of-the-valley', 'little-hearts', 'mini-rose', 'peonies', 
-  'ping-pong-flower', 'plumeria', 'puff-flower-bag-charm', 'ruffle-heart-bag-charm', 'stargazer-lily'
+  'ping-pong-flower', 'plumeria', 'hanging-rose-keychain', 'puff-flower-bag-charm', 'ruffle-heart-bag-charm', 'stargazer-lily'
 ];
 
 if (patternPages.includes(currentPatternId)) {
@@ -500,6 +500,7 @@ const flowerDatabase = [
   { name: 'Peonies', action: () => openModalById('patternModal-peonies') },
   { name: 'Roses', action: () => alert('Pattern for Roses coming soon!') },
   { name: 'Detailed Sunflower', action: () => openModalById('patternModal-detailed-sunflower') },
+  { name: 'Hanging Rose Keychain', action: () => openModalById('patternModal-hanging-rose-keychain') },
   { name: 'Tulips', action: () => openModalById('patternModal-blooming-tulips') },
   { name: 'Calla Lily', action: () => openModalById('patternModal-calla-lily') },
   { name: 'Carnations', action: () => openModalById('patternModal-carnations') },
@@ -573,6 +574,7 @@ const amigurumiSearchInput = document.getElementById('amigurumiSearchInput') as 
 const amigurumiSearchSuggestions = document.getElementById('amigurumiSearchSuggestions');
 
 const amigurumiDatabase = [
+  { name: 'Hanging Rose Keychain', action: () => openModalById('patternModal-hanging-rose-keychain') },
   { name: 'Puff Flower Bag Charm', action: () => openModalById('patternModal-puff-flower-bag-charm') },
   { name: 'Ruffle Heart Bag Charm', action: () => openModalById('patternModal-ruffle-heart-bag-charm') },
   { name: 'Ruffle Bow Keychain', action: () => openModalById('patternModal-ruffle-bow-keychain') }

@@ -26,6 +26,7 @@ export default defineConfig({
         'plumeria': 'plumeria.html',
         'stargazer-lily': 'stargazer-lily.html',
         'puff-flower-bag-charm': 'puff-flower-bag-charm.html',
+        'hanging-rose-keychain': 'hanging-rose-keychain.html',
         'ruffle-heart-bag-charm': 'ruffle-heart-bag-charm.html',
         'ruffle-bow-keychain': 'ruffle-bow-keychain.html',
         'dictionary': 'dictionary.html',
