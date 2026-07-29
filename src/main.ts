@@ -29,7 +29,7 @@ const patternPages = [
   'carnations', 'cosmos', 'daisy', 'detailed-sunflower', 
   'fluffy-tulips', 'forget-me-not', 'lavenders', 'leaf-stem', 
   'lily-of-the-valley', 'little-hearts', 'mini-rose', 'peonies', 
-  'ping-pong-flower', 'plumeria', 'hanging-rose-keychain', 'puff-flower-bag-charm', 'ruffle-heart-bag-charm', 'stargazer-lily'
+  'ping-pong-flower', 'plumeria', 'hanging-rose-keychain', 'hanging-tulips-keychain', 'puff-flower-bag-charm', 'ruffle-heart-bag-charm', 'stargazer-lily'
 ];
 
 if (patternPages.includes(currentPatternId)) {
@@ -501,6 +501,7 @@ const flowerDatabase = [
   { name: 'Roses', action: () => alert('Pattern for Roses coming soon!') },
   { name: 'Detailed Sunflower', action: () => openModalById('patternModal-detailed-sunflower') },
   { name: 'Hanging Rose Keychain', action: () => openModalById('patternModal-hanging-rose-keychain') },
+  { name: 'Hanging Tulips Keychain', action: () => openModalById('patternModal-hanging-tulips-keychain') },
   { name: 'Tulips', action: () => openModalById('patternModal-blooming-tulips') },
   { name: 'Calla Lily', action: () => openModalById('patternModal-calla-lily') },
   { name: 'Carnations', action: () => openModalById('patternModal-carnations') },
