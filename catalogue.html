@@ -101,19 +101,37 @@
         <p class="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto">Manage your yarn colors, codes, and stock status.</p>
       </div>
       
-      <!-- Actions -->
-      <div class="flex justify-end mb-6 gap-3">
-          <button id="addYarnBtn" class="bg-brand-primary text-white font-bold py-3 px-6 rounded-xl hover:bg-brand-accent transition-all duration-300 shadow-md items-center gap-2 hidden">
-              <svg class="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-              Add Yarn Color
-          </button>
-          <button id="editCatalogueBtn" class="bg-gray-800 text-white font-bold py-3 px-6 rounded-xl hover:bg-gray-900 transition-all duration-300 shadow-md flex items-center gap-2">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-              Edit Catalogue
-          </button>
-          <button id="exitEditModeBtn" class="bg-red-500 text-white font-bold py-3 px-6 rounded-xl hover:bg-red-600 transition-all duration-300 shadow-md flex items-center gap-2 hidden">
-              Exit Edit Mode
-          </button>
+      <!-- Filters and Actions -->
+      <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+          <div class="flex flex-col sm:flex-row gap-4 items-center w-full md:w-auto bg-white/70 backdrop-blur-xl p-2.5 rounded-[1.25rem] border border-white/80 shadow-[0_4px_20px_rgb(0,0,0,0.04)]">
+              <div class="relative w-full sm:w-56 group">
+                  <select id="filterYarnType" class="appearance-none w-full p-3.5 pr-10 border-2 border-transparent bg-brand-neutral/80 hover:bg-brand-light/40 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white text-gray-800 font-bold text-sm transition-all duration-300 cursor-pointer shadow-sm">
+                      <option value="All">All Yarn Types</option>
+                      <!-- JS will populate -->
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-brand-primary group-hover:text-yellow-600 transition-colors">
+                      <svg class="w-5 h-5 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                  </div>
+              </div>
+              <label class="flex items-center gap-3 w-full sm:w-auto cursor-pointer bg-brand-neutral/80 hover:bg-brand-light/40 p-3.5 px-5 rounded-xl border-2 border-transparent hover:border-brand-primary/50 transition-all duration-300 shadow-sm group">
+                  <input type="checkbox" id="filterInStock" class="custom-checkbox">
+                  <span class="text-sm font-bold text-gray-800 group-hover:text-gray-900 transition-colors select-none">In Stock Only</span>
+              </label>
+          </div>
+
+          <div class="flex justify-end gap-3 w-full md:w-auto">
+              <button id="addYarnBtn" class="bg-brand-primary text-white font-bold py-3 px-6 rounded-xl hover:bg-brand-accent transition-all duration-300 shadow-md flex items-center gap-2 hidden">
+                  <svg class="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                  Add Yarn Color
+              </button>
+              <button id="editCatalogueBtn" class="bg-gray-800 text-white font-bold py-3 px-6 rounded-xl hover:bg-gray-900 transition-all duration-300 shadow-md flex items-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                  Edit Catalogue
+              </button>
+              <button id="exitEditModeBtn" class="bg-red-500 text-white font-bold py-3 px-6 rounded-xl hover:bg-red-600 transition-all duration-300 shadow-md flex items-center gap-2 hidden">
+                  Exit Edit Mode
+              </button>
+          </div>
       </div>
 
       <!-- Catalogue Grid -->
@@ -161,8 +179,21 @@
                 <input type="text" id="yarnName" class="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary" placeholder="e.g. #012">
             </div>
             <div>
-                <label class="block text-xs font-bold text-gray-500 mb-1 uppercase tracking-wider">Yarn Weight</label>
-                <input type="text" id="yarnCode" class="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary" placeholder="e.g. 5ply, DK, Worsted">
+                <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">Yarn Type</label>
+                <div id="yarnTypeContainer" class="flex flex-wrap gap-2 mb-2">
+                    <!-- JS will populate pills here -->
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="newYarnTypeInput" class="flex-1 p-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-brand-primary" placeholder="Add custom type">
+                    <button type="button" id="addNewYarnTypeBtn" class="bg-gray-100 text-gray-700 p-2 rounded-lg hover:bg-gray-200 font-bold px-3">+</button>
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-gray-500 mb-1 uppercase tracking-wider">Yarn Weight (g)</label>
+                <div class="relative">
+                    <input type="number" id="yarnCode" class="w-full p-3 pr-8 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary" placeholder="e.g. 50">
+                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium">g</span>
+                </div>
             </div>
             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100">
                 <label class="text-sm font-bold text-gray-700 cursor-pointer select-none" for="yarnInStock">In Stock?</label>

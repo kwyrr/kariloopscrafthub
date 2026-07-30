@@ -1596,11 +1596,66 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveYarnBtn = document.getElementById('saveYarnBtn')!;
   const deleteYarnBtn = document.getElementById('deleteYarnBtn')!;
   
+  const filterYarnType = document.getElementById('filterYarnType') as HTMLSelectElement;
+  const filterInStock = document.getElementById('filterInStock') as HTMLInputElement;
+  const yarnTypeContainer = document.getElementById('yarnTypeContainer')!;
+  const newYarnTypeInput = document.getElementById('newYarnTypeInput') as HTMLInputElement;
+  const addNewYarnTypeBtn = document.getElementById('addNewYarnTypeBtn')!;
+  
   let yarnData: any[] = [];
   let editingYarnId: string | null = null;
   let actionPending: string | null = null;
   let isCatalogueEditMode = false;
   let draggedYarnIndex: number | null = null;
+  
+  let customYarnTypes: string[] = JSON.parse(localStorage.getItem('kariloops_yarn_types') || '["4ply Cotton Yarn", "5ply Cotton Yarn", "8ply Cotton Yarn", "5ply Monaco Yarn", "Chunky Chenille Yarn"]');
+  let selectedYarnType: string = '';
+
+  function renderYarnTypeFilters() {
+      if (!filterYarnType) return;
+      filterYarnType.innerHTML = '<option value="All">All Yarn Types</option>';
+      customYarnTypes.forEach(type => {
+          const option = document.createElement('option');
+          option.value = type;
+          option.textContent = type;
+          filterYarnType.appendChild(option);
+      });
+  }
+
+  function renderYarnTypeTags() {
+      if (!yarnTypeContainer) return;
+      yarnTypeContainer.innerHTML = '';
+      customYarnTypes.forEach(type => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = `px-3 py-1.5 text-xs font-bold rounded-full transition-all ${selectedYarnType === type ? 'bg-brand-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`;
+          btn.textContent = type;
+          btn.onclick = () => {
+              selectedYarnType = type;
+              renderYarnTypeTags();
+          };
+          yarnTypeContainer.appendChild(btn);
+      });
+  }
+
+  if (addNewYarnTypeBtn) {
+      addNewYarnTypeBtn.onclick = () => {
+          const newType = newYarnTypeInput.value.trim();
+          if (newType && !customYarnTypes.includes(newType)) {
+              customYarnTypes.push(newType);
+              localStorage.setItem('kariloops_yarn_types', JSON.stringify(customYarnTypes));
+              newYarnTypeInput.value = '';
+              selectedYarnType = newType;
+              renderYarnTypeTags();
+              renderYarnTypeFilters();
+          }
+      };
+  }
+
+  if (filterYarnType) filterYarnType.addEventListener('change', renderCatalogue);
+  if (filterInStock) filterInStock.addEventListener('change', renderCatalogue);
+  
+  renderYarnTypeFilters();
 
   // Load from Firebase
   onSnapshot(doc(db, "catalogue", "items"), (docSnap: any) => {
@@ -1613,14 +1668,35 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderCatalogue() {
       catalogueGrid.innerHTML = '';
       
-      if (yarnData.length === 0) {
-          catalogueGrid.innerHTML = `<div class="col-span-2 md:col-span-5 text-center p-12 text-gray-400 italic">No yarn colors added yet. ${isCatalogueEditMode ? 'Click "Add Yarn Color" to start!' : ''}</div>`;
+      let filteredData = yarnData;
+      const typeFilterVal = filterYarnType ? filterYarnType.value : 'All';
+      const inStockFilterVal = filterInStock ? filterInStock.checked : false;
+
+      if (typeFilterVal !== 'All') {
+          filteredData = filteredData.filter(y => y.type === typeFilterVal);
+      }
+      if (inStockFilterVal) {
+          filteredData = filteredData.filter(y => y.inStock === true);
+      }
+      
+      if (filteredData.length === 0) {
+          catalogueGrid.innerHTML = `<div class="col-span-2 md:col-span-5 text-center p-12 text-gray-400 italic">No yarn colors found. ${isCatalogueEditMode ? 'Click "Add Yarn Color" to start!' : ''}</div>`;
           return;
       }
       
-      yarnData.forEach((yarn, index) => {
+      filteredData.forEach((yarn, _) => {
+          const index = yarnData.findIndex(y => y.id === yarn.id);
+          
+          let bgColorClass = 'bg-white';
+          const weight = parseFloat(yarn.code);
+          if (!isNaN(weight)) {
+              if (weight > 50) bgColorClass = 'bg-white';
+              else if (weight >= 20) bgColorClass = 'bg-[#FFF9C4]'; // Pastel yellow
+              else bgColorClass = 'bg-[#FCE7F3]'; // Pastel pink
+          }
+          
           const card = document.createElement('div');
-          card.className = `bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col relative overflow-hidden ${isCatalogueEditMode ? 'hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-pointer' : ''}`;
+          card.className = `${bgColorClass} rounded-2xl border border-gray-200 shadow-sm p-4 flex flex-col relative overflow-hidden ${isCatalogueEditMode ? 'hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-pointer' : ''}`;
           
           if (isCatalogueEditMode) {
               card.draggable = true;
@@ -1630,7 +1706,8 @@ document.addEventListener('DOMContentLoaded', () => {
           card.innerHTML = `
               <div class="w-full aspect-square rounded-xl mb-4 shadow-inner pointer-events-none" style="background-color: ${yarn.colorHex || '#ddd'};"></div>
               <h3 class="font-bold text-gray-900 text-lg leading-tight mb-1 truncate pointer-events-none">${yarn.name || 'Unknown Code'}</h3>
-              <p class="text-sm text-gray-500 mb-3 truncate pointer-events-none">${yarn.code || 'Unknown Weight'}</p>
+              <p class="text-sm text-gray-600 font-medium mb-1 truncate pointer-events-none">${yarn.type || 'No Type'}</p>
+              <p class="text-sm text-gray-500 mb-3 truncate pointer-events-none">${yarn.code ? yarn.code + 'g' : 'Unknown Weight'}</p>
               
               <div class="mt-auto flex items-center justify-between">
                   <span class="text-xs font-bold px-2 py-1 rounded-md ${yarn.inStock ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'} pointer-events-none">
@@ -1756,6 +1833,7 @@ document.addEventListener('DOMContentLoaded', () => {
           yarnName.value = '';
           yarnCode.value = '';
           yarnInStock.checked = true;
+          selectedYarnType = customYarnTypes[0] || '';
           deleteYarnBtn.classList.add('hidden');
       } else {
           const yarn = yarnData.find(y => y.id === editingYarnId);
@@ -1764,9 +1842,12 @@ document.addEventListener('DOMContentLoaded', () => {
               yarnName.value = yarn.name || '';
               yarnCode.value = yarn.code || '';
               yarnInStock.checked = yarn.inStock;
+              selectedYarnType = yarn.type || '';
               deleteYarnBtn.classList.remove('hidden');
           }
       }
+      
+      renderYarnTypeTags();
       
       yarnModal.classList.remove('hidden');
       setTimeout(() => yarnModal.classList.remove('opacity-0'), 10);
@@ -1793,6 +1874,7 @@ document.addEventListener('DOMContentLoaded', () => {
           colorHex: yarnColorHex.value,
           name: yarnName.value.trim(),
           code: yarnCode.value.trim(),
+          type: selectedYarnType,
           inStock: yarnInStock.checked
       };
       
