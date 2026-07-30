@@ -1597,6 +1597,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const deleteYarnBtn = document.getElementById('deleteYarnBtn')!;
   
   const filterYarnType = document.getElementById('filterYarnType') as HTMLSelectElement;
+  const filterYarnStatus = document.getElementById('filterYarnStatus') as HTMLSelectElement;
   const filterInStock = document.getElementById('filterInStock') as HTMLInputElement;
   const yarnTypeContainer = document.getElementById('yarnTypeContainer')!;
   const newYarnTypeInput = document.getElementById('newYarnTypeInput') as HTMLInputElement;
@@ -1653,6 +1654,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (filterYarnType) filterYarnType.addEventListener('change', renderCatalogue);
+  if (filterYarnStatus) filterYarnStatus.addEventListener('change', renderCatalogue);
   if (filterInStock) filterInStock.addEventListener('change', renderCatalogue);
   
   renderYarnTypeFilters();
@@ -1670,11 +1672,24 @@ document.addEventListener('DOMContentLoaded', () => {
       
       let filteredData = yarnData;
       const typeFilterVal = filterYarnType ? filterYarnType.value : 'All';
+      const statusFilterVal = filterYarnStatus ? filterYarnStatus.value : 'All';
       const inStockFilterVal = filterInStock ? filterInStock.checked : false;
 
       if (typeFilterVal !== 'All') {
           filteredData = filteredData.filter(y => y.type === typeFilterVal);
       }
+      
+      if (statusFilterVal !== 'All') {
+          filteredData = filteredData.filter(y => {
+              const weight = parseFloat(y.code);
+              if (isNaN(weight)) return false;
+              if (statusFilterVal === 'Good') return weight > 50;
+              if (statusFilterVal === 'Low') return weight >= 20 && weight <= 50;
+              if (statusFilterVal === 'Critical') return weight < 20;
+              return true;
+          });
+      }
+      
       if (inStockFilterVal) {
           filteredData = filteredData.filter(y => y.inStock === true);
       }
