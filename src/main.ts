@@ -29,7 +29,7 @@ const patternPages = [
   'carnations', 'cosmos', 'daisy', 'detailed-sunflower', 
   'fluffy-tulips', 'forget-me-not', 'lavenders', 'leaf-stem', 
   'lily-of-the-valley', 'little-hearts', 'mini-rose', 'peonies', 
-  'ping-pong-flower', 'plumeria', 'hanging-rose-keychain', 'hanging-tulips-keychain', 'puff-flower-bag-charm', 'ruffle-heart-bag-charm', 'stargazer-lily'
+  'ping-pong-flower', 'plumeria', 'hanging-rose-keychain', 'hanging-tulips-keychain', 'butterfly-flower-keychain', 'puff-flower-bag-charm', 'ruffle-heart-bag-charm', 'stargazer-lily'
 ];
 
 if (patternPages.includes(currentPatternId)) {
@@ -576,6 +576,7 @@ const amigurumiSearchSuggestions = document.getElementById('amigurumiSearchSugge
 
 const amigurumiDatabase = [
   { name: 'Hanging Rose Keychain', action: () => openModalById('patternModal-hanging-rose-keychain') },
+  { name: 'Butterfly Flower Keychain', action: () => openModalById('patternModal-butterfly-flower-keychain') },
   { name: 'Puff Flower Bag Charm', action: () => openModalById('patternModal-puff-flower-bag-charm') },
   { name: 'Ruffle Heart Bag Charm', action: () => openModalById('patternModal-ruffle-heart-bag-charm') },
   { name: 'Ruffle Bow Keychain', action: () => openModalById('patternModal-ruffle-bow-keychain') }

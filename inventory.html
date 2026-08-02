@@ -379,7 +379,7 @@
 
 
       <!-- Amigurumi Charts Section -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-12">
         <!-- Pie Chart -->
         <div
           class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500">
@@ -403,6 +403,15 @@
           class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500 flex flex-col">
           <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">📝 Pending To-Do</h2>
           <div class="w-full flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar max-h-56" id="amigurumiTodoList">
+            <!-- JS will populate rows here -->
+          </div>
+        </div>
+
+        <!-- Pending Assembly List -->
+        <div
+          class="bg-white/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(236,72,153,0.05)] transition-all duration-500 flex flex-col">
+          <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">🛠 Pending Assembly</h2>
+          <div class="w-full flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar max-h-56" id="amigurumiAssemblyList">
             <!-- JS will populate rows here -->
           </div>
         </div>
@@ -861,7 +870,7 @@
       ];
 
       const amigurumiNames = [
-        "Puff Flower Bag Charm", "Turtle Amigurumi", "Whale Keychain", "Octopus Amigurumi", "Bear Keychain"
+        "Puff Flower Bag Charm", "Turtle Amigurumi", "Whale Keychain", "Octopus Amigurumi", "Bear Keychain", "Butterfly Flower Keychain"
       ];
 
       const itemNames = [
@@ -1005,16 +1014,17 @@
           dataArray.forEach(row => {
             if (row.toDo > 0) {
               hasTodos = true;
-              // Make flowers clickable links to their pattern pages
-              const itemDiv = document.createElement(type === 'flowers' ? 'a' : 'div');
-              if (type === 'flowers') {
-                // Convert "Baby's Breath" to "babys-breath.html"
+              // Make flowers and amigurumi clickable links to their pattern pages
+              const itemDiv = document.createElement(type === 'flowers' || type === 'amigurumi' ? 'a' : 'div');
+              if (type === 'flowers' || type === 'amigurumi') {
                 const url = row.item.toLowerCase().replace(/[']/g, '').replace(/\s+/g, '-') + '.html';
                 itemDiv.href = url;
               }
               itemDiv.className = type === 'flowers'
                 ? 'flex items-center gap-3 p-3 bg-pink-50/50 rounded-xl border border-pink-100/50 transition-colors hover:bg-pink-50 cursor-pointer hover:shadow-sm'
-                : 'flex items-center gap-3 p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 transition-colors hover:bg-blue-50';
+                : (type === 'amigurumi' 
+                  ? 'flex items-center gap-3 p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 transition-colors hover:bg-blue-50 cursor-pointer hover:shadow-sm' 
+                  : 'flex items-center gap-3 p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 transition-colors hover:bg-blue-50');
 
               const dot = document.createElement('div');
               dot.className = type === 'flowers'
@@ -1054,21 +1064,23 @@
           }
         }
 
-        const assemblyListEl = type === 'flowers' ? document.getElementById('flowersAssemblyList') : null;
+        const assemblyListEl = type === 'flowers' ? document.getElementById('flowersAssemblyList') : (type === 'amigurumi' ? document.getElementById('amigurumiAssemblyList') : null);
         if (assemblyListEl) {
           assemblyListEl.innerHTML = '';
           let hasAssembly = false;
           dataArray.forEach(row => {
             if (row.orderStatus === 'For Assembly') {
               hasAssembly = true;
-              const itemDiv = document.createElement(type === 'flowers' ? 'a' : 'div');
-              if (type === 'flowers') {
+              const itemDiv = document.createElement(type === 'flowers' || type === 'amigurumi' ? 'a' : 'div');
+              if (type === 'flowers' || type === 'amigurumi') {
                 const url = row.item.toLowerCase().replace(/[']/g, '').replace(/\s+/g, '-') + '.html';
                 itemDiv.href = url;
               }
               itemDiv.className = type === 'flowers'
                 ? 'flex items-center gap-3 p-3 bg-pink-50/50 rounded-xl border border-pink-100/50 transition-colors hover:bg-pink-50 cursor-pointer hover:shadow-sm'
-                : 'flex items-center gap-3 p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 transition-colors hover:bg-blue-50';
+                : (type === 'amigurumi' 
+                  ? 'flex items-center gap-3 p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 transition-colors hover:bg-blue-50 cursor-pointer hover:shadow-sm' 
+                  : 'flex items-center gap-3 p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 transition-colors hover:bg-blue-50');
 
               const dot = document.createElement('div');
               dot.className = type === 'flowers'

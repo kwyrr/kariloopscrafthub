@@ -29,6 +29,7 @@ export default defineConfig({
         'hanging-rose-keychain': 'hanging-rose-keychain.html',
         'hanging-tulips-keychain': 'hanging-tulips-keychain.html',
         'ruffle-heart-bag-charm': 'ruffle-heart-bag-charm.html',
+        'butterfly-flower-keychain': 'butterfly-flower-keychain.html',
         'ruffle-bow-keychain': 'ruffle-bow-keychain.html',
         'dictionary': 'dictionary.html',
         'calendar': 'calendar.html',
