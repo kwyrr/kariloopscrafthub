@@ -943,7 +943,7 @@ allNavLinks.forEach(link => {
 document.addEventListener('DOMContentLoaded', () => {
   // Only run this if we are on a pattern page with an auth modal
   const openAuthModalBtn = document.getElementById('openAuthModalBtn');
-  if (!openAuthModalBtn) return;
+  if (!openAuthModalBtn || !patternPages.includes(currentPatternId)) return;
 
   let isEditMode = false;
 
