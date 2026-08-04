@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/src/assets/kariloops%20logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commissions | Kariloops</title>
+  <!-- Add Google Fonts for a premium look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body
+  class="bg-[#FAFAF9] text-gray-800 font-sans antialiased selection:bg-brand-primary selection:text-gray-900 relative min-h-screen overflow-x-hidden">
+  <!-- Decorative Background Blobs -->
+  <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+    <div class="absolute -top-[10%] -right-[5%] w-[40%] h-[40%] rounded-full bg-pink-200/20 blur-[120px]"></div>
+    <div class="absolute top-[20%] -left-[10%] w-[30%] h-[30%] rounded-full bg-brand-primary/20 blur-[100px]"></div>
+    <div class="absolute bottom-[-10%] right-[10%] w-[50%] h-[40%] rounded-full bg-yellow-200/20 blur-[120px]"></div>
+  </div>
+
+  <div id="app">
+    <nav id="mainNav">
+      <div class="status-banner">
+        <span>KARILOOPS ♡ 2026</span>
+        <div class="status-location">
+          <span class="status-pulse-dot"></span>
+          <span id="live-clock">MANILA, PH · 20:59</span>
+        </div>
+        <span>v1.0.0 ♡</span>
+      </div>
+
+      <div class="custom-nav-container">
+        <a class="nav-profile-brand group" href="#home">
+          <img src="/src/assets/kariloops%20logo.png" alt="Kariloops Logo"
+            class="h-16 md:h-20 w-auto max-w-xs transition-transform group-hover:scale-105 object-contain" />
+          <div class="profile-details">
+            <span class="profile-name">Kariloops</span>
+            <span class="profile-title">Patterns ♡ Inventory</span>
+          </div>
+        </a>
+
+        <div class="desktop-nav-links">
+          <a href="#flower-patterns" class="nav-link">Crochet Patterns</a>
+          <a href="inventory.html" class="nav-link">Inventory</a>
+          <a href="catalogue.html" class="nav-link">Catalogue</a>
+          <a href="calendar.html" class="nav-link">Calendar</a>
+          <a href="dictionary.html" class="nav-link">Dictionary</a>
+        </div>
+
+        <div class="nav-actions">
+          <a class="btn-cv" href="https://kariloops.vercel.app/#">Shop</a>
+          <a class="btn-hire" href="commissions.html">Commission →</a>
+
+          <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-nav" id="mobileNav">
+        <!-- Date and Time for mobile menu -->
+        <div
+          class="-mx-6 -mt-6 mb-6 p-6 bg-brand-light border-b border-brand-border text-xs font-medium tracking-widest uppercase text-gray-700 flex flex-col items-center justify-center gap-1.5 shadow-sm">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span>MANILA, PH</span>
+          </div>
+          <span class="live-clock-mobile-date"></span>
+        </div>
+
+        <div class="flex flex-col gap-4 px-2">
+          <a href="#flower-patterns" class="mobile-nav-link group">Crochet Patterns</a>
+          <a href="inventory.html" class="mobile-nav-link group">Inventory</a>
+          <a href="catalogue.html" class="mobile-nav-link group">Catalogue</a>
+          <a href="calendar.html" class="mobile-nav-link group">Calendar</a>
+          <a href="dictionary.html" class="mobile-nav-link group">Dictionary</a>
+          <button id="openStitchCounterMenu"
+            class="mobile-nav-link group text-left flex items-center justify-between w-full">
+            <span>Project Counter</span>
+            <svg class="w-4 h-4 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            </svg>
+          </button>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: auto; padding-top: 20px;">
+          <a class="btn-cv" href="https://kariloops.vercel.app/#" style="display: inline-block;">Shop</a>
+          <a class="btn-hire" href="commissions.html" style="display: inline-block;" class="mobile-nav-link">Commission →</a>
+        </div>
+      </div>
+      <div class="mobile-overlay" id="mobileOverlay"></div>
+    </nav>
+
+    
+    <main class="p-8 max-w-7xl mx-auto mt-16 relative flex-grow pb-32">
+      <div class="mb-12 text-center relative">
+        <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight drop-shadow-md">Commissions Dashboard</h1>
+        <p class="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto">Track your commission orders, items, and calculate pricing seamlessly.</p>
+        
+        <button id="openAuthModalBtn" class="absolute top-0 right-0 p-3 bg-brand-primary text-gray-900 rounded-full shadow-md hover:scale-105 transition-transform" title="Unlock Editing">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+        </button>
+      </div>
+      
+      <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-6">
+          <div class="flex items-center gap-3 bg-white/70 backdrop-blur-xl px-5 py-2.5 rounded-full border border-pink-100 shadow-[0_4px_15px_rgb(0,0,0,0.03)] hover:shadow-lg transition-all group cursor-pointer">
+              <svg class="w-5 h-5 text-brand-primary group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+              </svg>
+              <span class="text-xs font-extrabold text-gray-500 uppercase tracking-widest">Sort</span>
+              <div class="relative flex items-center">
+                  <select id="sortOrdersSelect" class="appearance-none bg-transparent pl-2 pr-8 py-1 text-gray-900 font-bold focus:outline-none cursor-pointer text-sm w-36">
+                      <option value="newest">Recently Added</option>
+                      <option value="oldest">Oldest First</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1 text-brand-primary">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+                  </div>
+              </div>
+          </div>
+          
+          <span id="editModeStatusIndicator" class="text-sm font-bold text-yellow-600 bg-yellow-100 px-4 py-1.5 rounded-full hidden items-center gap-2 animate-pulse shadow-sm border border-yellow-200">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+              </svg>
+              Edit Mode
+          </span>
+      </div>
+
+      <div id="ordersContainer" class="space-y-12 mb-12">
+        <!-- Tables will be dynamically inserted here -->
+      </div>
+      
+      <div id="addTableContainer" class="flex justify-center mt-8 hidden">
+        <button id="addTableBtn" class="flex items-center justify-center gap-2 px-8 py-4 bg-brand-primary text-gray-900 font-bold rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all shadow-md text-lg">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+            </svg>
+            Add New Order Table
+        </button>
+      </div>
+
+    </main>
+    
+    <div id="saveContainer" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 hidden">
+        <button id="saveEditBtn" class="px-8 py-4 bg-brand-primary text-gray-900 font-bold rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all flex items-center gap-3 text-lg border-2 border-white">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+            </svg>
+            Save Changes
+        </button>
+    </div>
+
+    <datalist id="inventoryItemsList">
+        <!-- Will be populated dynamically -->
+    </datalist>
+
+    <!-- PIN Auth Modal -->
+    <div id="authModal" class="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-[100] flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none [&.is-active]:opacity-100 [&.is-active]:pointer-events-auto">
+      <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-sm border-2 border-yellow-400 mx-4 transform scale-95 transition-transform duration-300 [&.is-active>div]:scale-100">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-xl font-bold text-gray-900">Enter PIN</h3>
+          <button type="button" id="closeAuthModal" class="text-gray-400 hover:text-gray-600 transition-colors">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <div class="flex justify-center gap-3 mb-8" id="pinDots">
+          <div class="w-4 h-4 rounded-full border-2 border-yellow-400 pin-dot transition-colors"></div>
+          <div class="w-4 h-4 rounded-full border-2 border-yellow-400 pin-dot transition-colors"></div>
+          <div class="w-4 h-4 rounded-full border-2 border-yellow-400 pin-dot transition-colors"></div>
+          <div class="w-4 h-4 rounded-full border-2 border-yellow-400 pin-dot transition-colors"></div>
+          <div class="w-4 h-4 rounded-full border-2 border-yellow-400 pin-dot transition-colors"></div>
+          <div class="w-4 h-4 rounded-full border-2 border-yellow-400 pin-dot transition-colors"></div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4" id="numpad">
+          <button class="numpad-btn h-14 rounded-xl bg-gray-50 text-xl font-bold text-gray-900 hover:bg-yellow-400 hover:text-gray-900 transition-colors active:scale-95" data-num="1">1</button>
+          <button class="numpad-btn h-14 rounded-xl bg-gray-50 text-xl font-bold text-gray-900 hover:bg-yellow-400 hover:text-gray-900 transition-colors active:scale-95" data-num="2">2</button>
+          <button class="numpad-btn h-14 rounded-xl bg-gray-50 text-xl font-bold text-gray-900 hover:bg-yellow-400 hover:text-gray-900 transition-colors active:scale-95" data-num="3">3</button>
+          <button class="numpad-btn h-14 rounded-xl bg-gray-50 text-xl font-bold text-gray-900 hover:bg-yellow-400 hover:text-gray-900 transition-colors active:scale-95" data-num="4">4</button>
+          <button class="numpad-btn h-14 rounded-xl bg-gray-50 text-xl font-bold text-gray-900 hover:bg-yellow-400 hover:text-gray-900 transition-colors active:scale-95" data-num="5">5</button>
+          <button class="numpad-btn h-14 rounded-xl bg-gray-50 text-xl font-bold text-gray-900 hover:bg-yellow-400 hover:text-gray-900 transition-colors active:scale-95" data-num="6">6</button>
+          <button class="numpad-btn h-14 rounded-xl bg-gray-50 text-xl font-bold text-gray-900 hover:bg-yellow-400 hover:text-gray-900 transition-colors active:scale-95" data-num="7">7</button>
+          <button class="numpad-btn h-14 rounded-xl bg-gray-50 text-xl font-bold text-gray-900 hover:bg-yellow-400 hover:text-gray-900 transition-colors active:scale-95" data-num="8">8</button>
+          <button class="numpad-btn h-14 rounded-xl bg-gray-50 text-xl font-bold text-gray-900 hover:bg-yellow-400 hover:text-gray-900 transition-colors active:scale-95" data-num="9">9</button>
+          <div class="h-14"></div>
+          <button class="numpad-btn h-14 rounded-xl bg-gray-50 text-xl font-bold text-gray-900 hover:bg-yellow-400 hover:text-gray-900 transition-colors active:scale-95" data-num="0">0</button>
+          <button id="numpadBackspace" class="h-14 rounded-xl bg-gray-50 text-gray-600 hover:bg-red-100 hover:text-red-600 transition-colors flex items-center justify-center active:scale-95">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <style>
+      .shake { animation: shake 0.4s ease-in-out; }
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-8px) rotate(-1deg); }
+        75% { transform: translateX(8px) rotate(1deg); }
+      }
+      .pin-dot.filled { background-color: #eab308; border-color: #eab308; } /* yellow-500 */
+    </style>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            authDomain: "kariloopscrafthub.firebaseapp.com",
+            projectId: "kariloopscrafthub",
+            storageBucket: "kariloopscrafthub.firebasestorage.app",
+            messagingSenderId: "367332219468",
+            appId: "1:367332219468:web:1ec415891395f87b8f59cb",
+            measurementId: "G-FDRQ8T4GWB"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let inventoryDict = {};
+        let ordersData = [];
+        let isGlobalEditMode = false;
+        let currentSort = 'newest';
+        
+        // Auth Logic
+        const correctPin = '061624';
+        let currentPin = '';
+        const authModal = document.getElementById('authModal');
+        const pinDots = document.querySelectorAll('.pin-dot');
+        const numpadBtns = document.querySelectorAll('.numpad-btn');
+        const openAuthBtn = document.getElementById('openAuthModalBtn');
+        const closeAuthModalBtn = document.getElementById('closeAuthModal');
+        const saveContainer = document.getElementById('saveContainer');
+        const saveEditBtn = document.getElementById('saveEditBtn');
+        const sortSelect = document.getElementById('sortOrdersSelect');
+        
+        function updateDots() {
+          pinDots.forEach((dot, index) => {
+            if (index < currentPin.length) dot.classList.add('filled');
+            else dot.classList.remove('filled');
+          });
+        }
+        function resetPin() {
+          currentPin = '';
+          updateDots();
+        }
+        function toggleAuthModal() {
+          resetPin();
+          authModal.classList.add('is-active');
+        }
+        
+        openAuthBtn.addEventListener('click', toggleAuthModal);
+        closeAuthModalBtn.addEventListener('click', () => { authModal.classList.remove('is-active'); });
+        
+        sortSelect.addEventListener('change', (e) => {
+            syncDOMToData();
+            currentSort = e.target.value;
+            renderOrders();
+        });
+
+        numpadBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (currentPin.length < 6) {
+              currentPin += btn.getAttribute('data-num');
+              updateDots();
+              if (currentPin.length === 6) {
+                setTimeout(() => {
+                  if (currentPin === correctPin) {
+                    authModal.classList.remove('is-active');
+                    isGlobalEditMode = true;
+                    openAuthBtn.classList.add('hidden');
+                    saveContainer.classList.remove('hidden');
+                    
+                    document.getElementById('editModeStatusIndicator').classList.remove('hidden');
+                    document.getElementById('editModeStatusIndicator').classList.add('flex');
+                    document.getElementById('addTableContainer').classList.remove('hidden');
+                    
+                    renderOrders();
+                  } else {
+                    const modalWindow = authModal.querySelector('div');
+                    modalWindow.classList.add('shake');
+                    setTimeout(() => modalWindow.classList.remove('shake'), 400);
+                    resetPin();
+                  }
+                }, 200);
+              }
+            }
+          });
+        });
+
+        document.getElementById('numpadBackspace').addEventListener('click', () => {
+          if (currentPin.length > 0) {
+            currentPin = currentPin.slice(0, -1);
+            updateDots();
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (!authModal.classList.contains('is-active')) return;
+          if (e.key >= '0' && e.key <= '9') {
+            const btn = Array.from(numpadBtns).find(b => b.getAttribute('data-num') === e.key);
+            if (btn) btn.click();
+          } else if (e.key === 'Backspace') {
+            document.getElementById('numpadBackspace').click();
+          } else if (e.key === 'Escape') {
+            closeAuthModalBtn.click();
+          }
+        });
+        
+        async function saveAllChanges() {
+          syncDOMToData();
+          ordersData.forEach(o => o.isUnlocked = false);
+          
+          try {
+            const payload = ordersData.map(o => ({
+                id: o.id,
+                orderNumber: o.orderNumber,
+                createdAt: o.createdAt,
+                items: o.items
+            }));
+            
+            await setDoc(doc(db, "inventory", "commissionsData"), { orders: payload });
+            isGlobalEditMode = false;
+            openAuthBtn.classList.remove('hidden');
+            saveContainer.classList.add('hidden');
+            document.getElementById('editModeStatusIndicator').classList.add('hidden');
+            document.getElementById('editModeStatusIndicator').classList.remove('flex');
+            document.getElementById('addTableContainer').classList.add('hidden');
+            renderOrders();
+            const originalText = saveEditBtn.innerHTML;
+            saveEditBtn.innerHTML = 'Saved!';
+            setTimeout(() => saveEditBtn.innerHTML = originalText, 2000);
+          } catch (e) {
+            console.error("Error saving document: ", e);
+            alert("Failed to save to database.");
+          }
+        }
+
+        saveEditBtn.addEventListener('click', saveAllChanges);
+
+        function loadInventoryPrices() {
+            inventoryDict = {};
+            const handleSnapshot = (docSnap) => {
+                if (docSnap.exists()) {
+                    const dataArray = docSnap.data().data || [];
+                    const dataList = document.getElementById('inventoryItemsList');
+                    
+                    dataArray.forEach(itemObj => {
+                        if (itemObj.item && itemObj.price) {
+                            const cleanPrice = String(itemObj.price).replace(/[^0-9.-]+/g, "");
+                            const val = parseFloat(cleanPrice) || 0;
+                            inventoryDict[itemObj.item.trim().toLowerCase()] = val;
+                            
+                            let exists = false;
+                            for(let i=0; i<dataList.options.length; i++){
+                                if(dataList.options[i].value === itemObj.item) exists = true;
+                            }
+                            if(!exists){
+                                const option = document.createElement('option');
+                                option.value = itemObj.item;
+                                dataList.appendChild(option);
+                            }
+                        }
+                    });
+                }
+            };
+            onSnapshot(doc(db, "inventory", "flowers"), handleSnapshot);
+            onSnapshot(doc(db, "inventory", "items"), handleSnapshot);
+            onSnapshot(doc(db, "inventory", "amigurumi"), handleSnapshot);
+        }
+
+        function loadCommissions() {
+            onSnapshot(doc(db, "inventory", "commissionsData"), (docSnap) => {
+                if (docSnap.exists()) {
+                    const incomingData = docSnap.data().orders || [];
+                    if (!isGlobalEditMode) {
+                        ordersData = incomingData.map((o, idx) => ({ ...o, isUnlocked: false, createdAt: o.createdAt || idx }));
+                        renderOrders();
+                    }
+                } else {
+                    if (!isGlobalEditMode) {
+                        ordersData = [];
+                        renderOrders();
+                    }
+                }
+            });
+        }
+        
+        function syncDOMToData() {
+            const containers = document.querySelectorAll('.order-container');
+            containers.forEach(container => {
+                const orderId = container.getAttribute('data-id');
+                const order = ordersData.find(o => o.id === orderId);
+                if (order && order.isUnlocked) {
+                    order.orderNumber = container.querySelector('.order-number-input').value;
+                    const items = [];
+                    const rows = container.querySelectorAll('.item-row');
+                    rows.forEach(row => {
+                       items.push({
+                           amount: row.querySelector('.col-amount').value,
+                           item: row.querySelector('.col-item').value,
+                           status: row.querySelector('.col-status').value,
+                           todo: row.querySelector('.col-todo').value,
+                           price: row.querySelector('.col-price').value,
+                           notes: row.querySelector('.col-notes').value
+                       });
+                    });
+                    order.items = items;
+                }
+            });
+        }
+        
+        function generateId() {
+            return Math.random().toString(36).substring(2, 9);
+        }
+
+        function renderOrders() {
+            const container = document.getElementById('ordersContainer');
+            container.innerHTML = '';
+            
+            if (ordersData.length === 0 && !isGlobalEditMode) {
+                 container.innerHTML = '<div class="text-center text-gray-500 italic">No commission orders found. Unlock editing to add one.</div>';
+                 return;
+            }
+            
+            const sortedOrders = [...ordersData].sort((a, b) => {
+                const timeA = a.createdAt || 0;
+                const timeB = b.createdAt || 0;
+                if (currentSort === 'newest') return timeB - timeA;
+                return timeA - timeB;
+            });
+
+            sortedOrders.forEach(order => {
+                const isTableEditable = isGlobalEditMode && order.isUnlocked;
+                
+                const orderDiv = document.createElement('div');
+                orderDiv.className = `bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border ${isTableEditable ? 'border-yellow-300 shadow-md ring-4 ring-yellow-50' : 'border-white/80'} overflow-hidden relative order-container transition-all`;
+                orderDiv.setAttribute('data-id', order.id);
+                
+                let rowsHtml = '';
+                let grandTotal = 0;
+                
+                if (order.items.length === 0) {
+                    order.items = [{ amount: '', item: '', status: 'To Do', todo: '', price: '', notes: '' }];
+                }
+                
+                order.items.forEach((item, idx) => {
+                    const amount = parseFloat(item.amount) || 0;
+                    const price = parseFloat(item.price) || 0;
+                    const total = amount * price;
+                    grandTotal += total;
+                    
+                    const statusOptions = ['Completed', 'For Wrapping', 'For Assembly', 'In Progress', 'To Do', 'None'];
+                    const optionsHtml = statusOptions.map(opt => `<option value="${opt}" ${item.status === opt ? 'selected' : ''}>${opt}</option>`).join('');
+                    
+                    rowsHtml += `
+                      <tr class="hover:bg-pink-50/30 transition-colors group item-row border-b border-pink-50/50">
+                        <td class="py-3 px-4">
+                            <input type="number" min="0" class="col-amount w-20 px-3 py-2 bg-transparent border-b border-transparent focus:border-brand-primary focus:outline-none transition-all ${!isTableEditable ? 'pointer-events-none' : ''}" placeholder="0" value="${item.amount || ''}" ${!isTableEditable ? 'readonly' : ''}>
+                        </td>
+                        <td class="py-3 px-4">
+                            <input type="text" list="inventoryItemsList" class="col-item w-40 px-3 py-2 bg-transparent border-b border-transparent focus:border-brand-primary focus:outline-none transition-all font-medium text-gray-900 ${!isTableEditable ? 'pointer-events-none' : ''}" placeholder="Type item..." value="${item.item || ''}" ${!isTableEditable ? 'readonly' : ''}>
+                        </td>
+                        <td class="py-3 px-4">
+                            <select class="col-status w-full bg-transparent border-b border-transparent focus:border-brand-primary focus:outline-none text-sm text-gray-700 p-1 ${!isTableEditable ? 'pointer-events-none appearance-none' : 'cursor-pointer'}" ${!isTableEditable ? 'disabled' : ''}>
+                                ${optionsHtml}
+                            </select>
+                        </td>
+                        <td class="py-3 px-4">
+                            <input type="number" min="0" class="col-todo w-20 px-3 py-2 bg-transparent border-b border-transparent focus:border-brand-primary focus:outline-none transition-all ${!isTableEditable ? 'pointer-events-none' : ''}" placeholder="0" value="${item.todo || ''}" ${!isTableEditable ? 'readonly' : ''}>
+                        </td>
+                        <td class="py-3 px-4">
+                            <input type="number" min="0" step="0.01" class="col-price w-24 px-3 py-2 bg-transparent border-b border-transparent focus:border-brand-primary focus:outline-none transition-all font-semibold ${!isTableEditable ? 'pointer-events-none' : ''}" placeholder="0.00" value="${item.price || ''}" ${!isTableEditable ? 'readonly' : ''}>
+                        </td>
+                        <td class="py-3 px-4 font-bold text-gray-900 col-total">₱${total.toFixed(2)}</td>
+                        <td class="py-3 px-4">
+                            <input type="text" class="col-notes w-full px-3 py-2 bg-transparent border-b border-transparent focus:border-brand-primary focus:outline-none transition-all text-sm text-gray-600 ${!isTableEditable ? 'pointer-events-none' : ''}" placeholder="..." value="${item.notes || ''}" ${!isTableEditable ? 'readonly' : ''}>
+                        </td>
+                        <td class="py-3 px-4 text-right ${!isTableEditable ? 'hidden' : ''}">
+                            <button class="deleteRowBtn opacity-0 group-hover:opacity-100 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all" aria-label="Delete row">
+                                <svg class="w-5 h-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </td>
+                      </tr>
+                    `;
+                });
+
+                orderDiv.innerHTML = `
+                  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 border-b border-gray-100 pb-4">
+                    <div class="flex items-center gap-4">
+                        <h2 class="text-2xl font-extrabold text-gray-900 border-l-4 border-brand-primary pl-3">Order Number</h2>
+                        <input type="text" class="order-number-input w-48 px-4 py-2 border ${isTableEditable ? 'border-brand-primary bg-white ring-2 ring-brand-primary/20' : 'border-transparent bg-transparent'} rounded-xl focus:outline-none transition-all ${!isTableEditable ? 'pointer-events-none' : ''}" placeholder="Order #" value="${order.orderNumber || ''}" ${!isTableEditable ? 'readonly' : ''} />
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <button class="editTableBtn flex items-center gap-2 ${isTableEditable ? 'text-green-600 bg-green-50 hover:bg-green-100' : 'text-yellow-600 bg-yellow-50 hover:bg-yellow-100'} px-4 py-2 rounded-xl transition-all font-bold ${!isGlobalEditMode ? 'hidden' : ''}">
+                            ${isTableEditable ? `
+                              <svg class="w-5 h-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                              </svg>
+                              Table Unlocked
+                            ` : `
+                              <svg class="w-5 h-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                              </svg>
+                              Edit Table
+                            `}
+                        </button>
+                        
+                        <button class="deleteTableBtn flex items-center gap-2 text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 px-4 py-2 rounded-xl transition-all font-bold ${!isTableEditable ? 'hidden' : ''}">
+                            <svg class="w-5 h-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            Delete Order
+                        </button>
+                    </div>
+                  </div>
+          
+                  <div class="overflow-x-auto custom-scrollbar mb-6">
+                    <table class="w-full text-left border-collapse">
+                      <thead>
+                        <tr class="bg-brand-neutral/50 text-gray-600 uppercase text-xs tracking-wider border-b-2 border-pink-100">
+                          <th class="py-4 px-4 font-extrabold whitespace-nowrap">Amount</th>
+                          <th class="py-4 px-4 font-extrabold whitespace-nowrap">Item</th>
+                          <th class="py-4 px-4 font-extrabold whitespace-nowrap">Status</th>
+                          <th class="py-4 px-4 font-extrabold whitespace-nowrap">To Do</th>
+                          <th class="py-4 px-4 font-extrabold whitespace-nowrap">Price (₱)</th>
+                          <th class="py-4 px-4 font-extrabold whitespace-nowrap">Total (₱)</th>
+                          <th class="py-4 px-4 font-extrabold whitespace-nowrap">Notes</th>
+                          <th class="py-4 px-4 font-extrabold whitespace-nowrap text-right ${!isTableEditable ? 'hidden' : ''}">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody class="orderTableBody divide-y divide-pink-50/50">
+                        ${rowsHtml}
+                      </tbody>
+                      <tfoot>
+                        <tr class="bg-yellow-50 font-bold text-gray-900">
+                          <td colspan="5" class="py-4 px-4 text-right text-lg uppercase tracking-wider">Grand Total:</td>
+                          <td colspan="${isTableEditable ? '3' : '2'}" class="py-4 px-4 text-2xl text-brand-primary grandTotalCell">₱${grandTotal.toFixed(2)}</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+          
+                  <div class="flex justify-start ${!isTableEditable ? 'hidden' : ''}">
+                      <button class="addRowBtn flex items-center justify-center gap-2 px-6 py-3 bg-brand-primary text-gray-900 font-bold rounded-xl hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-sm">
+                          <svg class="w-5 h-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                          </svg>
+                          Add Item Row
+                      </button>
+                  </div>
+                `;
+
+                container.appendChild(orderDiv);
+                attachListenersToTable(orderDiv);
+            });
+        }
+
+        function updateRowTotal(row, orderDiv) {
+            const amountInput = row.querySelector('.col-amount');
+            const priceInput = row.querySelector('.col-price');
+            const totalCell = row.querySelector('.col-total');
+            const amount = parseFloat(amountInput.value) || 0;
+            const price = parseFloat(priceInput.value) || 0;
+            const total = amount * price;
+            totalCell.textContent = '₱' + total.toFixed(2);
+            updateTableGrandTotal(orderDiv);
+        }
+
+        function updateTableGrandTotal(orderDiv) {
+            let grandTotal = 0;
+            const totalCells = orderDiv.querySelectorAll('.col-total');
+            totalCells.forEach(cell => {
+                const totalStr = cell.textContent.replace(/[^0-9.-]+/g, "");
+                grandTotal += parseFloat(totalStr) || 0;
+            });
+            const grandTotalEl = orderDiv.querySelector('.grandTotalCell');
+            grandTotalEl.textContent = '₱' + grandTotal.toFixed(2);
+        }
+
+        function attachListenersToTable(orderDiv) {
+            if (!isGlobalEditMode) return;
+            
+            const orderId = orderDiv.getAttribute('data-id');
+            const order = ordersData.find(o => o.id === orderId);
+            
+            const editTableBtn = orderDiv.querySelector('.editTableBtn');
+            editTableBtn.addEventListener('click', () => {
+                syncDOMToData(); 
+                order.isUnlocked = !order.isUnlocked;
+                renderOrders(); 
+            });
+
+            if (!order.isUnlocked) return; 
+            
+            const delTableBtn = orderDiv.querySelector('.deleteTableBtn');
+            delTableBtn.addEventListener('click', () => {
+                syncDOMToData();
+                ordersData = ordersData.filter(o => o.id !== orderId);
+                renderOrders();
+            });
+
+            const addRowBtn = orderDiv.querySelector('.addRowBtn');
+            addRowBtn.addEventListener('click', () => {
+                syncDOMToData();
+                const o = ordersData.find(x => x.id === orderId);
+                if(o) {
+                    o.items.push({ amount: '', item: '', status: 'To Do', todo: '', price: '', notes: '' });
+                    renderOrders();
+                }
+            });
+
+            const rows = orderDiv.querySelectorAll('.item-row');
+            rows.forEach(row => {
+                const itemInput = row.querySelector('.col-item');
+                const priceInput = row.querySelector('.col-price');
+                const amountInput = row.querySelector('.col-amount');
+                
+                itemInput.addEventListener('input', () => {
+                    const searchKey = itemInput.value.trim().toLowerCase();
+                    if (inventoryDict.hasOwnProperty(searchKey)) {
+                        priceInput.value = inventoryDict[searchKey];
+                        updateRowTotal(row, orderDiv);
+                    }
+                });
+                amountInput.addEventListener('input', () => updateRowTotal(row, orderDiv));
+                priceInput.addEventListener('input', () => updateRowTotal(row, orderDiv));
+
+                const delRowBtn = row.querySelector('.deleteRowBtn');
+                if (delRowBtn) {
+                    delRowBtn.addEventListener('click', () => {
+                        row.remove();
+                        updateTableGrandTotal(orderDiv);
+                    });
+                }
+            });
+        }
+
+        document.getElementById('addTableBtn').addEventListener('click', () => {
+            syncDOMToData();
+            ordersData.push({
+                id: generateId(),
+                orderNumber: '',
+                createdAt: Date.now(),
+                items: [{ amount: '', item: '', status: 'To Do', todo: '', price: '', notes: '' }],
+                isUnlocked: true 
+            });
+            
+            currentSort = 'newest'; // auto switch to newest so the new table appears at the top
+            sortSelect.value = 'newest';
+            
+            renderOrders();
+            
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top since newest is top
+            }, 100);
+        });
+
+        loadInventoryPrices();
+        loadCommissions();
+    </script>
+
+  <script type="module" src="/src/main.ts"></script>
+  <button type="button" id="floatingMenuToggle" aria-label="Open menu" class="fixed top-8 right-8 w-14 h-14 bg-brand-primary text-gray-900 rounded-full shadow-2xl hover:shadow-brand-primary/50 hover:bg-brand-accent flex flex-col justify-center items-center gap-1.5 z-50 opacity-0 pointer-events-none transition-all duration-300 transform hover:-translate-y-1 focus:outline-none">
+    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
+  </button>
+  <button id="backToTopBtn" aria-label="Back to top" class="fixed bottom-8 right-8 w-14 h-14 bg-white text-brand-primary rounded-full shadow-2xl hover:bg-brand-primary hover:text-gray-900 flex justify-center items-center z-50 opacity-0 pointer-events-none transition-all duration-300 transform hover:-translate-y-1 focus:outline-none border border-brand-primary">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </button>
+</body>
+</html>

@@ -34,6 +34,7 @@ export default defineConfig({
         'dictionary': 'dictionary.html',
         'calendar': 'calendar.html',
         'catalogue': 'catalogue.html',
+        'commissions': 'commissions.html',
       },
     },
   },
