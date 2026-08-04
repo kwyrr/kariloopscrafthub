@@ -1464,25 +1464,6 @@
         renderTable(flowersData, 'flowersTableBody', 'flowers');
         renderTable(itemsData, 'itemsTableBody', 'items');
         renderTable(amigurumiData, 'amigurumiTableBody', 'amigurumi');
-
-        const saveBtn = document.getElementById('saveEditBtnFlowers');
-        if (saveBtn) {
-          const originalText = saveBtn.innerText;
-          saveBtn.innerText = 'Saved!';
-          setTimeout(() => saveBtn.innerText = originalText, 2000);
-        }
-        const saveBtn2 = document.getElementById('saveEditBtnItems');
-        if (saveBtn2) {
-          const originalText2 = saveBtn2.innerText;
-          saveBtn2.innerText = 'Saved!';
-          setTimeout(() => saveBtn2.innerText = originalText2, 2000);
-        }
-        const saveBtn3 = document.getElementById('saveEditBtnAmigurumi');
-        if (saveBtn3) {
-          const originalText3 = saveBtn3.innerText;
-          saveBtn3.innerText = 'Saved!';
-          setTimeout(() => saveBtn3.innerText = originalText3, 2000);
-        }
       }
 
       document.getElementById('saveEditBtnFlowers')?.addEventListener('click', saveAllChanges);
