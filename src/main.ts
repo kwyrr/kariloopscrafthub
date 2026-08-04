@@ -1,7 +1,7 @@
 import './style.css'
 
 // @ts-ignore
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 // @ts-ignore
 import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
@@ -15,7 +15,7 @@ const firebaseConfig = {
   measurementId: "G-P7NM1SBJM2"
 };
 
-const app = initializeApp(firebaseConfig);
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
 
 // Get the current pattern name from the URL path
