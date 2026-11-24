@@ -53,46 +53,11 @@
         <div class="nav-actions">
           <a class="btn-cv" href="https://kariloops.vercel.app/#">Shop</a>
           <a class="btn-hire" href="commissions.html">Commission →</a>
-
-          <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
         </div>
       </div>
 
-      <div class="mobile-nav" id="mobileNav">
-        <!-- Date and Time for mobile menu -->
-        <div
-          class="-mx-6 -mt-6 mb-6 p-6 bg-brand-light border-b border-brand-border text-xs font-medium tracking-widest uppercase text-gray-700 flex flex-col items-center justify-center gap-1.5 shadow-sm">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            <span>MANILA, PH</span>
-          </div>
-          <span class="live-clock-mobile-date"></span>
-        </div>
-
-        <div class="flex flex-col gap-4 px-2">
-          <a href="index.html" class="mobile-nav-link group">Crochet Patterns</a>
-          <a href="inventory.html" class="mobile-nav-link group">Inventory</a>
-          <a href="catalogue.html" class="mobile-nav-link group">Catalogue</a>
-          <a href="calendar.html" class="mobile-nav-link group">Calendar</a>
-          <a href="dictionary.html" class="mobile-nav-link group">Dictionary</a>
-        <button id="openStitchCounterMenu" class="mobile-nav-link group text-left flex items-center justify-between w-full">
-          <span>Project Counter</span>
-          <svg class="w-4 h-4 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-          </svg>
-        </button>
-        </div>
-
-        <div style="display: flex; gap: 8px; margin-top: auto; padding-top: 20px;">
-          <a class="btn-cv" href="https://kariloops.vercel.app/#" style="display: inline-block;">Shop</a>
-          <a class="btn-hire" href="commissions.html" style="display: inline-block;" class="mobile-nav-link">Commission →</a>
-        </div>
-      </div>
-      <div class="mobile-overlay" id="mobileOverlay"></div>
+      
+      
     </nav>
 
     <main class="p-8 max-w-7xl mx-auto mt-16 relative">
@@ -275,14 +240,6 @@
   </div>
 
   <script type="module" src="/src/main.ts"></script>
-  
-  <!-- Floating Hamburger Menu for scroll -->
-  <button type="button" id="floatingMenuToggle" aria-label="Open menu"
-    class="fixed top-8 right-8 w-14 h-14 bg-brand-primary text-gray-900 rounded-full shadow-2xl hover:shadow-brand-primary/50 hover:bg-brand-accent flex flex-col justify-center items-center gap-1.5 z-50 opacity-0 pointer-events-none transition-all duration-300 transform hover:-translate-y-1 focus:outline-none">
-    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
-    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
-    <span class="w-6 h-0.5 bg-gray-900 rounded pointer-events-none"></span>
-  </button>
 </body>
 </html>
 

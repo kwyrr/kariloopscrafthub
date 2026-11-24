@@ -23,143 +23,14 @@ let currentPatternId = window.location.pathname.split('/').pop()?.replace('.html
 // If it's just '/' or empty, don't use a blank ID
 if (!currentPatternId || currentPatternId === 'index') currentPatternId = 'home';
 
-// Global Pattern Authentication Check
+// Global Pattern Pages List (used for edit mode authentication)
 const patternPages = [
   'babys-breath', 'big-thai-rose', 'blooming-tulips', 'calla-lily', 
   'carnations', 'cosmos', 'daisy', 'detailed-sunflower', 
   'fluffy-tulips', 'forget-me-not', 'lavenders', 'leaf-stem', 
   'lily-of-the-valley', 'little-hearts', 'mini-rose', 'peonies', 
-  'ping-pong-flower', 'plumeria', 'hanging-rose-keychain', 'hanging-tulips-keychain', 'butterfly-flower-keychain', 'puff-flower-bag-charm', 'ruffle-heart-bag-charm', 'stargazer-lily'
+  'ping-pong-flower', 'plumeria', 'hanging-rose-keychain', 'hanging-tulips-keychain', 'butterfly-flower-keychain', 'puff-flower-bag-charm', 'ruffle-bow-keychain', 'ruffle-heart-bag-charm', 'stargazer-lily'
 ];
-
-if (patternPages.includes(currentPatternId)) {
-  // Always inject lock screen for pattern pages
-  document.addEventListener('DOMContentLoaded', () => {
-      document.body.classList.add('overflow-hidden');
-      const html = `
-      <div id="pageAuthModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-white/40 backdrop-blur-xl">
-        <div class="bg-white/90 backdrop-blur-md rounded-3xl p-8 shadow-2xl max-w-sm w-full mx-4 flex flex-col items-center border border-white/50">
-          <div class="w-16 h-16 bg-yellow-50 text-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm border border-yellow-100">
-             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-2">Enter Password</h3>
-          <p class="text-sm text-gray-600 mb-8 text-center font-medium">Please enter the correct 6-digit password to view this pattern.</p>
-
-          <div id="pagePinDotsContainer" class="flex gap-4 mb-8 p-2 rounded-xl transition-colors duration-300">
-            <div class="page-pin-dot w-4 h-4 rounded-full border-2 border-gray-300 transition-colors"></div>
-            <div class="page-pin-dot w-4 h-4 rounded-full border-2 border-gray-300 transition-colors"></div>
-            <div class="page-pin-dot w-4 h-4 rounded-full border-2 border-gray-300 transition-colors"></div>
-            <div class="page-pin-dot w-4 h-4 rounded-full border-2 border-gray-300 transition-colors"></div>
-            <div class="page-pin-dot w-4 h-4 rounded-full border-2 border-gray-300 transition-colors"></div>
-            <div class="page-pin-dot w-4 h-4 rounded-full border-2 border-gray-300 transition-colors"></div>
-          </div>
-
-          <div class="grid grid-cols-3 gap-4 mb-8">
-            <button class="page-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-yellow-50 hover:text-yellow-600 font-bold text-2xl transition-all shadow-sm border border-gray-100 active:scale-95" data-num="1">1</button>
-            <button class="page-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-yellow-50 hover:text-yellow-600 font-bold text-2xl transition-all shadow-sm border border-gray-100 active:scale-95" data-num="2">2</button>
-            <button class="page-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-yellow-50 hover:text-yellow-600 font-bold text-2xl transition-all shadow-sm border border-gray-100 active:scale-95" data-num="3">3</button>
-            <button class="page-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-yellow-50 hover:text-yellow-600 font-bold text-2xl transition-all shadow-sm border border-gray-100 active:scale-95" data-num="4">4</button>
-            <button class="page-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-yellow-50 hover:text-yellow-600 font-bold text-2xl transition-all shadow-sm border border-gray-100 active:scale-95" data-num="5">5</button>
-            <button class="page-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-yellow-50 hover:text-yellow-600 font-bold text-2xl transition-all shadow-sm border border-gray-100 active:scale-95" data-num="6">6</button>
-            <button class="page-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-yellow-50 hover:text-yellow-600 font-bold text-2xl transition-all shadow-sm border border-gray-100 active:scale-95" data-num="7">7</button>
-            <button class="page-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-yellow-50 hover:text-yellow-600 font-bold text-2xl transition-all shadow-sm border border-gray-100 active:scale-95" data-num="8">8</button>
-            <button class="page-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-yellow-50 hover:text-yellow-600 font-bold text-2xl transition-all shadow-sm border border-gray-100 active:scale-95" data-num="9">9</button>
-            <div></div>
-            <button class="page-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-yellow-50 hover:text-yellow-600 font-bold text-2xl transition-all shadow-sm border border-gray-100 active:scale-95" data-num="0">0</button>
-            <button class="page-numpad-btn bg-red-50 hover:bg-red-100 text-red-500 w-16 h-16 rounded-2xl flex items-center justify-center transition-all shadow-sm border border-red-100 active:scale-95" id="pageNumpadBackspace">
-              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" />
-              </svg>
-            </button>
-          </div>
-          
-          <a href="index.html" class="text-gray-500 hover:text-gray-900 font-bold text-sm bg-gray-100 px-4 py-2 rounded-xl transition-colors">Return Home</a>
-        </div>
-      </div>`;
-      document.body.insertAdjacentHTML('beforeend', html);
-
-      const pagePinDots = document.querySelectorAll('.page-pin-dot');
-      const pageNumpadBtns = document.querySelectorAll('.page-numpad-btn[data-num]');
-      const pageBackspaceBtn = document.getElementById('pageNumpadBackspace');
-      const pageAuthModal = document.getElementById('pageAuthModal');
-
-      let pageCurrentPin = '';
-      const correctPin = '061624';
-
-      function updatePagePinDots() {
-        pagePinDots.forEach((dot, index) => {
-          dot.classList.remove('bg-red-500', 'border-red-500'); // Always clean up error colors
-          if (index < pageCurrentPin.length) {
-            dot.classList.add('bg-yellow-400', 'border-yellow-400');
-            dot.classList.remove('border-gray-300');
-          } else {
-            dot.classList.remove('bg-yellow-400', 'border-yellow-400');
-            dot.classList.add('border-gray-300');
-          }
-        });
-      }
-
-      function handlePagePinInput(num: string) {
-        if (pageCurrentPin.length < 6) {
-          pageCurrentPin += num;
-          updatePagePinDots();
-
-          if (pageCurrentPin.length === 6) {
-            if (pageCurrentPin === correctPin) {
-              // Unlock!
-              document.body.classList.remove('overflow-hidden');
-              if (pageAuthModal) pageAuthModal.remove();
-            } else {
-              // Shake animation on error
-              const container = document.getElementById('pagePinDotsContainer');
-              if (container) {
-                container.classList.add('animate-shake', 'bg-red-50');
-                pagePinDots.forEach(dot => {
-                  dot.classList.remove('bg-yellow-400', 'border-yellow-400');
-                  dot.classList.add('bg-red-500', 'border-red-500');
-                });
-                setTimeout(() => {
-                  pageCurrentPin = '';
-                  updatePagePinDots();
-                  container.classList.remove('animate-shake', 'bg-red-50');
-                }, 300);
-              }
-            }
-          }
-        }
-      }
-
-      pageNumpadBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const num = (e.target as HTMLElement).closest('button')?.getAttribute('data-num');
-          if (num) handlePagePinInput(num);
-        });
-      });
-
-      if (pageBackspaceBtn) {
-        pageBackspaceBtn.addEventListener('click', () => {
-          if (pageCurrentPin.length > 0) {
-            pageCurrentPin = pageCurrentPin.slice(0, -1);
-            updatePagePinDots();
-          }
-        });
-      }
-
-      document.addEventListener('keydown', (e) => {
-        const modal = document.getElementById('pageAuthModal');
-        if (modal) {
-          if (/^[0-9]$/.test(e.key)) {
-            handlePagePinInput(e.key);
-          } else if (e.key === 'Backspace') {
-            if (pageCurrentPin.length > 0) {
-              pageCurrentPin = pageCurrentPin.slice(0, -1);
-              updatePagePinDots();
-            }
-          }
-        }
-      });
-    });
-}
 
 // Update the live clock
 function updateClock() {
@@ -181,56 +52,6 @@ function updateClock() {
 
 setInterval(updateClock, 1000)
 updateClock() // Initial call
-
-// Mobile Menu Toggle Logic
-const mobileMenuToggle = document.getElementById('mobileMenuToggle')
-const mobileNav = document.getElementById('mobileNav')
-const mobileOverlay = document.getElementById('mobileOverlay')
-const mobileNavLinks = document.querySelectorAll('.mobile-nav-link')
-
-function toggleMobileMenu() {
-  if (mobileMenuToggle && mobileNav && mobileOverlay) {
-    mobileMenuToggle.classList.toggle('is-active')
-    mobileNav.classList.toggle('is-open')
-    mobileOverlay.classList.toggle('is-active')
-  }
-}
-
-function closeMobileMenu() {
-  if (mobileMenuToggle && mobileNav && mobileOverlay) {
-    mobileMenuToggle.classList.remove('is-active')
-    mobileNav.classList.remove('is-open')
-    mobileOverlay.classList.remove('is-active')
-  }
-}
-
-if (mobileMenuToggle) {
-  mobileMenuToggle.addEventListener('click', toggleMobileMenu)
-}
-
-if (mobileOverlay) {
-  mobileOverlay.addEventListener('click', closeMobileMenu)
-}
-
-mobileNavLinks.forEach(link => {
-  link.addEventListener('click', closeMobileMenu)
-})
-
-// Floating Hamburger Toggle
-const floatingMenuToggle = document.getElementById('floatingMenuToggle')
-
-if (floatingMenuToggle) {
-  floatingMenuToggle.addEventListener('click', toggleMobileMenu)
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 200) {
-      floatingMenuToggle.classList.remove('opacity-0', 'pointer-events-none')
-      floatingMenuToggle.classList.add('opacity-100', 'pointer-events-auto')
-    } else {
-      floatingMenuToggle.classList.add('opacity-0', 'pointer-events-none')
-      floatingMenuToggle.classList.remove('opacity-100', 'pointer-events-auto')
-    }
-  })
-}
 
 // Project Counter Logic
 function injectStitchCounter() {
@@ -288,7 +109,6 @@ function injectStitchCounter() {
 injectStitchCounter();
 
 const openCounterBtn = document.getElementById('openStitchCounter')
-const openCounterMenuBtn = document.getElementById('openStitchCounterMenu')
 const closeCounterBtn = document.getElementById('closeStitchCounter')
 const counterWindow = document.getElementById('stitchCounterWindow')
 const counterHeader = document.getElementById('stitchCounterHeader')
@@ -339,14 +159,6 @@ if (openCounterBtn && counterWindow) {
   openCounterBtn.addEventListener('click', () => {
     counterWindow.classList.remove('hidden')
     counterWindow.classList.add('flex')
-  })
-}
-if (openCounterMenuBtn && counterWindow) {
-  openCounterMenuBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    counterWindow.classList.remove('hidden')
-    counterWindow.classList.add('flex')
-    closeMobileMenu(); // hide mobile nav when opening counter
   })
 }
 
@@ -950,8 +762,9 @@ document.addEventListener('DOMContentLoaded', () => {
       
       newRow.addEventListener('click', () => {
         if (isEditMode) return;
-        newRow.classList.toggle('text-yellow-500');
-        newRow.classList.toggle('text-gray-800');
+        newRow.classList.remove('text-yellow-500');
+        newRow.classList.toggle('pattern-row-active');
+        newRow.classList.toggle('text-gray-800', !newRow.classList.contains('pattern-row-active'));
         saveProgress();
       });
     });
@@ -967,7 +780,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (section) {
           const rows = section.querySelectorAll('.pattern-row');
           rows.forEach(row => {
-            row.classList.remove('text-yellow-500');
+            row.classList.remove('pattern-row-active', 'text-yellow-500');
             row.classList.add('text-gray-800');
           });
           saveProgress();
@@ -979,13 +792,43 @@ document.addEventListener('DOMContentLoaded', () => {
   function saveProgress() {
     if (isEditMode) return;
     const rows = document.querySelectorAll('.pattern-row');
-    const progress = Array.from(rows).map(row => row.classList.contains('text-yellow-500'));
+    const progress = Array.from(rows).map(row => row.classList.contains('pattern-row-active'));
     setDoc(doc(db, "patternProgress", currentPatternId), { progress });
   }
 
   // Load progress and edits from Firebase!
   const progressRef = doc(db, "patternProgress", currentPatternId);
   const editsRef = doc(db, "patternEdits", currentPatternId);
+
+  function normalizePatternRows(container: HTMLElement) {
+    container.querySelectorAll('.font-mono').forEach(list => {
+      list.querySelectorAll('font').forEach(fontEl => {
+        const span = document.createElement('span');
+        span.innerHTML = fontEl.innerHTML;
+        fontEl.replaceWith(span);
+      });
+
+      list.querySelectorAll('[style]').forEach(el => {
+        el.removeAttribute('style');
+      });
+
+      Array.from(list.children).forEach(child => {
+        if (child.tagName === 'DIV' && !child.classList.contains('add-row-btn')) {
+          const isItalic = child.classList.contains('italic');
+          const isBold = child.classList.contains('font-bold');
+          const isActive = child.classList.contains('pattern-row-active');
+          child.className = 'pattern-row hover:bg-brand-light/50 px-2 py-0.5 -mx-2 rounded transition-all select-none cursor-pointer relative group pr-8';
+          if (isItalic) child.classList.add('italic');
+          if (isBold) child.classList.add('font-bold');
+          if (isActive) {
+            child.classList.add('pattern-row-active');
+          } else {
+            child.classList.add('text-gray-800');
+          }
+        }
+      });
+    });
+  }
 
   // Live listener for Edits
   onSnapshot(editsRef, (docSnap: any) => {
@@ -994,6 +837,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const patternContainer = document.getElementById('patternContentContainer');
       if (patternContainer && savedEdits) {
         patternContainer.innerHTML = savedEdits;
+        normalizePatternRows(patternContainer);
         bindRowListeners();
       }
     }
@@ -1005,11 +849,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const progress = docSnap.data().progress;
       const rows = document.querySelectorAll('.pattern-row');
       rows.forEach((row, index) => {
+        row.classList.remove('text-yellow-500');
         if (progress[index]) {
-          row.classList.add('text-yellow-500');
+          row.classList.add('pattern-row-active');
           row.classList.remove('text-gray-800');
         } else {
-          row.classList.remove('text-yellow-500');
+          row.classList.remove('pattern-row-active');
           row.classList.add('text-gray-800');
         }
       });
@@ -1100,10 +945,87 @@ document.addEventListener('DOMContentLoaded', () => {
   function bindSingleRowListener(row: Element) {
     row.addEventListener('click', () => {
       if (isEditMode) return;
-      row.classList.toggle('text-yellow-500');
-      row.classList.toggle('text-gray-800');
+      row.classList.remove('text-yellow-500');
+      row.classList.toggle('pattern-row-active');
+      row.classList.toggle('text-gray-800', !row.classList.contains('pattern-row-active'));
       saveProgress();
     });
+  }
+
+  let draggedRow: HTMLElement | null = null;
+
+  function attachEditRowControls(row: Element) {
+    const rowEl = row as HTMLElement;
+    rowEl.setAttribute('contenteditable', 'true');
+    rowEl.classList.add('is-editing', 'relative');
+    rowEl.classList.remove('pattern-row-active', 'text-yellow-500');
+    rowEl.classList.add('text-gray-800');
+
+    if (!rowEl.querySelector('.drag-handle-btn')) {
+      const dragHandle = document.createElement('button');
+      dragHandle.type = 'button';
+      dragHandle.className = 'drag-handle-btn absolute left-1.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-brand-primary p-1 cursor-grab active:cursor-grabbing opacity-70 hover:opacity-100 transition-opacity select-none';
+      dragHandle.setAttribute('contenteditable', 'false');
+      dragHandle.setAttribute('title', 'Drag to reorder');
+      dragHandle.setAttribute('aria-label', 'Drag to reorder row');
+      dragHandle.innerHTML = '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" /></svg>';
+
+      dragHandle.addEventListener('pointerdown', () => {
+        rowEl.setAttribute('draggable', 'true');
+      });
+      dragHandle.addEventListener('pointerup', () => {
+        rowEl.setAttribute('draggable', 'false');
+      });
+      dragHandle.addEventListener('click', (e) => e.stopPropagation());
+      rowEl.insertBefore(dragHandle, rowEl.firstChild);
+    }
+
+    if (!rowEl.querySelector('.delete-row-btn')) {
+      const delBtn = document.createElement('button');
+      delBtn.type = 'button';
+      delBtn.className = 'delete-row-btn absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500 p-1 opacity-50 hover:opacity-100 transition-opacity';
+      delBtn.setAttribute('contenteditable', 'false');
+      delBtn.innerHTML = '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>';
+      delBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        rowEl.remove();
+      });
+      rowEl.appendChild(delBtn);
+    }
+
+    if (!rowEl.dataset.dragBound) {
+      rowEl.dataset.dragBound = 'true';
+      rowEl.addEventListener('dragstart', (e) => {
+        if (!isEditMode) return;
+        draggedRow = rowEl;
+        rowEl.classList.add('is-dragging');
+        if (e.dataTransfer) {
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', '');
+        }
+      });
+      rowEl.addEventListener('dragend', () => {
+        rowEl.classList.remove('is-dragging');
+        rowEl.setAttribute('draggable', 'false');
+        draggedRow = null;
+      });
+    }
+  }
+
+  function getDragAfterElement(container: Element, y: number): Element | null {
+    const siblingRows = Array.from(container.querySelectorAll(':scope > .pattern-row:not(.is-dragging)'));
+    let closestOffset = Number.NEGATIVE_INFINITY;
+    let closestElement: Element | null = null;
+
+    siblingRows.forEach(child => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closestOffset) {
+        closestOffset = offset;
+        closestElement = child;
+      }
+    });
+    return closestElement;
   }
 
   function enableEditMode() {
@@ -1112,51 +1034,42 @@ document.addEventListener('DOMContentLoaded', () => {
     openAuthModalBtn?.classList.add('hidden');
 
     const activeRows = document.querySelectorAll('.pattern-row');
-    activeRows.forEach(row => {
-      row.setAttribute('contenteditable', 'true');
-      row.classList.add('is-editing', 'relative', 'pr-8');
-      row.classList.remove('text-yellow-500');
-      row.classList.add('text-gray-800');
+    activeRows.forEach(row => attachEditRowControls(row));
 
-      if (!row.querySelector('.delete-row-btn')) {
-        const delBtn = document.createElement('button');
-        delBtn.className = 'delete-row-btn absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500 p-1 opacity-50 hover:opacity-100 transition-opacity';
-        delBtn.setAttribute('contenteditable', 'false');
-        delBtn.innerHTML = '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>';
-        delBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          row.remove();
-        });
-        row.appendChild(delBtn);
-      }
-    });
-
-    const patternLists = document.querySelectorAll('.font-mono.text-lg.text-gray-800');
+    const patternLists = document.querySelectorAll('#patternContentContainer .font-mono.text-lg');
     patternLists.forEach(list => {
-      if (!list.querySelector('.add-row-btn')) {
+      const listEl = list as HTMLElement;
+      if (!listEl.dataset.dropBound) {
+        listEl.dataset.dropBound = 'true';
+        listEl.addEventListener('dragover', (e) => {
+          if (!isEditMode || !draggedRow) return;
+          e.preventDefault();
+          const afterElement = getDragAfterElement(listEl, e.clientY);
+          const addBtn = listEl.querySelector(':scope > .add-row-btn');
+          if (afterElement) {
+            listEl.insertBefore(draggedRow, afterElement);
+          } else if (addBtn) {
+            listEl.insertBefore(draggedRow, addBtn);
+          } else {
+            listEl.appendChild(draggedRow);
+          }
+        });
+      }
+
+      if (!listEl.querySelector('.add-row-btn')) {
         const btn = document.createElement('button');
         btn.className = 'add-row-btn mt-4 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-lg text-sm shadow-sm border border-gray-200 w-full text-center transition-colors';
         btn.textContent = '+ Add Row';
         btn.addEventListener('click', () => {
           const newRow = document.createElement('div');
-          newRow.className = 'pattern-row hover:bg-yellow-50/50 px-2 py-0.5 -mx-2 rounded transition-all select-none is-editing border border-dashed border-brand-primary bg-white cursor-text text-gray-900 relative pr-8';
-          newRow.setAttribute('contenteditable', 'true');
+          newRow.className = 'pattern-row hover:bg-brand-light/50 px-2 py-0.5 -mx-2 rounded transition-all select-none cursor-pointer text-gray-800 relative';
           newRow.textContent = 'New row...';
 
-          const delBtn = document.createElement('button');
-          delBtn.className = 'delete-row-btn absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500 p-1 opacity-50 hover:opacity-100 transition-opacity';
-          delBtn.setAttribute('contenteditable', 'false');
-          delBtn.innerHTML = '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>';
-          delBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            newRow.remove();
-          });
-          newRow.appendChild(delBtn);
-
-          list.insertBefore(newRow, btn);
+          attachEditRowControls(newRow);
+          listEl.insertBefore(newRow, btn);
           bindSingleRowListener(newRow);
         });
-        list.appendChild(btn);
+        listEl.appendChild(btn);
       }
     });
   }
@@ -1170,7 +1083,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const activeRows = document.querySelectorAll('.pattern-row');
       activeRows.forEach(row => {
         row.setAttribute('contenteditable', 'false');
-        row.classList.remove('is-editing', 'relative', 'pr-8');
+        row.removeAttribute('draggable');
+        delete (row as HTMLElement).dataset.dragBound;
+        row.classList.remove('is-editing', 'is-dragging', 'relative', 'pr-8');
+        const dragHandle = row.querySelector('.drag-handle-btn');
+        if (dragHandle) dragHandle.remove();
         const delBtn = row.querySelector('.delete-row-btn');
         if (delBtn) delBtn.remove();
       });
@@ -1180,6 +1097,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const patternContainer = document.getElementById('patternContentContainer');
       if (patternContainer) {
+        normalizePatternRows(patternContainer);
         setDoc(doc(db, "patternEdits", currentPatternId), { html: patternContainer.innerHTML });
         // After save, we immediately update bindRowListeners just in case
         bindRowListeners();

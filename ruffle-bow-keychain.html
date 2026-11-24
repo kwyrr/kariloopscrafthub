@@ -47,46 +47,11 @@
       <div class="nav-actions">
         <a class="btn-cv" href="https://kariloops.vercel.app/#">Shop</a>
         <a class="btn-hire" href="commissions.html">Commission →</a>
-
-        <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </div>
 
-    <div class="mobile-nav" id="mobileNav">
-      <!-- Date and Time for mobile menu -->
-      <div
-        class="-mx-6 -mt-6 mb-6 p-6 bg-brand-light border-b border-brand-border text-xs font-medium tracking-widest uppercase text-gray-700 flex flex-col items-center justify-center gap-1.5 shadow-sm">
-        <div class="flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-          <span>MANILA, PH</span>
-        </div>
-        <span class="live-clock-mobile-date"></span>
-      </div>
-
-      <div class="flex flex-col gap-4 px-2">
-        <a href="index.html" class="mobile-nav-link group">Crochet Patterns</a>
-        <a href="inventory.html" class="mobile-nav-link group">Inventory</a>
-        <a href="catalogue.html" class="mobile-nav-link group">Catalogue</a>
-        <a href="calendar.html" class="mobile-nav-link group">Calendar</a>
-        <a href="dictionary.html" class="mobile-nav-link group">Dictionary</a>
-        <button id="openStitchCounterMenu" class="mobile-nav-link group text-left flex items-center justify-between w-full">
-          <span>Project Counter</span>
-          <svg class="w-4 h-4 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-          </svg>
-        </button>
-      </div>
-
-      <div style="display: flex; gap: 8px; margin-top: auto; padding-top: 20px;">
-        <a class="btn-cv" href="https://kariloops.vercel.app/#" style="display: inline-block;">Shop</a>
-        <a class="btn-hire" href="commissions.html" style="display: inline-block;" class="mobile-nav-link">Commission →</a>
-      </div>
-    </div>
-    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    
   </nav>
 
   <main class="flex-1 flex flex-col pt-8 pb-12 px-4 max-w-7xl mx-auto w-full relative z-0">
@@ -102,8 +67,8 @@
       </a>
     </div>
 
-    <!-- LOCKED CONTENT -->
-    <div id="lockedContent" class="hidden w-full">
+    <!-- CONTENT -->
+    <div id="lockedContent" class="w-full">
       <!-- Description -->
       <div
       class="text-lg text-gray-600 leading-relaxed font-medium flex flex-col gap-2 mb-8 max-w-3xl bg-white p-6 rounded-2xl border border-brand-border shadow-sm inline-block w-fit pr-16">
@@ -465,121 +430,6 @@
       <button id="closeAuthModalBtn" class="text-gray-500 hover:text-gray-900 font-medium text-sm">Cancel</button>
     </div>
   </div>
-
-  <!-- Page Lock Modal -->
-  <div id="pageLockModal" class="auth-modal is-active" style="z-index: 99999;">
-    <div class="bg-white rounded-3xl p-8 shadow-2xl max-w-sm w-full mx-auto flex flex-col items-center relative">
-      <h3 class="text-xl font-bold text-gray-900 mb-2">Pattern Locked</h3>
-      <p class="text-sm text-gray-500 mb-8 text-center">Please enter the correct 6-digit password to view this pattern.</p>
-
-      <div class="flex gap-4 mb-8">
-        <div class="lock-pin-dot w-4 h-4 rounded-full bg-gray-200 transition-colors"></div>
-        <div class="lock-pin-dot w-4 h-4 rounded-full bg-gray-200 transition-colors"></div>
-        <div class="lock-pin-dot w-4 h-4 rounded-full bg-gray-200 transition-colors"></div>
-        <div class="lock-pin-dot w-4 h-4 rounded-full bg-gray-200 transition-colors"></div>
-        <div class="lock-pin-dot w-4 h-4 rounded-full bg-gray-200 transition-colors"></div>
-        <div class="lock-pin-dot w-4 h-4 rounded-full bg-gray-200 transition-colors"></div>
-      </div>
-
-      <div class="grid grid-cols-3 gap-4 mb-8">
-        <button class="lock-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-gray-100 text-xl font-bold text-gray-700 transition-colors" data-num="1">1</button>
-        <button class="lock-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-gray-100 text-xl font-bold text-gray-700 transition-colors" data-num="2">2</button>
-        <button class="lock-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-gray-100 text-xl font-bold text-gray-700 transition-colors" data-num="3">3</button>
-        <button class="lock-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-gray-100 text-xl font-bold text-gray-700 transition-colors" data-num="4">4</button>
-        <button class="lock-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-gray-100 text-xl font-bold text-gray-700 transition-colors" data-num="5">5</button>
-        <button class="lock-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-gray-100 text-xl font-bold text-gray-700 transition-colors" data-num="6">6</button>
-        <button class="lock-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-gray-100 text-xl font-bold text-gray-700 transition-colors" data-num="7">7</button>
-        <button class="lock-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-gray-100 text-xl font-bold text-gray-700 transition-colors" data-num="8">8</button>
-        <button class="lock-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-gray-100 text-xl font-bold text-gray-700 transition-colors" data-num="9">9</button>
-        <div></div>
-        <button class="lock-numpad-btn w-16 h-16 rounded-2xl bg-gray-50 hover:bg-gray-100 text-xl font-bold text-gray-700 transition-colors" data-num="0">0</button>
-        <button class="w-16 h-16 rounded-2xl bg-red-50 hover:bg-red-100 text-red-500 flex items-center justify-center transition-colors" id="lockNumpadBackspace">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" />
-          </svg>
-        </button>
-      </div>
-      <!-- No cancel button for page lock -->
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const lockModal = document.getElementById('pageLockModal');
-      const lockedContent = document.getElementById('lockedContent');
-      const dots = document.querySelectorAll('.lock-pin-dot');
-      const numBtns = document.querySelectorAll('.lock-numpad-btn');
-      const backspaceBtn = document.getElementById('lockNumpadBackspace');
-      
-      let currentPin = '';
-      const correctPin = '061624';
-
-      function updateDots() {
-        dots.forEach((dot, index) => {
-          if (index < currentPin.length) {
-            dot.classList.add('bg-brand-primary');
-            dot.classList.remove('bg-gray-200');
-          } else {
-            dot.classList.remove('bg-brand-primary');
-            dot.classList.add('bg-gray-200');
-          }
-        });
-      }
-
-      function resetPin() {
-        currentPin = '';
-        updateDots();
-      }
-
-      numBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          if (currentPin.length < 6) {
-            currentPin += btn.getAttribute('data-num');
-            updateDots();
-            if (currentPin.length === 6) {
-              setTimeout(() => {
-                if (currentPin === correctPin) {
-                  lockModal.classList.remove('is-active');
-                  lockedContent.classList.remove('hidden');
-                } else {
-                  const modalWindow = lockModal.querySelector('div');
-                  modalWindow.classList.add('shake');
-                  setTimeout(() => modalWindow.classList.remove('shake'), 400);
-                  resetPin();
-                }
-              }, 200);
-            }
-          }
-        });
-      });
-
-      backspaceBtn.addEventListener('click', () => {
-        if (currentPin.length > 0) {
-          currentPin = currentPin.slice(0, -1);
-          updateDots();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (!lockModal.classList.contains('is-active')) return;
-        if (e.key >= '0' && e.key <= '9') {
-          const btn = Array.from(numBtns).find(b => b.getAttribute('data-num') === e.key);
-          if (btn) btn.click();
-        } else if (e.key === 'Backspace') {
-          backspaceBtn.click();
-        }
-      });
-    });
-  </script>
-
-  <!-- Floating Hamburger Menu Button (Appears on Scroll) -->
-  <button type="button" id="floatingMenuToggle" aria-label="Open menu"
-    class="fixed top-6 right-6 z-[150] w-12 h-12 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 flex flex-col items-center justify-center gap-1.5 opacity-0 pointer-events-none transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5">
-    <span class="w-5 h-0.5 bg-gray-800 rounded-full"></span>
-    <span class="w-5 h-0.5 bg-gray-800 rounded-full"></span>
-    <span class="w-5 h-0.5 bg-gray-800 rounded-full"></span>
-  </button>
 </body>
 
 </html>
