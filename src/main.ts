@@ -492,31 +492,159 @@ document.addEventListener('click', (e) => {
   }
 })
 
-// Predictive Search Logic
+// Predictive Search & Unified Filtering Logic
 const flowerSearchInput = document.getElementById('flowerSearchInput') as HTMLInputElement | null;
 const searchSuggestions = document.getElementById('searchSuggestions');
+const searchClearBtn = document.getElementById('searchClearBtn');
+const flowerSection = document.getElementById('flower-patterns');
+const amigurumiSection = document.getElementById('amigurumi-patterns');
+const patternsHeading = document.getElementById('patternsHeading');
+const flowerGridEl = document.getElementById('patternsGrid');
+const amigurumiGridEl = document.getElementById('amigurumiPatternsGrid');
+const noSearchResultsEl = document.getElementById('noSearchResults');
+const categoryFilterBtns = document.querySelectorAll('.category-filter-btn');
 
-const flowerDatabase = [
-  { name: 'Peonies', action: () => openModalById('patternModal-peonies') },
-  { name: 'Roses', action: () => alert('Pattern for Roses coming soon!') },
-  { name: 'Detailed Sunflower', action: () => openModalById('patternModal-detailed-sunflower') },
-  { name: 'Hanging Rose Keychain', action: () => openModalById('patternModal-hanging-rose-keychain') },
-  { name: 'Hanging Tulips Keychain', action: () => openModalById('patternModal-hanging-tulips-keychain') },
-  { name: 'Tulips', action: () => openModalById('patternModal-blooming-tulips') },
-  { name: 'Calla Lily', action: () => openModalById('patternModal-calla-lily') },
-  { name: 'Carnations', action: () => openModalById('patternModal-carnations') },
-  { name: 'Cosmos', action: () => openModalById('patternModal-cosmos') },
-  { name: 'Daisies', action: () => openModalById('patternModal-daisy') },
-    { name: 'Fluffy Tulips', action: () => openModalById('patternModal-fluffy-tulips') },
-    { name: 'Big Thai Rose', action: () => openModalById('patternModal-big-thai-rose') },
-    { name: 'Forget Me Not', action: () => openModalById('patternModal-forget-me-not') },
-    { name: 'Leaf Stem', action: () => openModalById('patternModal-leaf-stem') },
-    { name: 'Lily of the Valley', action: () => openModalById('patternModal-lily-of-the-valley') },
-    { name: 'Little Hearts', action: () => openModalById('patternModal-little-hearts') },
-    { name: 'Mini Rose', action: () => openModalById('patternModal-mini-rose') },
-    { name: 'Ping Pong Flower', action: () => openModalById('patternModal-ping-pong-flower') },
-    { name: 'Plumeria', action: () => openModalById('patternModal-plumeria') },
-    { name: 'Stargazer Lily', action: () => openModalById('patternModal-stargazer-lily') }
+let activeCategory: 'all' | 'flowers' | 'amigurumi' = 'all';
+let currentSortValue = 'name-asc';
+
+// Tag cards by category and combine all patterns into #patternsGrid for unified sorting & filtering
+if (flowerGridEl) {
+  Array.from(flowerGridEl.querySelectorAll('.pattern-card-trigger')).forEach(card => {
+    (card as HTMLElement).dataset.category = 'flowers';
+  });
+}
+if (amigurumiGridEl && flowerGridEl) {
+  Array.from(amigurumiGridEl.querySelectorAll('.pattern-card-trigger')).forEach(card => {
+    (card as HTMLElement).dataset.category = 'amigurumi';
+    flowerGridEl.appendChild(card);
+  });
+  if (amigurumiSection) amigurumiSection.classList.add('hidden');
+}
+
+function sortPatternsGrid(value: string) {
+  if (!flowerGridEl) return;
+  const cards = Array.from(flowerGridEl.querySelectorAll('.pattern-card-trigger')) as HTMLElement[];
+  cards.sort((a: any, b: any) => {
+    const nameA = a.dataset.name || '';
+    const nameB = b.dataset.name || '';
+    const diffA = parseInt(a.dataset.difficulty || '0');
+    const diffB = parseInt(b.dataset.difficulty || '0');
+    const hoursA = parseInt(a.dataset.hours || '0');
+    const hoursB = parseInt(b.dataset.hours || '0');
+    const priceA = parseInt(a.dataset.price || '0');
+    const priceB = parseInt(b.dataset.price || '0');
+
+    switch (value) {
+      case 'name-asc': return nameA.localeCompare(nameB);
+      case 'name-desc': return nameB.localeCompare(nameA);
+      case 'difficulty-asc': return diffA - diffB;
+      case 'difficulty-desc': return diffB - diffA;
+      case 'hours-asc': return hoursA - hoursB;
+      case 'hours-desc': return hoursB - hoursA;
+      case 'price-asc': return priceA - priceB;
+      case 'price-desc': return priceB - priceA;
+      default: return 0;
+    }
+  });
+  cards.forEach(card => flowerGridEl.appendChild(card));
+}
+
+function setActiveCategory(category: 'all' | 'flowers' | 'amigurumi') {
+  activeCategory = category;
+
+  categoryFilterBtns.forEach(b => {
+    const isSelected = b.getAttribute('data-category') === category;
+    b.classList.toggle('bg-brand-primary', isSelected);
+    b.classList.toggle('text-white', isSelected);
+    b.classList.toggle('border-brand-primary', isSelected);
+    b.classList.toggle('shadow-sm', isSelected);
+    b.classList.toggle('bg-white', !isSelected);
+    b.classList.toggle('text-gray-700', !isSelected);
+    b.classList.toggle('border-brand-border', !isSelected);
+  });
+
+  if (patternsHeading) {
+    if (category === 'flowers') patternsHeading.textContent = 'Flower Patterns';
+    else if (category === 'amigurumi') patternsHeading.textContent = 'Amigurumi & Keychain Patterns';
+    else patternsHeading.textContent = 'All Patterns';
+  }
+
+  applyFilters();
+}
+
+function applyFilters() {
+  const query = (flowerSearchInput?.value || '').trim().toLowerCase();
+
+  let visibleCount = 0;
+
+  if (flowerGridEl) {
+    const cards = Array.from(flowerGridEl.querySelectorAll('.pattern-card-trigger')) as HTMLElement[];
+    cards.forEach(card => {
+      const name = (card.dataset.name || '').toLowerCase();
+      const category = card.dataset.category || 'flowers';
+      const matchesCategory = activeCategory === 'all' || category === activeCategory;
+      const matchesQuery = !query || name.includes(query);
+      const isVisible = matchesCategory && matchesQuery;
+      card.classList.toggle('hidden', !isVisible);
+      if (isVisible) visibleCount++;
+    });
+  }
+
+  if (flowerSection) flowerSection.classList.toggle('hidden', visibleCount === 0);
+  if (noSearchResultsEl) noSearchResultsEl.classList.toggle('hidden', visibleCount > 0);
+}
+
+categoryFilterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const category = (btn.getAttribute('data-category') || 'all') as 'all' | 'flowers' | 'amigurumi';
+    setActiveCategory(category);
+  });
+});
+
+// Ensure nav dropdown links for Flower Patterns / Amigurumi & Keychains switch category & scroll smoothly
+document.querySelectorAll('a[href="#flower-patterns"], a[href="#amigurumi-patterns"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if (href === '#flower-patterns' || href === '#amigurumi-patterns') {
+      e.preventDefault();
+      if (href === '#amigurumi-patterns') {
+        setActiveCategory('amigurumi');
+      } else {
+        setActiveCategory('flowers');
+      }
+      flowerSection?.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+// Initial unified sort (Name A-Z)
+sortPatternsGrid(currentSortValue);
+
+const allPatternsDatabase = [
+  { name: 'Peonies', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-peonies') },
+  { name: 'Roses', sectionId: 'flower-patterns', category: 'flowers', action: () => alert('Pattern for Roses coming soon!') },
+  { name: 'Detailed Sunflower', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-detailed-sunflower') },
+  { name: 'Hanging Rose Keychain', sectionId: 'amigurumi-patterns', category: 'amigurumi', action: () => openModalById('patternModal-hanging-rose-keychain') },
+  { name: 'Hanging Tulips Keychain', sectionId: 'amigurumi-patterns', category: 'amigurumi', action: () => openModalById('patternModal-hanging-tulips-keychain') },
+  { name: 'Tulips', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-blooming-tulips') },
+  { name: 'Calla Lily', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-calla-lily') },
+  { name: 'Carnations', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-carnations') },
+  { name: 'Cosmos', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-cosmos') },
+  { name: 'Daisies', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-daisy') },
+  { name: 'Fluffy Tulips', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-fluffy-tulips') },
+  { name: 'Big Thai Rose', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-big-thai-rose') },
+  { name: 'Forget Me Not', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-forget-me-not') },
+  { name: 'Leaf Stem', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-leaf-stem') },
+  { name: 'Lily of the Valley', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-lily-of-the-valley') },
+  { name: 'Little Hearts', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-little-hearts') },
+  { name: 'Mini Rose', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-mini-rose') },
+  { name: 'Ping Pong Flower', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-ping-pong-flower') },
+  { name: 'Plumeria', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-plumeria') },
+  { name: 'Stargazer Lily', sectionId: 'flower-patterns', category: 'flowers', action: () => openModalById('patternModal-stargazer-lily') },
+  { name: 'Butterfly Flower Keychain', sectionId: 'amigurumi-patterns', category: 'amigurumi', action: () => openModalById('patternModal-butterfly-flower-keychain') },
+  { name: 'Puff Flower Bag Charm', sectionId: 'amigurumi-patterns', category: 'amigurumi', action: () => openModalById('patternModal-puff-flower-bag-charm') },
+  { name: 'Ruffle Heart Bag Charm', sectionId: 'amigurumi-patterns', category: 'amigurumi', action: () => openModalById('patternModal-ruffle-heart-bag-charm') },
+  { name: 'Ruffle Bow Keychain', sectionId: 'amigurumi-patterns', category: 'amigurumi', action: () => openModalById('patternModal-ruffle-bow-keychain') }
 ];
 
 if (flowerSearchInput && searchSuggestions) {
@@ -524,13 +652,26 @@ if (flowerSearchInput && searchSuggestions) {
     const query = (e.target as HTMLInputElement).value.toLowerCase();
     searchSuggestions.innerHTML = '';
 
+    if (searchClearBtn) {
+      if (query.length > 0) {
+        searchClearBtn.classList.remove('hidden');
+      } else {
+        searchClearBtn.classList.add('hidden');
+      }
+    }
+
+    applyFilters();
+
     if (query.trim().length === 0) {
       searchSuggestions.classList.add('hidden');
       searchSuggestions.classList.remove('flex');
       return;
     }
 
-    const matches = flowerDatabase.filter(f => f.name.toLowerCase().includes(query.trim()));
+    const matches = allPatternsDatabase.filter(f =>
+      f.name.toLowerCase().includes(query.trim()) &&
+      (activeCategory === 'all' || f.category === activeCategory)
+    );
 
     if (matches.length > 0) {
       searchSuggestions.classList.remove('hidden');
@@ -544,8 +685,8 @@ if (flowerSearchInput && searchSuggestions) {
           flowerSearchInput.value = match.name;
           searchSuggestions.classList.add('hidden');
           searchSuggestions.classList.remove('flex');
-          // Navigate to patterns section if not already open
-          document.getElementById('flower-patterns')?.scrollIntoView({ behavior: 'smooth' });
+          applyFilters();
+          flowerSection?.scrollIntoView({ behavior: 'smooth' });
           match.action();
         });
         searchSuggestions.appendChild(li);
@@ -561,75 +702,26 @@ if (flowerSearchInput && searchSuggestions) {
     }
   });
 
+  if (searchClearBtn) {
+    searchClearBtn.addEventListener('click', () => {
+      flowerSearchInput.value = '';
+      searchSuggestions.innerHTML = '';
+      searchSuggestions.classList.add('hidden');
+      searchSuggestions.classList.remove('flex');
+      searchClearBtn.classList.add('hidden');
+      applyFilters();
+      flowerSearchInput.focus();
+    });
+  }
+
   document.addEventListener('click', (e) => {
-    if (!flowerSearchInput.contains(e.target as Node) && !searchSuggestions.contains(e.target as Node)) {
+    if (!flowerSearchInput.contains(e.target as Node) && !searchSuggestions.contains(e.target as Node) && !(searchClearBtn && searchClearBtn.contains(e.target as Node))) {
       searchSuggestions.classList.add('hidden');
       searchSuggestions.classList.remove('flex');
     }
   });
 }
 
-
-// Amigurumi Predictive Search Logic
-const amigurumiSearchInput = document.getElementById('amigurumiSearchInput') as HTMLInputElement | null;
-const amigurumiSearchSuggestions = document.getElementById('amigurumiSearchSuggestions');
-
-const amigurumiDatabase = [
-  { name: 'Hanging Rose Keychain', action: () => openModalById('patternModal-hanging-rose-keychain') },
-  { name: 'Butterfly Flower Keychain', action: () => openModalById('patternModal-butterfly-flower-keychain') },
-  { name: 'Puff Flower Bag Charm', action: () => openModalById('patternModal-puff-flower-bag-charm') },
-  { name: 'Ruffle Heart Bag Charm', action: () => openModalById('patternModal-ruffle-heart-bag-charm') },
-  { name: 'Ruffle Bow Keychain', action: () => openModalById('patternModal-ruffle-bow-keychain') }
-];
-
-if (amigurumiSearchInput && amigurumiSearchSuggestions) {
-  amigurumiSearchInput.addEventListener('input', (e) => {
-    const query = (e.target as HTMLInputElement).value.toLowerCase();
-    amigurumiSearchSuggestions.innerHTML = '';
-
-    if (query.trim().length === 0) {
-      amigurumiSearchSuggestions.classList.add('hidden');
-      amigurumiSearchSuggestions.classList.remove('flex');
-      return;
-    }
-
-    const matches = amigurumiDatabase.filter(f => f.name.toLowerCase().includes(query.trim()));
-
-    if (matches.length > 0) {
-      amigurumiSearchSuggestions.classList.remove('hidden');
-      amigurumiSearchSuggestions.classList.add('flex');
-
-      matches.forEach(match => {
-        const li = document.createElement('li');
-        li.className = 'px-5 py-4 hover:bg-brand-light cursor-pointer text-gray-800 transition-colors border-l-4 border-transparent hover:border-brand-primary font-medium';
-        li.textContent = match.name;
-        li.addEventListener('click', () => {
-          amigurumiSearchInput.value = match.name;
-          amigurumiSearchSuggestions.classList.add('hidden');
-          amigurumiSearchSuggestions.classList.remove('flex');
-          document.getElementById('amigurumi-patterns')?.scrollIntoView({ behavior: 'smooth' });
-          match.action();
-        });
-        amigurumiSearchSuggestions.appendChild(li);
-      });
-    } else {
-      amigurumiSearchSuggestions.classList.remove('hidden');
-      amigurumiSearchSuggestions.classList.add('flex');
-
-      const li = document.createElement('li');
-      li.className = 'px-5 py-4 text-gray-400 italic';
-      li.textContent = 'No matching patterns found.';
-      amigurumiSearchSuggestions.appendChild(li);
-    }
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!amigurumiSearchInput.contains(e.target as Node) && !amigurumiSearchSuggestions.contains(e.target as Node)) {
-      amigurumiSearchSuggestions.classList.add('hidden');
-      amigurumiSearchSuggestions.classList.remove('flex');
-    }
-  });
-}
 
 // --- Sort Logic ---
 const customSortDropdown = document.getElementById('customSortDropdown');
@@ -692,123 +784,13 @@ if (customSortDropdown && customSortBtn && customSortMenu && patternsGrid) {
       customSortMenu.classList.add('opacity-0', 'invisible', '-translate-y-2');
       customSortIcon?.classList.remove('rotate-180');
 
-      // Sort Grid
-      const cards = Array.from(patternsGrid.querySelectorAll('.pattern-card-trigger')) as HTMLElement[];
-      
-      cards.sort((a: any, b: any) => {
-        const nameA = a.dataset.name || '';
-        const nameB = b.dataset.name || '';
-        const diffA = parseInt(a.dataset.difficulty || '0');
-        const diffB = parseInt(b.dataset.difficulty || '0');
-        const hoursA = parseInt(a.dataset.hours || '0');
-        const hoursB = parseInt(b.dataset.hours || '0');
-        const priceA = parseInt(a.dataset.price || '0');
-        const priceB = parseInt(b.dataset.price || '0');
-        
-        switch (value) {
-          case 'name-asc': return nameA.localeCompare(nameB);
-          case 'name-desc': return nameB.localeCompare(nameA);
-          case 'difficulty-asc': return diffA - diffB;
-          case 'difficulty-desc': return diffB - diffA;
-          case 'hours-asc': return hoursA - hoursB;
-          case 'hours-desc': return hoursB - hoursA;
-          case 'price-asc': return priceA - priceB;
-          case 'price-desc': return priceB - priceA;
-          default: return 0;
-        }
-      });
-      
-      cards.forEach(card => patternsGrid.appendChild(card));
+      // Sort unified patterns grid
+      currentSortValue = value;
+      sortPatternsGrid(value);
     });
   });
 }
 
-
-// --- Amigurumi Sort Logic ---
-const amigurumiCustomSortDropdown = document.getElementById('amigurumiCustomSortDropdown');
-const amigurumiCustomSortBtn = document.getElementById('amigurumiCustomSortBtn');
-const amigurumiCustomSortMenu = document.getElementById('amigurumiCustomSortMenu');
-const amigurumiCustomSortIcon = document.getElementById('amigurumiCustomSortIcon');
-const amigurumiCustomSortLabel = document.getElementById('amigurumiCustomSortLabel');
-const amigurumiSortOptions = document.querySelectorAll('.amigurumi-sort-option');
-const amigurumiPatternsGrid = document.getElementById('amigurumiPatternsGrid') as HTMLElement | null;
-
-if (amigurumiCustomSortDropdown && amigurumiCustomSortBtn && amigurumiCustomSortMenu && amigurumiPatternsGrid) {
-  amigurumiCustomSortBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = !amigurumiCustomSortMenu.classList.contains('opacity-0');
-    if (isOpen) {
-      amigurumiCustomSortMenu.classList.add('opacity-0', 'invisible', '-translate-y-2');
-      amigurumiCustomSortIcon?.classList.remove('rotate-180');
-    } else {
-      amigurumiCustomSortMenu.classList.remove('opacity-0', 'invisible', '-translate-y-2');
-      amigurumiCustomSortIcon?.classList.add('rotate-180');
-    }
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!amigurumiCustomSortDropdown.contains(e.target as Node)) {
-      amigurumiCustomSortMenu.classList.add('opacity-0', 'invisible', '-translate-y-2');
-      amigurumiCustomSortIcon?.classList.remove('rotate-180');
-    }
-  });
-
-  amigurumiSortOptions.forEach(option => {
-    option.addEventListener('click', () => {
-      const value = option.getAttribute('data-value') || 'name-asc';
-      const labelText = (option.querySelector('span') as HTMLElement).textContent || '';
-      
-      if (amigurumiCustomSortLabel) {
-        amigurumiCustomSortLabel.textContent = labelText;
-      }
-      
-      amigurumiSortOptions.forEach(opt => {
-        opt.classList.remove('text-brand-primary', 'bg-pink-50/50');
-        const secondaryText = opt.querySelector('span:last-child');
-        if (secondaryText) {
-          secondaryText.classList.remove('opacity-100');
-          secondaryText.classList.add('opacity-0');
-        }
-      });
-      option.classList.add('text-brand-primary', 'bg-pink-50/50');
-      const activeSecondary = option.querySelector('span:last-child');
-      if (activeSecondary) {
-        activeSecondary.classList.remove('opacity-0');
-        activeSecondary.classList.add('opacity-100');
-      }
-
-      amigurumiCustomSortMenu.classList.add('opacity-0', 'invisible', '-translate-y-2');
-      amigurumiCustomSortIcon?.classList.remove('rotate-180');
-
-      const cards = Array.from(amigurumiPatternsGrid.querySelectorAll('.pattern-card-trigger')) as HTMLElement[];
-      
-      cards.sort((a: any, b: any) => {
-        const nameA = a.dataset.name || '';
-        const nameB = b.dataset.name || '';
-        const diffA = parseInt(a.dataset.difficulty || '0');
-        const diffB = parseInt(b.dataset.difficulty || '0');
-        const hoursA = parseInt(a.dataset.hours || '0');
-        const hoursB = parseInt(b.dataset.hours || '0');
-        const priceA = parseInt(a.dataset.price || '0');
-        const priceB = parseInt(b.dataset.price || '0');
-        
-        switch (value) {
-          case 'name-asc': return nameA.localeCompare(nameB);
-          case 'name-desc': return nameB.localeCompare(nameA);
-          case 'difficulty-asc': return diffA - diffB;
-          case 'difficulty-desc': return diffB - diffA;
-          case 'hours-asc': return hoursA - hoursB;
-          case 'hours-desc': return hoursB - hoursA;
-          case 'price-asc': return priceA - priceB;
-          case 'price-desc': return priceB - priceA;
-          default: return 0;
-        }
-      });
-      
-      cards.forEach(card => amigurumiPatternsGrid.appendChild(card));
-    });
-  });
-}
 
 // --- Page Transition Logic ---
 const pageTransition = document.getElementById('pageTransition');

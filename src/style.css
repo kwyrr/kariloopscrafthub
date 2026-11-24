@@ -1,18 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-primary: #ffd400;
-  --color-brand-accent: #ffdd3c;
-  --color-brand-secondary: #ffea61;
-  --color-brand-light: #fff192;
-  --color-brand-neutral: #fffdf0;
-  --color-brand-border: #ffffb7;
+  --color-brand-primary: #8f6e58;
+  --color-brand-accent: #a3826c;
+  --color-brand-secondary: #b69680;
+  --color-brand-light: #e8d6c8;
+  --color-brand-neutral: #faf6f2;
+  --color-brand-border: #cfb6a4;
   --font-sans: 'Inter', sans-serif;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-brand-neutral text-gray-800 font-sans antialiased selection:bg-brand-primary selection:text-gray-900;
+    @apply bg-brand-neutral text-gray-800 font-sans antialiased selection:bg-brand-primary selection:text-white;
+  }
+
+  #flower-patterns,
+  #amigurumi-patterns {
+    scroll-margin-top: 130px;
   }
 }
 
@@ -20,7 +29,9 @@
 
   /* Status Banner */
   .status-banner {
-    @apply flex items-center justify-between px-6 py-2 bg-brand-light border-b border-brand-border text-xs font-medium tracking-widest uppercase text-gray-700;
+    @apply flex items-center justify-between px-6 py-2 border-b border-brand-border text-xs font-medium tracking-widest uppercase;
+    background-color: #8f6e58;
+    color: #ffffff;
   }
 
   .status-location {
@@ -28,17 +39,47 @@
   }
 
   .status-pulse-dot {
-    @apply w-2 h-2 rounded-full bg-green-400 relative;
+    @apply w-2 h-2 rounded-full relative;
+    background-color: #cfb6a4;
   }
 
   .status-pulse-dot::after {
     content: '';
-    @apply absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75;
+    @apply absolute inset-0 rounded-full animate-ping opacity-75;
+    background-color: #cfb6a4;
+  }
+
+  /* Sticky Nav Wrapper */
+  #mainNav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
 
   /* Main Navigation Container */
   .custom-nav-container {
-    @apply flex items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-brand-border shadow-sm;
+    @apply flex items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-md z-40 border-b border-brand-border shadow-sm;
+  }
+
+  /* Crochet Patterns Dropdown */
+  .nav-dropdown-wrapper {
+    @apply relative;
+  }
+
+  .nav-dropdown-menu {
+    @apply absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-white border border-brand-border rounded-xl shadow-lg opacity-0 invisible transition-all duration-200 z-50 overflow-hidden;
+  }
+
+  .nav-dropdown-wrapper:hover .nav-dropdown-menu {
+    @apply opacity-100 visible;
+  }
+
+  .nav-dropdown-menu a {
+    @apply block px-5 py-3 text-sm font-medium text-gray-700 hover:bg-brand-light hover:text-brand-primary transition-colors;
+  }
+
+  .nav-dropdown-menu a:not(:last-child) {
+    @apply border-b border-brand-border/50;
   }
 
   /* Brand / Profile */
@@ -47,7 +88,7 @@
   }
 
   .avatar-box {
-    @apply w-10 h-10 flex items-center justify-center bg-brand-primary text-gray-900 font-bold rounded-lg shadow-sm transition-transform group-hover:scale-105;
+    @apply w-10 h-10 flex items-center justify-center bg-brand-primary text-white font-bold rounded-lg shadow-sm transition-transform group-hover:scale-105;
   }
 
   .profile-details {
@@ -86,11 +127,11 @@
   }
 
   .btn-cv {
-    @apply hidden md:inline-block px-4 py-2 text-sm font-medium text-gray-800 border border-brand-primary rounded-full hover:bg-brand-secondary transition-all shadow-sm;
+    @apply hidden md:inline-block px-4 py-2 text-sm font-medium text-brand-primary border border-brand-primary rounded-full hover:bg-brand-light transition-all shadow-sm;
   }
 
   .btn-hire {
-    @apply hidden md:inline-block px-4 py-2 text-sm font-medium text-gray-900 bg-brand-primary rounded-full shadow-md hover:bg-brand-accent hover:shadow-lg transition-all transform hover:-translate-y-0.5;
+    @apply hidden md:inline-block px-4 py-2 text-sm font-medium text-white bg-brand-primary rounded-full shadow-md hover:bg-brand-accent hover:shadow-lg transition-all transform hover:-translate-y-0.5;
   }
 
   /* Mobile Menu Toggle */
